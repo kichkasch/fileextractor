@@ -1,5 +1,16 @@
 README for FileExtractor
 
+Content
+1. Introduction
+2. Mode of operation
+3. Signatures
+4. Version Tracker
+5. ToDo
+6. Known Bugs
+7. Possible test cases
+
+1. Introduction
+---------------
 This program was implemented for searching for files inside files. Apparently, the source files are image 
 files containing all the data of a hard disk, a memory stick or a camera. It becomes useful whenever the 
 File System on the device was damaged, maybe problems with the File Allocation Table or whatever. 
@@ -15,7 +26,8 @@ Requirements:
 * A running Python Installation (tested with Python 2.4 - but should also be running with lower versions.) - www.python.org
 * For the GUI part: wxPython (with all its dependencies) - http://wxpython.org/
 
-Mode of operation:
+2. Mode of operation
+---------------------
 FileExtractor may look for very different kinds of files. All it needs for a new file type is a signature telling the program 
 how to find the beginning and the end of a file. (see next paragraph Signatures for more details) The beginning of a 
 file may only be found by a defined sequence of bytes. The length of the sequence may vary; however, too short sequences 
@@ -32,7 +44,9 @@ might cause false positives for finding files. The end of a file may be determin
     After importing the implemented python module the program will handover the control to the user-defined function whenever 
     the start of the file is found.
 
-Signatures (more details in signatures.py):
+3. Signatures 
+-------------
+(more details in signatures.py):
 * JPEG (type 1)
 * BMP (type 2)
 * GIF (type 1)
@@ -41,8 +55,8 @@ Signatures (more details in signatures.py):
 * THM (type 1)
 * WAV
 
-Version Tracker:
-
+4. Version Tracker
+------------------
 version 0.1 (12/05/2005)
 * Renaming to FileExtractor
     - new GUI Executable: FileExtractor.py (before findFilesGui.py)
@@ -116,7 +130,9 @@ version 0.1 (28/01/2005)
 * first release
 * supported formats: JPEG
 
-ToDo:
+
+5. ToDo
+-------
 * user guide
 * finsih Help Dialog Content
 * setup.py
@@ -134,12 +150,14 @@ ToDo:
     - Image creator (gaining an image file from a source partition / fs)
 
     
-Known Bugs
+6. Known Bugs
+-------------
 * if started and no source file given - exception raised
 * Program crashed when Access Denied for Source File
 * No check for the address gained from files with signature type 2
 
-TestCases
+7. Possible test cases
+----------------------
 * ZipFile plain (no protection)
 * ZipFile unencrypted but password
 * ZipFile encrypted
