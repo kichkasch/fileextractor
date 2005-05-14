@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.5.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2005-05-14, 16:49:41 -->
+<!-- Saved: 2005-05-14, 18:03:06 -->
 <!-- Copyright (C) 2005 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.5">
   <Description></Description>
@@ -74,9 +74,6 @@
     <Other>
       <Dir>help</Dir>
       <Name>signatures.htm</Name>
-    </Other>
-    <Other>
-      <Name>notes</Name>
     </Other>
     <Other>
       <Name>Makefile</Name>

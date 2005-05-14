@@ -4,7 +4,7 @@
 # Michael Pilgermann
 # mpilgerm@glam.ac.uk
 #
-# last change Makefile: 2005-05-12
+# last change Makefile: 2005-05-14
 #
 # global parameters
 TITLE=		"File Extractor"

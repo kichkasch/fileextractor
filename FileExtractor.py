@@ -50,7 +50,7 @@ class FileExtractorFrame(wxFrame):
     def __init__(self, parent, ID, title):
         """Instantiate a FileExtractorFrame.
     
-        A wxFrame will be created with the size L{wxSize}(600,500). The position
+        A wxFrame will be created with the size L{wxSize}(600,400). The position
         is default position, indicated by the keyword wxDefaultPosition. The events for the
         buttons and menu items are registered as well.
         
@@ -94,13 +94,21 @@ class FileExtractorFrame(wxFrame):
         panel_buttons.SetSizer(box)
         panel_buttons.Layout()
         
+        label_outputdir = wxStaticText (panel_left, -1, "Output Directory")
+        self.if_dir = wxTextCtrl(panel_left, -1, "Working Directory")
+        self.if_dir.SetEditable(false)
+        bChooseDir = wxButton(panel_left, _ID_B_DIR, "Change Directory")        
+        
         panel_fill = wxPanel(panel_left, -1)
         
         box = wxBoxSizer(wxVERTICAL)
         box.Add(label_sources, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
         box.Add(self.filelist, 5, wxEXPAND)
         box.Add(panel_buttons, 2, wxEXPAND | wxALIGN_CENTER_VERTICAL)
-        box.Add(panel_fill, 3, wxEXPAND)
+        box.Add(label_outputdir, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
+        box.Add(self.if_dir, 1, wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT)
+        box.Add(bChooseDir, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
+##        box.Add(panel_fill, 3, wxEXPAND)
 
         panel_left.SetAutoLayout(True)
         panel_left.SetSizer(box)
@@ -122,20 +130,28 @@ class FileExtractorFrame(wxFrame):
             
         bInfo = wxButton(panel_right, _ID_B_INFO, "Info")
         
-        pFill = wxPanel(panel_right, -1)
-        label_outputdir = wxStaticText (panel_right, -1, "Output Directory")
-        self.if_dir = wxTextCtrl(panel_right, -1, "Working Directory")
-        self.if_dir.SetEditable(false)
-        bChooseDir = wxButton(panel_right, _ID_B_DIR, "Change Directory")
+        pFill1 = wxPanel(panel_right, -1)
+        pFill2 = wxPanel(panel_right, -1)
+
+        panel_start = wxPanel(panel_right, -1)
+        panel_fills1 = wxPanel(panel_start, -1)
+##        panel_fills2 = wxPanel(panel_start, -1)
+        bStartSearch = wxButton(panel_start, _ID_B_START, "Start Search")
+        boxs = wxBoxSizer(wxHORIZONTAL)
+        boxs.Add(panel_fills1, 7, wxEXPAND)
+        boxs.Add(bStartSearch, 7, wxEXPAND | wxALIGN_RIGHT)
+##        boxs.Add(panel_fills2, 1, wxEXPAND)
+        panel_start.SetAutoLayout(True)
+        panel_start.SetSizer(boxs)
+        panel_start.Layout()
         
         boxr = wxBoxSizer(wxVERTICAL)
         boxr.Add(label_signatures, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
-        boxr.Add(self.signaturelist, 5, wxEXPAND)
+        boxr.Add(self.signaturelist, 7, wxEXPAND)
+##        boxr.Add(pFill1, 1, wxEXPAND)
         boxr.Add(bInfo, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
-        boxr.Add(pFill, 1, wxEXPAND)
-        boxr.Add(label_outputdir, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
-        boxr.Add(self.if_dir, 1, wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT)
-        boxr.Add(bChooseDir, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
+        boxr.Add(pFill2, 1, wxEXPAND)
+        boxr.Add(panel_start, 1, wxEXPAND)
 
         panel_right.SetAutoLayout(True)
         panel_right.SetSizer(boxr)
@@ -144,17 +160,6 @@ class FileExtractorFrame(wxFrame):
 
         
         # layout for outer window
-        panel_start = wxPanel(self, -1)
-        panel_fills1 = wxPanel(panel_start, -1)
-        panel_fills2 = wxPanel(panel_start, -1)
-        bStartSearch = wxButton(panel_start, _ID_B_START, "Start Search")
-        boxs = wxBoxSizer(wxHORIZONTAL)
-        boxs.Add(panel_fills1, 15, wxEXPAND)
-        boxs.Add(bStartSearch, 7, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
-        boxs.Add(panel_fills2, 1, wxEXPAND)
-        panel_start.SetAutoLayout(True)
-        panel_start.SetSizer(boxs)
-        panel_start.Layout()
 
         panel_fill_hor1 = wxPanel(panel_outer, -1)
         panel_fill_hor2 = wxPanel(panel_outer, -1)
@@ -172,13 +177,13 @@ class FileExtractorFrame(wxFrame):
 
         pFill1 = wxPanel(self, -1)
         pFill2 = wxPanel(self, -1)
-        pFill3 = wxPanel(self, -1)
+##        pFill3 = wxPanel(self, -1)
         boxo = wxBoxSizer(wxVERTICAL)
         boxo.Add(pFill1, 1, wxEXPAND)
-        boxo.Add(panel_outer, 12, wxEXPAND)
+        boxo.Add(panel_outer, 20, wxEXPAND)
         boxo.Add(pFill2, 1, wxEXPAND)
-        boxo.Add(panel_start, 1, wxEXPAND)
-        boxo.Add(pFill3, 1, wxEXPAND)
+##        boxo.Add(panel_start, 1, wxEXPAND)
+##        boxo.Add(pFill3, 1, wxEXPAND)
 
 
         self.SetAutoLayout(True)
@@ -227,7 +232,8 @@ class FileExtractorFrame(wxFrame):
                               "Email: mpilgerm@glam.ac.uk\n\n"
                               "Information Security Research Group (ISRG)\n"
                               "School of Computing / University of Glamorgan\n"
-                              "http://www.glam.ac.uk/soc/research/isrg.php",
+                              "http://www.glam.ac.uk/soc/research/isrg.php"
+                              "\n\nPublished under the General Public License (GPL)   ",
                               "About Me", wxOK | wxICON_INFORMATION)
         dlg.ShowModal()
         dlg.Destroy()
