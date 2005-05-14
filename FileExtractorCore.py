@@ -193,7 +193,7 @@ def startSearch(status_passed):
                                 if status.settings.output_level == 3:
                                     print ('-- No valid end address found - skip this file.')
                                 continue
-                            writeFile(sig[signatures.name],statuts.counterr[sig[signatures.name]]+status.settings.counterstart_global,
+                            writeFile(sig[signatures.name],status.counterr[sig[signatures.name]]+status.settings.counterstart_global,
                                   sig[signatures.extension],binfile, start_pos, end_address,
                                   status.settings.dest_folder, status.settings.output_level == 3, status)
                             status.counter[sig[signatures.name]] += 1   
