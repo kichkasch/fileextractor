@@ -1,0 +1,140 @@
+README for FileExtractor
+
+This program was implemented for searching for files inside files. Apparently, the source files are image files containing all the data of a hard disk, a memory stick or a camera. It becomes useful whenever the File System on the device was damaged, maybe problems with the File Allocation Table or whatever. (The creating of the image file is beyond the scope of this program, it might be realised with tools such as EnCase or simply using the dd command in Linux/Unix environments).
+
+It has been created by Michael Pilgermann, as part of his work and studies for the University of Glamorgan / School of Computing / Information Security Research Group. More information at http://www.glam.ac.uk/soc/research/isrg.php. For any critism or hints I am very thankful for an email to mpilgerm@glam.ac.uk.
+
+Requirements:
+* A running Python Installation (tested with Python 2.4 - but should also be running with lower versions.) - www.python.org
+* For the GUI part: wxPython (with all its dependencies) - http://wxpython.org/
+
+Mode of operation:
+FileExtractor may look for very different kinds of files. All it needs for a new file type is a signature telling the program how to find the beginning and the end of a file. (see next paragraph Signatures for more details) The beginning of a file may only be found by a defined sequence of bytes. The length of the sequence may vary; however, too short sequences might cause false positives for finding files. The end of a file may be determined by the following 3 different ways:
+1.) An end sequence: Same as start sequence, the program will store all the data between the start of the start sequence and the end of the end sequence to a new file.
+2.) A location for the information about the file size: Many file formats store information about the file size of files at a certain location within the file. As soon as the location is fixed and relative to the beginnning of the file, it may be specified in the signature. (Offsets in Integers of different lengths are supported; just provide all the significant bytes ordered starting with the highest byte - see Signature File signatures.py for more details.)
+3.) User defined file end determination. You have a file type which starts with a certain sequence and you now how to deteremin the end of the file; however, this cannot be performed with either of the first two ways. All you need to provide is the name of the function to determine the end position (check signatures.py for required parameters and return values). After importing the implemented python module the program will handover the control to the user-defined function whenever the start of the file is found.
+
+Signatures (more details in signatures.py):
+* JPEG (type 1)
+* BMP (type 2)
+* GIF (type 1)
+* CRW (type 3)
+* CR2 (type 1)
+* THM (type 1)
+* WAV
+
+Version Tracker:
+
+version 0.1 (12/05/2005)
+* Renaming to FileExtractor
+    - new GUI Executable: FileExtractor.py (before findFilesGui.py)
+    - new CLI Executable: FileExtractorCLI.py (before findFiles.py)
+    - renaming applied to all readme files and help files
+* updates in README
+* added Documentation
+    - Source Code Documentation
+    - API Doc creator: Epydoc
+    - command used: epydoc --inheritance listed -o html/ -n "File Extractor" *.py
+* new Makefile for
+    - creating documentation (with epydoc)
+    - assembling the zip file for the online help
+* Apply changes to CLI version (Settings class, ...)
+
+* Refactoring:
+    - mark private attributes and functions as private
+    - rename findfiles_core to FileExtractorCore
+
+* addresses bugs
+    - when importing the program is starting automatically
+
+-------------------------------------------
+From here old name FindFiles and old versioning
+-------------------------------------------
+version 0.6 (27/04/2005)
+* Refactoring: 
+    - Extract ExecutionSettings and ExecutionStatus classes (both in module ExecutionSettings)
+    - Rewrite Communication between Core and GUI (now shared class instead of file communication)
+* Extension in Help ... everything but some bits in signatures and the Research page finished
+
+version 0.5 (27/04/2005)
+* "proper" Result Dialog
+* extensions in Readme (ToDo; Known Bugs, Signatures)
+* File Size Signatures type: Added correction (in case the file size info inside the file is varying fromt the actual size as for WAV)
+* fixed Bug: File end calculation was always 1 Byte to large
+* Help Dialog Framework ready
+    - Content for Overview
+    - Structure for Signatures and Installation / Start-UP
+    - Loaded from a zipfile (findfileshelp.zip) in root folder of application - HPP-Structure
+* Overwork of sequence checking (unsignificant bytes inside the sequence may be marked as None and will be skipped at run-time)
+* Change for BMP Signature - extended Start sequence (possible due to None-Byte feature)
+* new signature for:
+    - WAV files
+
+version 0.4 (25/04/2005)
+* Redesign - 3 modules extracted:
+    - FindFiles Core (findFilesCore.py) - The application core
+    - FindFiles (findFiles.py) - Command Line based program
+    - FindFiles GUI (findFilesGui.py) - Graphical interface for FindFiles (wxDigits based)
+* Implementation of GUI interface
+* BMP Signature: extended start sequence
+
+version 0.3 (15/04/2005)
+* added opportunity for adding user defined functions to signatures for determinating file end address
+* new signatures for
+    - CRW files
+    - CR2 files
+    - THM files (all 3 Canon picture file formats)
+    see signatures.py for more details
+* addressed bug with file pos initialisation
+
+version 0.2 (01/02/2005)
+* file end may now be determined by file size (rather than end sequence only)
+* new format(s): BMP, GIF
+
+version tracker:
+version 0.1 (28/01/2005)
+* first release
+* supported formats: JPEG
+
+ToDo:
+* API documentation
+* install guide
+* finsih Help Dialog Content
+* setup.py
+* HelpBook for UserGuide
+* Closing Threads in case of errors
+* Error Handling
+* new signature type for saving a predefined file size???
+* Options Dialog
+* Cancel Processing Button?
+* More Signatures:
+    - MP3
+    - Movie Formats
+* Possible Tools
+    - Signature Creator
+    - Image creator (gaining an image file from a source partition / fs)
+
+    
+Known Bugs
+* if started and no source file given - exception raised
+* Program crashed when Access Denied for Source File
+* No check for the address gained from files with signature type 2
+
+TestCases
+* ZipFile plain (no protection)
+* ZipFile unencrypted but password
+* ZipFile encrypted
+* Other Archives (tar, ...)
+* Outlook Archive File (pst) - plain
+* Outlook Archive File (pst) - password protected
+* Outlook Archive File (pst) - encrypted
+* Other Mail Archives (Thunderbird, ...)
+* Self Assembled Binary Files
+* Image Files from Partitions with Data (dd command)
+    * FAT
+    * FAT32
+    * NTFS
+    * Linux EXT
+    * Linux Reiser
+* Encrypted Partitions
+* Image File from a Memory Stick / Camera

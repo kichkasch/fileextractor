@@ -1,0 +1,10 @@
+<ul>
+  <li> <object type="text/sitemap">
+           <param name="Name" value="Introduction">
+           <param name="Local" value="overview.htm">
+       </object>
+  <li> <object type="text/sitemap">
+           <param name="Name" value="Installation">
+           <param name="Local" value="installation.htm">
+       </object>
+</ul> 

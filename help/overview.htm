@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>FileExtractor Documentation</title>
+</head>
+<body>
+<h4>FileExtractor Version 0.1</h4>
+<a name="overview">
+<h5>Overview</h5>
+</a>
+<p>
+This program was implemented for searching for files inside files. Apparently, the source files are image files containing all the data of a hard disk, 
+a memory stick or a camera. It may also be useful for searching inside archives such as ZIP or TAR archives (uncompressed) or email archive
+files such as Outlook Personal Folder Files (pst).
+</p>
+<p>It becomes useful whenever the File System on the device was damaged, 
+maybe problems with the File Allocation Table or whatever. 
+(The creating of the image file is beyond the scope of this program, it might be realised with tools such as EnCase or simply using the 
+dd command in Linux/Unix environments).
+</p>
+
+<p>
+It has been created by Michael Pilgermann, as part of his work and studies for the University of Glamorgan / School of Computing / 
+Information Security Research Group. More information at http://www.glam.ac.uk/soc/research/isrg.php. 
+For any critism or hints I am very thankful for an email to <a href="mailto:mpilgerm@glam.ac.uk">mpilgerm@glam.ac.uk</a>.
+</p>
+
+<a name="mode">
+<p><h5>Mode of operation</h5></p>
+</a>
+<p>
+FileExtractor may look for very different kinds of files. All it needs for a new file type is a signature telling the program how to find the beginning and 
+the end of a file. The beginning of a file may only be found by a defined sequence of bytes. The length of the sequence may vary; however, 
+too short sequences might cause false positives for finding files. The end of a file may be determined by the following 3 different ways:
+<ol>
+<li>An end sequence: Same as start sequence, the program will store all the data between the start of the start sequence and the end of the end sequence to a new file.</li>
+<li>A location for the information about the file size: Many file formats store information about the file size of files at a certain location within the file. As soon as the location is fixed and relative to the beginnning of the file, it may be specified in the signature. (Offsets in Integers of different lengths are supported; just provide all the significant bytes ordered starting with the highest byte - see Signature File signatures.py for more details.)</li>
+<li>User defined file end determination. You have a file type which starts with a certain sequence and you now how to deteremin the end of the file; however, this cannot be performed with either of the first two ways. All you need to provide is the name of the function to determine the end position (check signatures.py for required parameters and return values). After importing the implemented python module the program will handover the control to the user-defined function whenever the start of the file is found.</li>
+</ol>
+<i>For more information on this topic check the page <a href="signatures.htm#types">Technical details for the 3 types</a> of this documentation.</i>
+</p>
+
+<a name="signatures">
+<h5>Signatures </h5>
+</a>
+<p>The following signatures have been implemented already:
+<ul>
+<li>JPEG (type 1)</li>
+<li>BMP (type 2)</li>
+<li>GIF (type 1)</li>
+<li>CRW (type 3)</li>
+<li>CR2 (type 1)</li>
+<li>THM (type 1)</li>
+<li>WAVE(type 2)</li>
+</ul>
+Find addtional information in <a href="signatures.htm#details">Signatures Help Page / Signature Details</a> and the Python Source File <i>signatures.py</i></p>
+
+ 
+ <p>More information is provided in the following two documents:
+ <ul>
+ <li><a href="installation.htm">Installation and Start</a></li>
+ <li><a href="signatures.htm">Information about Signatures, their (de)activation and creation</a></li>
+ </ul>
+ </p>
+ 
+ <p>
+ Finally, you may find some information about background research around this problem and for this application on the 
+ <a href="research.htm">Research Background Help Page</a>.
+ </p>
+ 
+ <p>For Version tracker, known Bugs and ToDo list please check the <i>readme</i> file in the program directory.</p>
+ 
+</body>
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project SYSTEM "Project-3.5.dtd">
+<!-- Project file for project FileExtractor -->
+<!-- Saved: 2005-05-14, 16:49:41 -->
+<!-- Copyright (C) 2005 Michael Pilgermann, mpilgerm@glam.ac.uk -->
+<Project version="3.5">
+  <Description></Description>
+  <Version>0.1</Version>
+  <Author>Michael Pilgermann</Author>
+  <Email>mpilgerm@glam.ac.uk</Email>
+  <Sources>
+    <Source>
+      <Name>FileExtractor.py</Name>
+    </Source>
+    <Source>
+      <Name>ExecutionSettings.py</Name>
+    </Source>
+    <Source>
+      <Name>ProgressDialog.py</Name>
+    </Source>
+    <Source>
+      <Name>ResultDialog.py</Name>
+    </Source>
+    <Source>
+      <Name>manual_crw.py</Name>
+    </Source>
+    <Source>
+      <Name>signatures.py</Name>
+    </Source>
+    <Source>
+      <Name>tools.py</Name>
+    </Source>
+    <Source>
+      <Name>FileExtractorCLI.py</Name>
+    </Source>
+    <Source>
+      <Name>FileExtractorCore.py</Name>
+    </Source>
+  </Sources>
+  <Forms>
+  </Forms>
+  <Translations>
+  </Translations>
+  <Interfaces>
+  </Interfaces>
+  <Others>
+    <Other>
+      <Name>readme</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>general.hhc</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>general.hhk</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>general.hhp</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>installation.htm</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>overview.htm</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>research.htm</Name>
+    </Other>
+    <Other>
+      <Dir>help</Dir>
+      <Name>signatures.htm</Name>
+    </Other>
+    <Other>
+      <Name>notes</Name>
+    </Other>
+    <Other>
+      <Name>Makefile</Name>
+    </Other>
+  </Others>
+  <MainScript>
+    <Name>FileExtractor.py</Name>
+  </MainScript>
+  <Vcs>
+    <VcsType>CVS</VcsType>
+    <VcsOptions>{'status': ['-v'], 'log': [''], 'global': ['-f'], 'update': ['-dP'], 'remove': ['-f'], 'add': [''], 'tag': ['-c'], 'export': [''], 'diff': ['-u3', '-p'], 'commit': [''], 'checkout': [''], 'history': ['-e', '-a']}</VcsOptions>
+    <VcsOtherData>{}</VcsOtherData>
+  </Vcs>
+  <Eric3Doc>
+    <Eric3DocParams>{'useRecursion': True, 'ignoreDirectories': [u'doc'], 'outputDirectory': u'doc'}</Eric3DocParams>
+  </Eric3Doc>
+  <Eric3Api>
+    <Eric3ApiParams>{'outputFile': u'doc2/documentation', 'ignoreDirectories': [u'doc', u'doc2', u'CVS'], 'useRecursion': True}</Eric3ApiParams>
+  </Eric3Api>
+</Project>

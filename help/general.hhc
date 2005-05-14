@@ -1,0 +1,76 @@
+<ul>
+  <li> <object type="text/sitemap">
+           <param name="Name" value="Introduction">
+           <param name="ID" value=101>
+           <param name="Local" value="overview.htm">
+       </object> 
+       <ul>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Overview">
+           <param name="ID" value=1011>
+           <param name="Local" value="overview.htm#overview">
+        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Mode of operation">
+           <param name="ID" value=1012>
+           <param name="Local" value="overview.htm#mode">
+        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Implemented Signatures">
+           <param name="ID" value=1013>
+           <param name="Local" value="overview.htm#signatures">
+        </object></li>
+       </ul>
+       </li>
+  <li> <object type="text/sitemap">
+           <param name="Name" value="Installation">
+           <param name="ID" value=102>
+           <param name="Local" value="installation.htm">
+       </object> 
+       <ul>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Requirements">
+           <param name="ID" value=2011>
+           <param name="Local" value="installation.htm#require">
+        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Extract archive and Start">
+           <param name="ID" value=2012>
+           <param name="Local" value="installation.htm#place">
+        </object></li>
+       </ul>
+       </li>
+  <li> <object type="text/sitemap">
+           <param name="Name" value="Signatures">
+           <param name="ID" value=103>
+           <param name="Local" value="signatures.htm">
+       </object>
+       <ul>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Overview">
+           <param name="ID" value=2011>
+           <param name="Local" value="signatures.htm#overview">
+        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="The 3 types in detail">
+           <param name="ID" value=2012>
+           <param name="Local" value="signatures.htm#types">
+        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Details for implemented signatures">
+           <param name="ID" value=2013>
+           <param name="Local" value="signatures.htm#details">
+        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Write your own signatures">
+           <param name="ID" value=2014>
+           <param name="Local" value="signatures.htm#create">
+        </object></li>
+       </ul>
+       </li>
+  <li> <object type="text/sitemap">
+           <param name="Name" value="Research">
+           <param name="ID" value=103>
+           <param name="Local" value="research.htm">
+       </object></li>
+</ul> 

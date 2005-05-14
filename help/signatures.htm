@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Information about Signatures</title>
+</head>
+<body>
+
+<h4>Signatures</h4>
+
+<a name="overview">
+<h5>Overview</h5>
+</a>
+<p>In order to provide a mechanism for integrating lots of file types with the program, a signature approach has been implemented; hence, all one need
+to do in order to extend the program to support an additional file type is writing a new signature for it.</p>
+
+<p>All information about signatures is and must be provided in the Python source file <i>signatures.py</i>. It is located directly in the program folder.</p>
+
+
+<h6>Activate and Deactivate Signatures</h6>
+<p>There might be a need to deactivate certain file types for a execution of the program. On the one hand, it might speed up the execution a bit, on the other
+hand there might be files with very short sequences which might cause lots of false positives and there are not really needed for the execution.</p>
+<p>By default, all signatures are activated. You may deactivate them by unticking them in the list of signatures in the start screen of the application.</p>
+
+<a name="types">
+<h5>The 3 Types in detail</h5>
+</a>
+<h6>Start sequence - End sequence</h6>
+<h6>Start sequence - End file information inside file</h6>
+<h6>Start sequence - Manual file end determination</h6>
+
+<a name="details">
+<h5>Currently implemented Signatures</h5>
+<table border="1">
+<tr>
+<th width="10%" align="center" valign="center">Name</th>
+<th width="5%" align="center" valign="center">T</th>
+<th width="15%" align="center" valign="center">Creator /<br>Date</th>
+<th width="10%" align="center" valign="center">Ext</th>
+<th width="60%" align="center" valign="center">Description</th>
+</tr>
+<tr>
+<td align="center" valign="center">JPEG</td>
+<td align="center" valign="center">1</td>
+<td align="center" valign="center">mpilgerm<br>28/01/2005</td>
+<td align="center" valign="center">jpg</td>
+<td align="left" valign="center">JPEG Image File<br>Start Sequence: 0xFF, 0xD8, 0xFF, 0xE1<br>End Sequence: 0xFF, 0xD9</td>
+</tr>
+<tr>
+<td align="center" valign="center">BMP</td>
+<td align="center" valign="center">2</td>
+<td align="center" valign="center">mpilgerm<br>01/02/2005</td>
+<td align="center" valign="center">jpg</td>
+<td align="left" valign="center">Bitmap Image File<br>
+Start Sequence: 0x42, 0x4D, ?, ?, ?, ?, 0x00, 0x00, 0x00, 0x00, 0x36, 0x04, 0x00, 0x00<br>
+Address offset for Size information: 0x05,0x04,0x03,0x02</td>
+</tr>
+<tr>
+<td align="center" valign="center">GIF</td>
+<td align="center" valign="center">1</td>
+<td align="center" valign="center">mpilgerm<br>01/02/2005</td>
+<td align="center" valign="center">gif</td>
+<td align="left" valign="center">GIF Image File<br>Start Sequence: 0x47, 0x49, 0x46, 0x38<br>End Sequence: 0x00, 0x3B</td>
+</tr>
+<tr>
+<td align="center" valign="center">CR2</td>
+<td align="center" valign="center">1</td>
+<td align="center" valign="center">mpilgerm<br>14/04/2005</td>
+<td align="center" valign="center">cr2</td>
+<td align="left" valign="center">Canon specific Picture File Format<br>
+Start Sequence: 0x49, 0x49, 0x2A, 0x00, 0x10, 0x00, 0x00, 0x00, 0x43, 0x52, 0x02, 0x00<br>End Sequence: 0xFF, 0xD9</td>
+</tr>
+<tr>
+<td align="center" valign="center">THM</td>
+<td align="center" valign="center">1</td>
+<td align="center" valign="center">mpilgerm<br>14/04/2005</td>
+<td align="center" valign="center">thm</td>
+<td align="left" valign="center">Canon specific Picture Thumbnail File Format<br>
+Start Sequence: 0xFF, 0xD8, 0xFF, 0xE1, 0x09, 0xFE, 0x45, 0x78, 0x69, 0x66, 0x00, 0x00, 0x49, 0x49<br>End Sequence: 0xFF, 0xD9</td>
+</tr>
+<tr>
+<td align="center" valign="center">CRW</td>
+<td align="center" valign="center">3</td>
+<td align="center" valign="center">mpilgerm<br>15/04/2005</td>
+<td align="center" valign="center">crw</td>
+<td align="left" valign="center">Canon specific Picture File Format<br>
+Start Sequence: 0x49, 0x49, 0x1A, 0x00, 0x00, 0x00, 0x48, 0x45, 0x41, 0x50, 0x43, 0x43, 0x44, 0x52<br>
+Format specific function <i>crw_getendaddress</i> provided in module <i>manual_crw</i></td>
+</tr>
+<tr>
+<td align="center" valign="center">WAVE</td>
+<td align="center" valign="center">2</td>
+<td align="center" valign="center">mpilgerm<br>25/04/2005</td>
+<td align="center" valign="center">wav</td>
+<td align="left" valign="center">Wave Multimedia Music File<br>
+Start Sequence: 0x52, 0x49, 0x46, 0x46<br>Address offset for Size information: 0x07, 0x06, 0x05, 0x04<br>
+File size info correction: 8 Bytes</td>
+</tr>
+
+</table>
+</a>
+
+<a name="create">
+<h5>Write your own Signatures</h5>
+</a>
+
+
+</body>
+</html>
