@@ -1,0 +1,69 @@
+Installation Instructions 
+
+Content Installation 
+1. Requirements
+2. Unpack program files and start
+3. Command Line Interface (CLI) 
+
+1. Requirements 
+---------------
+
+Before you start the installation of the program, please make sure that your system hits the following requirements: 
+
+
+Operating System
+
+Since the program was written in Python it is cross-plattform; hence, you can you it whenever a Python 
+version is available for your Operating System. (Please make also sure that the Python Extension (next Paragraph) 
+are available). However, the program was tested sucessfully on the following installations:
+
+- Linux Kernel 2.6.5 (Gentoo Linux 2005.0 with Python 2.3.4)
+- Windows XP (with SP 1 and Python 2.4.1 or Python 2.4.0)
+
+Please tell me if it is running on your plattform which is different and I am going to extent this list.
+
+
+Python and its modules
+
+Make also sure that you have installed Python with the following modules:
+
+- Python (tested with Python 2.3.4 / 2.4 / 2.4.1 - but should also be running with lower versions.) www.python.org
+- For the GUI part: wxPython (with all its dependencies) - wxpython.org You may also download binaries from this link.
+
+
+2. Unpack the program files and start the application 
+-----------------------------------------------------
+
+You may place the files to a location of your choice. The following locations are suggestions only: 
+
+
+Windows XP/2000
+
+- Take the program Archive file and extract its content to C:\Program Files (assuming your Windows Drive is C:)
+  Automatically, a subdirecty (FileExtractor) will be created and all required files will be stored in there.
+- Create a short cut to your desktop. Close (or minimise) all running programs and right-click your Desktop; 
+  choose New / Shortcut from the context menu. For location put the directory from the previous step together 
+  with the program file (C:\Program Files\FileExtractor\FileExtractor.py) Choose a reasonable name for the 
+  new shortcut (such as FileExtractor).
+Assuming, you have a running python installation and your configuration includes Python files (.py) being linked 
+with the Python Interpreter, the program may be started just by double-clicking the before created shortcut. 
+
+
+Linux / Unix
+ 
+- Extract the content of the ZIP file to a folder of your choice.
+- Browse into this folder and edit the program file FileExtractor.py. The first line contains an entry for the 
+  environment variable for the python program file. Check, whether this is set for you system and is corretly 
+  pointing to your python executable. 
+- If not yet done, change the permissions of the program file (FileExtractor.py) to executable for user. 
+  (chmod u+x FileExtractor.py)
+
+You may run the program just by calling the program file FileExtractor.py 
+
+
+3. Command Line Interface (CLI)
+-------------------------------
+
+FileExtractor is also coming with a Command Line Interface (CLI). If you are unable or not willing to install 
+wxPython you may run this version instead. Check the help (FileExtractorCLI --help) for more information. 
+ 
