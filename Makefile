@@ -16,6 +16,11 @@ HELP_HTMLS=	\
 		$(HELP_DIR)/overview.htm \
 		$(HELP_DIR)/research.htm \
 		$(HELP_DIR)/signatures.htm 
+HELP_PIC_DIR=	$(HELP_DIR)/pics
+HELP_PICS=	$(HELP_PIC_DIR)/background.jpg \
+		$(HELP_PIC_DIR)/background2.jpg \
+		$(HELP_PIC_DIR)/background3.jpg \
+		$(HELP_PIC_DIR)/background4.jpg
 HELP_CONFIGS=	\
 		$(HELP_DIR)/general.hhc \
 		$(HELP_DIR)/general.hhk \
@@ -39,7 +44,7 @@ api-docs:	$(API_DOC_DIR)
 docs:   api-docs
 
 
-$(HELP_ZIPNAME):	$(HELP_CONFIGS) $(HELP_HTMLS)
+$(HELP_ZIPNAME):	$(HELP_CONFIGS) $(HELP_HTMLS) 
 	$(ZIP) $(ZIP_PAR) $(HELP_ZIPNAME) $(HELP_CONFIGS) $(HELP_HTMLS)
 
 help: $(HELP_ZIPNAME)

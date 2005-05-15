@@ -148,12 +148,13 @@ _wav[filesize_info_correction] = 8
 _wav[filesize_type] = TYPE_FILE_SIZE
 
 # signature for PNG Picture files
+# http://download.mirror.ac.uk/sites/www.libpng.org/pub/png/spec/1.2/png-1.2-pdg.html
 # mpilgerm 2005-05-15
 _png = {}
 _png[name] = 'PNG'
 _png[description] = 'Portable Netowrk Graphics (PNG) Picture File'
 _png[extension] = 'png'
-_png[start_seq] = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D]
+_png[start_seq] = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
 _png[end_seq] = [0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82]
 _png[skip_end_seqs] = 0
 _png[filesize_type] = TYPE_END_SEQUENCE
