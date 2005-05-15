@@ -1,4 +1,8 @@
-README for FileExtractor
+README for FileExtractor Version 0.1
+
+Michael Pilgermann
+Email to: mpilgerm@glam.ac.uk
+Licensed under the Genreal Public License (GPL) 
 
 Content
 1. Introduction
@@ -11,20 +15,11 @@ Content
 
 1. Introduction
 ---------------
-This program was implemented for searching for files inside files. Apparently, the source files are image 
+This program was implemented for searching for files inside binary sources. Apparently, the source files are image 
 files containing all the data of a hard disk, a memory stick or a camera. It becomes useful whenever the 
 File System on the device was damaged, maybe problems with the File Allocation Table or whatever. 
 (The creating of the image file is beyond the scope of this program, it might be realised with tools such as 
 EnCase or simply using the dd command in Linux/Unix environments).
-
-It has been created by Michael Pilgermann, as part of his work and studies for the 
-University of Glamorgan / School of Computing / Information Security Research Group. 
-More information at http://www.glam.ac.uk/soc/research/isrg.php. For any critism or hints 
-I am very thankful for an email to mpilgerm@glam.ac.uk.
-
-Requirements:
-* A running Python Installation (tested with Python 2.4 - but should also be running with lower versions.) - www.python.org
-* For the GUI part: wxPython (with all its dependencies) - http://wxpython.org/
 
 2. Mode of operation
 ---------------------
@@ -53,7 +48,8 @@ might cause false positives for finding files. The end of a file may be determin
 * CRW (type 3)
 * CR2 (type 1)
 * THM (type 1)
-* WAV
+* WAV (type 2)
+* PNG (type 1)
 
 4. Version Tracker
 ------------------
@@ -133,10 +129,12 @@ version 0.1 (28/01/2005)
 
 5. ToDo
 -------
+* guide / instructions for creating an image of the partition, ...
 * user guide
 * finsih Help Dialog Content
 * setup.py
 * HelpBook for UserGuide
+* GUI - Indicator, whenever core is in manual function (may take some time where no progress is visible)
 * Closing Threads in case of errors
 * Error Handling
 * new signature type for saving a predefined file size???
@@ -152,6 +150,7 @@ version 0.1 (28/01/2005)
     
 6. Known Bugs
 -------------
+* Windows does not recognize the help zip file when assembled in Linux
 * if started and no source file given - exception raised
 * Program crashed when Access Denied for Source File
 * No check for the address gained from files with signature type 2
