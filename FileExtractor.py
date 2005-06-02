@@ -25,10 +25,20 @@ import signatures
 import ProgressDialog
 from ExecutionSettings import ExecutionSettings
 
+_MODULE_IMAGE_GENERATOR = 0
+
+try:
+    from imagegenerator import ImageGenerator
+    print "Module Imagegenerator initialised."
+    _MODULE_IMAGE_GENERATOR = 1
+except ImportError:
+    print "Module Imagegenerator not available."
+
 _ID_ADD = 101
 _ID_START = 102
 _ID_OPTIONS = 103
 _ID_EXIT  = 104
+_ID_IMAGEGENERATOR = 105
 _ID_CONTENT = 201
 _ID_ABOUT = 202
 _ID_B_ADD = 301
@@ -203,6 +213,12 @@ class FileExtractorFrame(wxFrame):
         fileMenu.Append(_ID_EXIT, "E&xit", "Terminate the program")
         menuBar = wxMenuBar()
         menuBar.Append(fileMenu, "&File");
+        
+        toolsMenu = wxMenu()
+        toolsMenu.Append(_ID_IMAGEGENERATOR, "&ImageGenerator...",
+                    "Create an image file")
+        menuBar.Append(toolsMenu, "&Tools")
+        
         helpMenu = wxMenu()
         helpMenu.Append(_ID_CONTENT, "&Content",
                     "How to use this Program in detail")
@@ -218,6 +234,10 @@ class FileExtractorFrame(wxFrame):
         EVT_MENU(self, _ID_START,  self._StartSearch)
         EVT_MENU(self, _ID_CONTENT,  self._showHelp)
         EVT_MENU(self, _ID_OPTIONS,  self._UnderConstruction)
+        if _MODULE_IMAGE_GENERATOR:
+            EVT_MENU(self, _ID_IMAGEGENERATOR, self._startImageGenerator)
+        else:
+            EVT_MENU(self, _ID_IMAGEGENERATOR,  self._NotAvailable)
         EVT_BUTTON(self, _ID_B_ADD, self._AddSourceFile)
         EVT_BUTTON(self, _ID_B_REMOVE, self._RemoveSourceFile)
         EVT_BUTTON(self, _ID_B_INFO, self._InfoSignature)
@@ -244,6 +264,13 @@ class FileExtractorFrame(wxFrame):
     def _UnderConstruction(self, event):
         dlg = wxMessageDialog(self, "Under Construction\n",
                               "Coming soon", wxOK | wxICON_INFORMATION)
+        dlg.ShowModal()
+        dlg.Destroy()
+        
+    def _NotAvailable(self, event):
+        dlg = wxMessageDialog(self, "The requested module was not found on this system.\n" \
+                                    " Check your installation.",
+                              "Not installed", wxOK | wxICON_INFORMATION)
         dlg.ShowModal()
         dlg.Destroy()
         
@@ -313,6 +340,11 @@ class FileExtractorFrame(wxFrame):
             self.dest_folder = path
             self.if_dir.SetValue(path)
         dirDialog.Destroy()
+    
+    def _startImageGenerator(self, event):
+        print "Starting module Image Generator..."
+        imageGenerator = ImageGenerator.ImageGenerator(callback = self)
+        imageGenerator.start()
         
     def _showHelp(self, event):
         global helpFile
@@ -339,6 +371,30 @@ class FileExtractorFrame(wxFrame):
         # start it up!
         self.helpctrl.DisplayContents()
 
+        
+    #################################################################################
+    ### stuff for image generator callback
+    def cancelled(self):
+        pass
+        
+    def success(self, destname):
+        dlg = wxMessageDialog(self, "The image file was created sucessfully" \
+                                "\n(name: " + destname + ")" \
+                                "\n\nAdd the image file to the source list?",
+                              "Imaging finished", wxYES_NO | wxICON_QUESTION)
+        if dlg.ShowModal() == wxID_YES:
+            self.content.append(destname)
+            self.filelist.Set(self.content)
+        dlg.Destroy()
+        
+    def error(self):
+        dlg = wxMessageDialog(self, "The image file could not be created\n",
+                              "Imaging error", wxOK | wxICON_ERROR)
+        dlg.ShowModal()
+        dlg.Destroy()
+        
+    ### end stuff image generator callback
+    #################################################################################
     
 class FileExtractorSimpleApp(wxApp):
     """
