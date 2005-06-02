@@ -84,6 +84,7 @@ might cause false positives for finding files. The end of a file may be determin
 * if started and no source file given - exception raised
 * Program crashed when Access Denied for Source File
 * No check for the address gained from files with signature type 2
+* when image generator used, the program does not shut down properly ... some remaining threads
 
 7. Possible test cases
 ----------------------
