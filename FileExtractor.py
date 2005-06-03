@@ -343,7 +343,7 @@ class FileExtractorFrame(wxFrame):
     
     def _startImageGenerator(self, event):
         print "Starting module Image Generator..."
-        imageGenerator = ImageGenerator.ImageGenerator(callback = self)
+        imageGenerator = ImageGenerator.ImageGenerator(callback = self, parentControl = self)
         imageGenerator.start()
         
     def _showHelp(self, event):
