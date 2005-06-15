@@ -16,10 +16,21 @@ will in case of start the simple Application.
 @license: GPL (General Public License)
 """
 
-from wxPython.wx import *
-import wxPython.html
-from wxPython.htmlhelp import *
+import sys
 
+try:
+    from wxPython.wx import *
+    import wxPython.html1
+    from wxPython.htmlhelp import *
+except ImportError:
+    print "\nIMPORT ERROR"
+    print "The site package for wxPython could not be imported."
+    print "You must install wxPython before running the FileExtractor!"
+    print"\nCheck 'http://wxpython.org' for information on wxPython and 'http://wxpython.org/download.php#binaries'" 
+    print "for downloading binary versions."
+    raw_input("\nPress enter to abort")
+    sys.exit(-1)
+    
 import FileExtractorCore
 import signatures
 import ProgressDialog
