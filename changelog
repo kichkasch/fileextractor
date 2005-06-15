@@ -1,6 +1,7 @@
 Changelog for FileExtractor
 
 Content:
+- version 0.2
 - version 0.1 (12/05/2005)
 - old entries for early development with name FindFiles
 
@@ -8,6 +9,7 @@ version 0.2 (??/??/????)
 ========================
 * Error handling
     - missing package wxpython reported with a proper error message
+* Integration of module for Image Generating
 
 
 version 0.1 (12/05/2005)

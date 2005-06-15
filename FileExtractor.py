@@ -28,6 +28,8 @@ except ImportError:
     print "You must install wxPython before running the FileExtractor!"
     print"\nCheck 'http://wxpython.org' for information on wxPython and 'http://wxpython.org/download.php#binaries'" 
     print "for downloading binary versions."
+    print "\nYou may also check the project home page's install page 'http://kkfileextractor.sourceforge.net/installation.htm' " \
+    "for more information."
     raw_input("\nPress enter to abort")
     sys.exit(-1)
     
