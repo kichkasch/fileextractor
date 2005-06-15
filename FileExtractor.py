@@ -20,7 +20,7 @@ import sys
 
 try:
     from wxPython.wx import *
-    import wxPython.html1
+    import wxPython.html
     from wxPython.htmlhelp import *
 except ImportError:
     print "\nIMPORT ERROR"
