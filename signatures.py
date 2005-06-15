@@ -159,6 +159,18 @@ _png[end_seq] = [0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x6
 _png[skip_end_seqs] = 0
 _png[filesize_type] = TYPE_END_SEQUENCE
 
+# signature for Windows Event Log Data files
+# bin comparision and http://www.oreilly.com/catalog/winlog/chapter/ch02.html
+# mpilgerm 2005-06-15
+_win_event = {}
+_win_event[name] = 'WINEVT'
+_win_event[description] = 'Windows Event Log Data Files'
+_win_event[extension] = 'Evt'
+_win_event[start_seq] = [0x30, 0x00, 0x00, 0x00, 0x4C, 0x66, 0x4C, 0x65, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00]
+_win_event[end_seq] = [0x28, 0x00, 0x00, 0x00, 0x11, 0x11, 0x11, 0x11, 0x22, 0x22, 0x22, 0x22, 0x33, 0x33, 0x33, 0x33, \
+0x44, 0x44, 0x44, 0x44, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, \
+None, 0x28, 0x00, 0x00, 0x00]
+_win_event[filesize_type] = TYPE_END_SEQUENCE
 
 # #######################################################
 # put your own signatures here
@@ -179,6 +191,7 @@ signs.append(_thm)
 signs.append(_crw)
 signs.append(_wav)
 signs.append(_png)
+signs.append(_win_event)
 
 
 # #######################################################
