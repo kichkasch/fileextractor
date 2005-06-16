@@ -162,6 +162,11 @@ _png[filesize_type] = TYPE_END_SEQUENCE
 # signature for Windows Event Log Data files
 # bin comparision and http://www.oreilly.com/catalog/winlog/chapter/ch02.html
 # mpilgerm 2005-06-15
+#
+# still causing problems - the files can't be read by the event viewer afterwards
+# Windows seems to implement some very funny mechanism for keeping these files at a constant size
+# of 512 KB; in fact, it looks like they just insert at the beginning and drop the end. Not sure about
+# that yet. Anyway, the end signature is most of the time somewhere in the middle of the file.
 _win_event = {}
 _win_event[name] = 'WINEVT'
 _win_event[description] = 'Windows Event Log Data Files'
