@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-3.5.dtd">
+<!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2005-05-17, 10:11:53 -->
-<!-- Copyright (C) 2005 Michael Pilgermann, mpilgerm@glam.ac.uk -->
-<Project version="3.5">
+<!-- Saved: 2006-01-20, 18:37:46 -->
+<!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
+<Project version="3.8">
+  <ProgLanguage mixed="0">Python</ProgLanguage>
+  <UIType>Qt</UIType>
   <Description></Description>
   <Version>0.1</Version>
   <Author>Michael Pilgermann</Author>
   <Email>mpilgerm@glam.ac.uk</Email>
   <Sources>
+    <Source>
+      <Name>tools.py</Name>
+    </Source>
+    <Source>
+      <Name>securitycontroller.py</Name>
+    </Source>
     <Source>
       <Name>FileExtractor.py</Name>
     </Source>
@@ -44,6 +52,28 @@
   <Interfaces>
   </Interfaces>
   <Others>
+    <Other>
+      <Name>README</Name>
+    </Other>
+    <Other>
+      <Dir>sql</Dir>
+      <Name>createtables.sql</Name>
+    </Other>
+    <Other>
+      <Dir>sql</Dir>
+      <Name>droptables.sql</Name>
+    </Other>
+    <Other>
+      <Dir>sql</Dir>
+      <Name>filltables.sql</Name>
+    </Other>
+    <Other>
+      <Dir>sql</Dir>
+      <Name>truncdata.sql</Name>
+    </Other>
+    <Other>
+      <Name>INSTALL</Name>
+    </Other>
     <Other>
       <Name>readme</Name>
     </Other>
@@ -96,4 +126,11 @@
   <Eric3Api>
     <Eric3ApiParams>{'outputFile': u'doc2/documentation', 'ignoreDirectories': [u'doc', u'doc2', u'CVS'], 'useRecursion': True}</Eric3ApiParams>
   </Eric3Api>
+  <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+  </FiletypeAssociations>
 </Project>

@@ -94,7 +94,7 @@ class FileExtractorFrame(wxFrame):
         self.dest_folder = "./"
         
         self.CreateStatusBar()
-        self.SetStatusText("FindFiles initialised ...")
+        self.SetStatusText("FileExtractor initialised ...")
         
         panel_outer = wxPanel(self, -1)
         
@@ -256,16 +256,60 @@ class FileExtractorFrame(wxFrame):
         EVT_BUTTON(self, _ID_B_INFO, self._InfoSignature)
         EVT_BUTTON(self, _ID_B_DIR, self._ChangeOutputDir)
         EVT_BUTTON(self, _ID_B_START, self._StartSearch)
+        
+        #
+        # toolbar
+        #
+        import wx
+        wx.InitAllImageHandlers()
+        toolbar = self.CreateToolBar(style = wxNO_BORDER | wxTB_HORIZONTAL)
+        self.ToolBar = toolbar
+        toolbar.SetToolBitmapSize((21,21))
+        # 1. global
+        bmExit = wx.Bitmap("icons/exit.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1001, bitmap = bmExit, label="Exit", shortHelp = "Quit FileExtractor")
+        toolbar.AddSeparator()
+        # 2. Actions
+        bmAdd = wx.Bitmap("icons/edit_add.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1002, bitmap = bmAdd, label="Add", shortHelp = "Add Source File")
+        bmRem = wx.Bitmap("icons/edit_remove.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1003, bitmap = bmRem, label="Remove", shortHelp = "Remove Source File")
+        bmStart = wx.Bitmap("icons/start.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1004, bitmap = bmStart, label="Start", shortHelp = "Start recovery")
+        toolbar.AddSeparator()
+        # 3. Tools
+        bmImage = wx.Bitmap("icons/tools_image.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1005, bitmap = bmImage, label="Image", shortHelp = "Image your data source")
+        toolbar.AddSeparator()
+        # 4. Configure
+        bmConf = wx.Bitmap("icons/configure.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1006, bitmap = bmConf, label="Configure", shortHelp = "Configure FileExtractor")
+        toolbar.AddSeparator()
+        # 5. Help
+        bmHelp = wx.Bitmap("icons/help.png", wx.BITMAP_TYPE_PNG);
+        toolbar.DoAddTool(id = 1007, bitmap = bmHelp, label="Help", shortHelp = "FileExtractor Help")
+        toolbar.AddSeparator()
 
+        toolbar.Realize()
+        
+        EVT_TOOL(self, 1001, self._TimeToQuit)
+        EVT_TOOL(self, 1002, self._AddSourceFile)
+        EVT_TOOL(self, 1003, self._RemoveSourceFile)
+        EVT_TOOL(self, 1004, self._StartSearch)
+        if _MODULE_IMAGE_GENERATOR:
+            EVT_TOOL(self, 1005, self._startImageGenerator)
+        else:
+            EVT_TOOL(self, 1005, self._NotAvailable)        
+        EVT_TOOL(self, 1006, self._UnderConstruction)
+        EVT_TOOL(self, 1007, self._showHelp)
+        
 
     def _OnAbout(self, event):
-        dlg = wxMessageDialog(self, "FileExtractor - Version 0.1\n"
+        dlg = wxMessageDialog(self, "FileExtractor - Version 0.2beta\n"
                               "Searching for Files within binary sources\n"
                               "\nAuthor: Michael Pilgermann\n"
                               "Email: mpilgerm@glam.ac.uk\n\n"
-                              "Information Security Research Group (ISRG)\n"
-                              "School of Computing / University of Glamorgan\n"
-                              "http://www.glam.ac.uk/soc/research/isrg.php"
+                              "http://kkfileextractor.sourceforge.net"
                               "\n\nPublished under the General Public License (GPL)   ",
                               "About Me", wxOK | wxICON_INFORMATION)
         dlg.ShowModal()
@@ -427,7 +471,7 @@ class FileExtractorSimpleApp(wxApp):
         @return: Indicates, whether the application was invoked successfully.
         @rtype: Bool
         """
-        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 0.1")
+        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 0.2b")
         frame.initHelp()
         frame.Show(true)
         self.SetTopWindow(frame)
