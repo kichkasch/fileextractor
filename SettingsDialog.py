@@ -135,6 +135,8 @@ class SettingsDialog(wxDialog):
             self._putGeneralOptionsContent()
         elif self.tree.GetItemText(item) == "FileTypes":
             self.contentHeading.SetValue("Specify default behaviour for file types.")
+            self._putFiletypeOptionsContent()
+            
         self.content_swap_box.Layout()
             
     def _putGeneralOptionsContent(self):
@@ -210,6 +212,35 @@ class SettingsDialog(wxDialog):
         
         self._lastChild = panel_top
 
+    def _putFiletypeOptionsContent(self):
+        import FileExtractorCore
+        import signatures
+        panel_top = wx.Panel(self.panel_swap, -1)
+
+        label_signatures = wxStaticText (panel_top, -1 , "Select file types enabled by default")
+        self.signaturelist = wxCheckListBox(panel_top, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)
+        thesignatures = FileExtractorCore.getAvailableSignatures()
+        self.sigDict = {}
+        for sig in thesignatures:
+            name = sig[signatures.name]
+            self.sigDict[name] = sig
+        self.sigcontent = self.sigDict.keys()
+        self.signaturelist.Set(self.sigcontent)
+        for i in range(0, len(self.sigcontent)):
+            self.signaturelist.Check(i)
+        
+##        panel_fill = wx.Panel(panel_top, -1)
+        topBox = wxBoxSizer(wxVERTICAL)
+        topBox.Add(label_signatures,1, wx.ALIGN_BOTTOM | wx.ALIGN_LEFT)
+        topBox.Add(self.signaturelist, 6, wx.EXPAND, wx.TOP)
+##        topBox.Add(panel_fill, 1, wx.EXPAND)
+        panel_top.SetAutoLayout(True)
+        panel_top.SetSizer(topBox)
+        panel_top.Layout()
+        self.content_swap_box.Add(panel_top, 1, wx.EXPAND)
+        
+        self._lastChild = panel_top
+        
         
     def _OnExit(self, event):
         self.EndModal(0)
