@@ -18,6 +18,7 @@ will in case of start the simple Application.
 
 import sys
 
+
 try:
     from wxPython.wx import *
     import wxPython.html
@@ -89,6 +90,8 @@ class FileExtractorFrame(wxFrame):
         @param title: The title of the frame (passed to super class constructor L{wxPython.wx.wxFrame.__init__})
         @type title: C{String}
         """
+        import wx
+
         wxFrame.__init__(self, parent, ID, title,
                          wxDefaultPosition, wxSize(600, 500))
         self.dest_folder = "./"
@@ -108,37 +111,44 @@ class FileExtractorFrame(wxFrame):
         self.filelist.Set(self.content)
         
         panel_buttons = wxPanel(panel_left, -1)
-        b1 = wxButton(panel_buttons, _ID_B_ADD, "Add")
-        b2 = wxButton(panel_buttons, _ID_B_REMOVE, "Remove")
+        #b1 = wxButton(panel_buttons, _ID_B_ADD, "Add")
+        #b2 = wxButton(panel_buttons, _ID_B_REMOVE, "Remove")
+
+        panel_fill = wxPanel(panel_buttons, -1)
+        bmAdd = wx.Bitmap("icons/edit_add.png", wx.BITMAP_TYPE_PNG);
+        b1 = wxBitmapButton(panel_buttons, _ID_B_ADD, bmAdd, size=(30,25))
+        bmRem = wx.Bitmap("icons/edit_remove.png", wx.BITMAP_TYPE_PNG);
+        b2 = wxBitmapButton(panel_buttons, _ID_B_REMOVE, bmRem, size=(30,25))
+
         box = wxBoxSizer(wxHORIZONTAL)
-        box.Add(b1, 1, wxALIGN_CENTER)
-        box.Add(b2, 1, wxALIGN_CENTER)
+        box.Add(panel_fill, 1, wxALIGN_CENTER | wxEXPAND)
+        box.Add(b1, 1, wxALIGN_CENTER )
+        box.Add(b2, 1, wxALIGN_CENTER )
         panel_buttons.SetAutoLayout(True)
         panel_buttons.SetSizer(box)
         panel_buttons.Layout()
         
-        label_outputdir = wxStaticText (panel_left, -1, "Output Directory")
-        self.if_dir = wxTextCtrl(panel_left, -1, "Working Directory")
-        self.if_dir.SetEditable(false)
-        bChooseDir = wxButton(panel_left, _ID_B_DIR, "Change Directory")        
+        
+        
+        bmLogo = wx.Bitmap("icons/felogo2.png", wx.BITMAP_TYPE_PNG);
+        sbmLogo = wxStaticBitmap(panel_left, 567, bmLogo, size = (250, 140))
         
         panel_fill = wxPanel(panel_left, -1)
+        #panel_fill1 = wxPanel(panel_left, -1)
         
         box = wxBoxSizer(wxVERTICAL)
         box.Add(label_sources, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
-        box.Add(self.filelist, 5, wxEXPAND)
-        box.Add(panel_buttons, 2, wxEXPAND | wxALIGN_CENTER_VERTICAL)
-        box.Add(label_outputdir, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
-        box.Add(self.if_dir, 1, wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT)
-        box.Add(bChooseDir, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
-##        box.Add(panel_fill, 3, wxEXPAND)
+        box.Add(self.filelist, 6, wxEXPAND)
+        box.Add(panel_buttons, 2, wxEXPAND ) #| wxALIGN_CENTER_VERTICAL)
+        box.Add(panel_fill, 1, wxEXPAND)
+        box.Add(sbmLogo, 8, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
 
         panel_left.SetAutoLayout(True)
         panel_left.SetSizer(box)
         panel_left.Layout()
 
         # and now the right panel
-        label_signatures = wxStaticText (panel_right, -1 , "Select Signatures")
+        label_signatures = wxStaticText (panel_right, -1 , "Select File Types")
 
         self.signaturelist = wxCheckListBox(panel_right, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)
         thesignatures = FileExtractorCore.getAvailableSignatures()
@@ -151,15 +161,45 @@ class FileExtractorFrame(wxFrame):
         for i in range(0, len(self.sigcontent)):
             self.signaturelist.Check(i)
             
-        bInfo = wxButton(panel_right, _ID_B_INFO, "Info")
+        
+        bmInfo = wx.Bitmap("icons/info.png", wx.BITMAP_TYPE_PNG);
+        bInfo = wxBitmapButton(panel_right, _ID_B_INFO, bmInfo, size=(60,20))
+        
+        
+        #bInfo = wxButton(panel_right, _ID_B_INFO, "Info")
+        
+        
+        label_outputdir = wxStaticText (panel_right, -1, "Output Directory")
+        panel_dir = wxPanel(panel_right, -1)
+        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+        self.if_dir.SetEditable(false)
+        #bChooseDir = wxButton(panel_dir, _ID_B_DIR, "Change Directory")        
+        
+        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        panel_fill = wxPanel(panel_dir, -1)
+        bChooseDir = wxBitmapButton(panel_dir, _ID_B_DIR, bmDir, size=(30,30))        
+
+        box = wxBoxSizer(wxHORIZONTAL)
+        box.Add(self.if_dir, 16, wxALIGN_CENTER)
+        box.Add(panel_fill, 1, wxALIGN_CENTER)
+        box.Add(bChooseDir, 3, wxALIGN_CENTER)
+        panel_dir.SetAutoLayout(True)
+        panel_dir.SetSizer(box)
+        panel_dir.Layout()
+        
         
         pFill1 = wxPanel(panel_right, -1)
         pFill2 = wxPanel(panel_right, -1)
+        pFill3 = wxPanel(panel_right, -1)
 
         panel_start = wxPanel(panel_right, -1)
         panel_fills1 = wxPanel(panel_start, -1)
 ##        panel_fills2 = wxPanel(panel_start, -1)
-        bStartSearch = wxButton(panel_start, _ID_B_START, "Start Search")
+
+        bmStart = wx.Bitmap("icons/start4.png", wx.BITMAP_TYPE_PNG);
+        bStartSearch  = wxBitmapButton(panel_start, _ID_B_START, bmStart, size=(105,22))
+
+        #bStartSearch = wxButton(panel_start, _ID_B_START, "Start Search")
         boxs = wxBoxSizer(wxHORIZONTAL)
         boxs.Add(panel_fills1, 7, wxEXPAND)
         boxs.Add(bStartSearch, 7, wxEXPAND | wxALIGN_RIGHT)
@@ -170,11 +210,14 @@ class FileExtractorFrame(wxFrame):
         
         boxr = wxBoxSizer(wxVERTICAL)
         boxr.Add(label_signatures, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_CENTER_HORIZONTAL)
-        boxr.Add(self.signaturelist, 7, wxEXPAND)
+        boxr.Add(self.signaturelist, 10, wxEXPAND)
 ##        boxr.Add(pFill1, 1, wxEXPAND)
-        boxr.Add(bInfo, 1, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
+        boxr.Add(bInfo, 2, wxALIGN_CENTER_VERTICAL | wxALIGN_RIGHT)
         boxr.Add(pFill2, 1, wxEXPAND)
-        boxr.Add(panel_start, 1, wxEXPAND)
+        boxr.Add(label_outputdir, 1, wxALIGN_BOTTOM| wxALIGN_CENTER_HORIZONTAL)
+        boxr.Add(panel_dir, 2, wxEXPAND | wxALIGN_CENTER_VERTICAL | wxALIGN_LEFT)
+        boxr.Add(pFill3, 1, wxEXPAND)
+        boxr.Add(panel_start, 2, wxEXPAND)
 
         panel_right.SetAutoLayout(True)
         panel_right.SetSizer(boxr)
@@ -246,7 +289,7 @@ class FileExtractorFrame(wxFrame):
         EVT_MENU(self, _ID_ADD,  self._AddSourceFile)
         EVT_MENU(self, _ID_START,  self._StartSearch)
         EVT_MENU(self, _ID_CONTENT,  self._showHelp)
-        EVT_MENU(self, _ID_OPTIONS,  self._UnderConstruction)
+        EVT_MENU(self, _ID_OPTIONS,  self._OnSettings)
         if _MODULE_IMAGE_GENERATOR:
             EVT_MENU(self, _ID_IMAGEGENERATOR, self._startImageGenerator)
         else:
@@ -262,7 +305,8 @@ class FileExtractorFrame(wxFrame):
         #
         import wx
         wx.InitAllImageHandlers()
-        toolbar = self.CreateToolBar(style = wxNO_BORDER | wxTB_HORIZONTAL)
+        #toolbar = self.CreateToolBar(style = wxNO_BORDER | wxTB_HORIZONTAL)
+        toolbar = self.CreateToolBar(style = wxRAISED_BORDER | wxTB_TEXT | wxTB_HORIZONTAL)
         self.ToolBar = toolbar
         toolbar.SetToolBitmapSize((21,21))
         # 1. global
@@ -300,9 +344,14 @@ class FileExtractorFrame(wxFrame):
             EVT_TOOL(self, 1005, self._startImageGenerator)
         else:
             EVT_TOOL(self, 1005, self._NotAvailable)        
-        EVT_TOOL(self, 1006, self._UnderConstruction)
+        EVT_TOOL(self, 1006, self._OnSettings)
         EVT_TOOL(self, 1007, self._showHelp)
-        
+
+    def _OnSettings(self, event):
+        import SettingsDialog
+        dia  = SettingsDialog.SettingsDialog(self, -1, "FileExtractor Configuration")
+        dia.ShowModal()
+        dia.Destroy()        
 
     def _OnAbout(self, event):
         dlg = wxMessageDialog(self, "FileExtractor - Version 0.2beta\n"
@@ -353,6 +402,14 @@ class FileExtractorFrame(wxFrame):
     
     def _StartSearch(self, event):
         sourceFiles = self.content
+        if len(sourceFiles) < 1:
+            dlg = wxMessageDialog(self, "No source file specified.\n\n"
+                                "Please provide at least one file in the\n"
+                                "list of source files.",
+                                "No source file", wxOK | wxICON_ERROR)
+            dlg.ShowModal()
+            dlg.Destroy()
+            return
         dis_sigs = []
         for i in range(0, len(self.sigcontent)):
             if not self.signaturelist.IsChecked(i):

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2006-01-20, 18:37:46 -->
+<!-- Saved: 2006-01-22, 12:22:58 -->
 <!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -13,9 +13,6 @@
   <Sources>
     <Source>
       <Name>tools.py</Name>
-    </Source>
-    <Source>
-      <Name>securitycontroller.py</Name>
     </Source>
     <Source>
       <Name>FileExtractor.py</Name>
@@ -43,6 +40,10 @@
     </Source>
     <Source>
       <Name>FileExtractorCore.py</Name>
+    </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>commondialogs.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -128,9 +129,9 @@
   </Eric3Api>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

@@ -7,6 +7,13 @@ Content:
 
 version 0.2 (??/??/????)
 ========================
+* Options dialog integrated
+    - fileextractor options
+    - image generator options
+* new GUI design
+    - lots of icons instead of text
+    - nice loge is on there as well now :)
+* Before start search - check, whether at least one source file is given
 * Error handling
     - missing package wxpython reported with a proper error message
 * Integration of module for Image Generating
