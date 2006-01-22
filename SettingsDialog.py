@@ -110,13 +110,14 @@ class SettingsDialog(wxDialog):
         
     def _OnSelChanged(self, event):
         item =  event.GetItem()
-        print "Selected now: ", self.tree.GetItemText(item)
+##        print "Selected now: ", self.tree.GetItemText(item)
         if self._lastChild:
             self.content_swap_box.Remove(self._lastChild)
             self._lastChild.Show(0)
         
         if self.tree.GetItemText(item) == "ImageGenerator":
             self.contentHeading.SetValue("Apply the settings for the module 'ImageGenerator' here.")
+            self._putImageGeneratorOptionsContent()
         elif self.tree.GetItemText(item) == "Modules":
             self.contentHeading.SetValue("Apply settings for FE modules.\nChoose a module from the tree.")
             st = wx.StaticText(self.panel_swap, -1, "Available modules:\n - ImageGenerator")
@@ -131,8 +132,84 @@ class SettingsDialog(wxDialog):
 
         elif self.tree.GetItemText(item) == "General":
             self.contentHeading.SetValue("Specify general options for the FileExtractor.")
+            self._putGeneralOptionsContent()
         elif self.tree.GetItemText(item) == "FileTypes":
             self.contentHeading.SetValue("Specify default behaviour for file types.")
+        self.content_swap_box.Layout()
+            
+    def _putGeneralOptionsContent(self):
+        panel_top = wx.Panel(self.panel_swap, -1)
+        label_outputdir = wxStaticText (panel_top, -1, "Output Directory")
+        panel_dir = wxPanel(panel_top, -1)
+        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+        self.if_dir.SetEditable(false)
+        
+        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        panel_fill = wxPanel(panel_dir, -1)
+        bChooseDir = wxBitmapButton(panel_dir, 701, bmDir, size=(25,25))        
+
+        box = wxBoxSizer(wxHORIZONTAL)
+        box.Add(self.if_dir, 16, wxALIGN_CENTER)
+        box.Add(panel_fill, 1, wxALIGN_CENTER)
+        box.Add(bChooseDir, 3, wxALIGN_CENTER)
+        panel_dir.SetAutoLayout(True)
+        panel_dir.SetSizer(box)
+        panel_dir.Layout()
+            
+        panel_fill = wx.Panel(panel_top, -1)
+        topBox = wxBoxSizer(wxVERTICAL)
+        topBox.Add(label_outputdir, 1, wx.ALIGN_BOTTOM,)
+        topBox.Add(panel_dir, 1, wx.EXPAND, wx.TOP)
+        topBox.Add(panel_fill, 4, wx.EXPAND)
+        panel_top.SetAutoLayout(True)
+        panel_top.SetSizer(topBox)
+        panel_top.Layout()
+        self.content_swap_box.Add(panel_top, 1, wx.EXPAND)
+        
+        self._lastChild = panel_top
+
+    def _putImageGeneratorOptionsContent(self):
+        panel_top = wx.Panel(self.panel_swap, -1)
+
+        lCore = wx.StaticText(panel_top, -1, "Choose default core")
+##        choicesCore = CoreManager.getInstance().getListOfCoreNames()
+        choicesCore = ['Win32 dd clone', 'Linux / Unix']
+        self._chCore = wx.Choice(panel_top, 721, choices = choicesCore)
+        self._chCore.SetSelection(0)
+
+        label_outputdir = wxStaticText (panel_top, -1, "Directory  for image")
+        panel_dir = wxPanel(panel_top, -1)
+        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+        self.if_dir.SetEditable(false)
+        
+        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        panel_fill = wxPanel(panel_dir, -1)
+        bChooseDir = wxBitmapButton(panel_dir, 722, bmDir, size=(25,25))        
+
+        box = wxBoxSizer(wxHORIZONTAL)
+        box.Add(self.if_dir, 16, wxALIGN_CENTER)
+        box.Add(panel_fill, 1, wxALIGN_CENTER)
+        box.Add(bChooseDir, 3, wxALIGN_CENTER)
+        panel_dir.SetAutoLayout(True)
+        panel_dir.SetSizer(box)
+        panel_dir.Layout()
+            
+        panel_fill0 = wx.Panel(panel_top, -1)
+        panel_fill = wx.Panel(panel_top, -1)
+        topBox = wxBoxSizer(wxVERTICAL)
+        topBox.Add(lCore,1, wx.ALIGN_BOTTOM | wx.ALIGN_LEFT)
+        topBox.Add(self._chCore, 1, wx.EXPAND, wx.TOP)
+        topBox.Add(panel_fill0, 1, wx.EXPAND)
+        topBox.Add(label_outputdir, 1, wx.ALIGN_BOTTOM | wx.ALIGN_LEFT)
+        topBox.Add(panel_dir, 1, wx.EXPAND, wx.TOP)
+        topBox.Add(panel_fill, 1, wx.EXPAND)
+        panel_top.SetAutoLayout(True)
+        panel_top.SetSizer(topBox)
+        panel_top.Layout()
+        self.content_swap_box.Add(panel_top, 1, wx.EXPAND)
+        
+        self._lastChild = panel_top
+
         
     def _OnExit(self, event):
         self.EndModal(0)
