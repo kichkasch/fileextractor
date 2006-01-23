@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2006-01-22, 21:23:03 -->
+<!-- Saved: 2006-01-23, 12:29:43 -->
 <!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -42,16 +42,10 @@
       <Name>FileExtractorCore.py</Name>
     </Source>
     <Source>
-      <Dir>tests</Dir>
-      <Name>commondialogs.py</Name>
+      <Name>SettingsDialog.py</Name>
     </Source>
     <Source>
-      <Dir>tests</Dir>
-      <Name>customdialog1.py</Name>
-    </Source>
-    <Source>
-      <Dir>tests</Dir>
-      <Name>DemoA.py</Name>
+      <Name>FESettings.py</Name>
     </Source>
   </Sources>
   <Forms>
@@ -137,9 +131,9 @@
   </Eric3Api>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

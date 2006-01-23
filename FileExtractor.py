@@ -91,6 +91,11 @@ class FileExtractorFrame(wxFrame):
         @type title: C{String}
         """
         import wx
+        wx.InitAllImageHandlers()
+        
+        # load settings
+        from FESettings import getSettings
+        getSettings().load()
 
         wxFrame.__init__(self, parent, ID, title,
                          wxDefaultPosition, wxSize(600, 500))
@@ -294,6 +299,7 @@ class FileExtractorFrame(wxFrame):
             EVT_MENU(self, _ID_IMAGEGENERATOR, self._startImageGenerator)
         else:
             EVT_MENU(self, _ID_IMAGEGENERATOR,  self._NotAvailable)
+            
         EVT_BUTTON(self, _ID_B_ADD, self._AddSourceFile)
         EVT_BUTTON(self, _ID_B_REMOVE, self._RemoveSourceFile)
         EVT_BUTTON(self, _ID_B_INFO, self._InfoSignature)
@@ -303,8 +309,8 @@ class FileExtractorFrame(wxFrame):
         #
         # toolbar
         #
-        import wx
-        wx.InitAllImageHandlers()
+##        import wx
+##        wx.InitAllImageHandlers()
         #toolbar = self.CreateToolBar(style = wxNO_BORDER | wxTB_HORIZONTAL)
         toolbar = self.CreateToolBar(style = wxRAISED_BORDER | wxTB_TEXT | wxTB_HORIZONTAL)
         self.ToolBar = toolbar
