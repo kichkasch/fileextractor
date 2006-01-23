@@ -72,6 +72,10 @@ class SettingsDialog(wxDialog):
         # Content area
         #
         self._lastChild = None
+        self._topName = None
+        self._imageGenerator = None
+        self._general = None
+        self._fileTypes = None
         self.content_swap_box =  wx.BoxSizer(wxVERTICAL)
         self.contentHeading = wx.TextCtrl(panel_content, -1, "Please choose an option from the tree", style = wxTE_MULTILINE | wxTE_READONLY | wxNO_BORDER )
         
@@ -109,6 +113,7 @@ class SettingsDialog(wxDialog):
         wx.EVT_TREE_SEL_CHANGED(self.tree, 1, self._OnSelChanged)
         
     def _OnSelChanged(self, event):
+##        self._save()
         item =  event.GetItem()
 ##        print "Selected now: ", self.tree.GetItemText(item)
         if self._lastChild:
@@ -139,12 +144,21 @@ class SettingsDialog(wxDialog):
             
         self.content_swap_box.Layout()
             
+##    def _save(self):
+##        if self._topName == 'image':
+##            self._imageGenerator = []
+##            self._imageGenerator.append()
+##        self._topName = None
+            
     def _putGeneralOptionsContent(self):
         panel_top = wx.Panel(self.panel_swap, -1)
         label_outputdir = wxStaticText (panel_top, -1, "Output Directory")
         panel_dir = wxPanel(panel_top, -1)
-        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
-        self.if_dir.SetEditable(false)
+        try:
+            self.if_dir.Reparent(panel_dir)
+        except AttributeError, msg:
+            self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+            self.if_dir.SetEditable(false)
         
         bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
@@ -176,20 +190,26 @@ class SettingsDialog(wxDialog):
         lCore = wx.StaticText(panel_top, -1, "Choose default core")
 ##        choicesCore = CoreManager.getInstance().getListOfCoreNames()
         choicesCore = ['Win32 dd clone', 'Linux / Unix']
-        self._chCore = wx.Choice(panel_top, 721, choices = choicesCore)
-        self._chCore.SetSelection(0)
+        try:
+            self._chCore.Reparent(panel_top)
+        except AttributeError, msg:
+            self._chCore = wx.Choice(panel_top, 721, choices = choicesCore)
+            self._chCore.SetSelection(0)
 
         label_outputdir = wxStaticText (panel_top, -1, "Directory  for image")
         panel_dir = wxPanel(panel_top, -1)
-        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
-        self.if_dir.SetEditable(false)
+        try:
+            self.if_dir_img.Reparent(panel_dir)
+        except AttributeError, msg:
+            self.if_dir_img = wxTextCtrl(panel_dir, -1, "Working Directory")
+            self.if_dir_img.SetEditable(false)
         
         bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
         bChooseDir = wxBitmapButton(panel_dir, 722, bmDir, size=(25,25))        
 
         box = wxBoxSizer(wxHORIZONTAL)
-        box.Add(self.if_dir, 16, wxALIGN_CENTER)
+        box.Add(self.if_dir_img, 16, wxALIGN_CENTER)
         box.Add(panel_fill, 1, wxALIGN_CENTER)
         box.Add(bChooseDir, 3, wxALIGN_CENTER)
         panel_dir.SetAutoLayout(True)
@@ -218,16 +238,19 @@ class SettingsDialog(wxDialog):
         panel_top = wx.Panel(self.panel_swap, -1)
 
         label_signatures = wxStaticText (panel_top, -1 , "Select file types enabled by default")
-        self.signaturelist = wxCheckListBox(panel_top, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)
-        thesignatures = FileExtractorCore.getAvailableSignatures()
-        self.sigDict = {}
-        for sig in thesignatures:
-            name = sig[signatures.name]
-            self.sigDict[name] = sig
-        self.sigcontent = self.sigDict.keys()
-        self.signaturelist.Set(self.sigcontent)
-        for i in range(0, len(self.sigcontent)):
-            self.signaturelist.Check(i)
+        try:
+            self.signaturelist .Reparent(panel_top)
+        except AttributeError, msg:
+            self.signaturelist = wxCheckListBox(panel_top, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)
+            thesignatures = FileExtractorCore.getAvailableSignatures()
+            self.sigDict = {}
+            for sig in thesignatures:
+                name = sig[signatures.name]
+                self.sigDict[name] = sig
+            self.sigcontent = self.sigDict.keys()
+            self.signaturelist.Set(self.sigcontent)
+            for i in range(0, len(self.sigcontent)):
+                self.signaturelist.Check(i)
         
 ##        panel_fill = wx.Panel(panel_top, -1)
         topBox = wxBoxSizer(wxVERTICAL)

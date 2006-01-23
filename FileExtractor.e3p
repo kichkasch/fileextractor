@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2006-01-22, 12:22:58 -->
+<!-- Saved: 2006-01-22, 21:23:03 -->
 <!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -44,6 +44,14 @@
     <Source>
       <Dir>tests</Dir>
       <Name>commondialogs.py</Name>
+    </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>customdialog1.py</Name>
+    </Source>
+    <Source>
+      <Dir>tests</Dir>
+      <Name>DemoA.py</Name>
     </Source>
   </Sources>
   <Forms>
