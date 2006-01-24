@@ -57,8 +57,9 @@ class SettingsDialog(wxDialog):
         mod = self.tree.AppendItem(root, 'Modules')
         self.tree.Expand(fe)
 
-        gen = self.tree.AppendItem(fe, 'General')
+        self.tree.AppendItem(fe, 'General')
         self.tree.AppendItem(fe, 'FileTypes')
+        self.tree.AppendItem(fe, 'Output Files')
 
         self.tree.AppendItem(mod, 'ImageGenerator')
         
@@ -182,6 +183,18 @@ class SettingsDialog(wxDialog):
         except AttributeError, msg:
             pass
             
+        try:
+            val = self.spinDigits.GetValue()
+            getSettings().setValue('naming_digits', val)
+        except AttributeError, msg:
+            pass
+
+        try:
+            val = self.spinStart .GetValue()
+            getSettings().setValue('naming_start', val)
+        except AttributeError, msg:
+            pass
+
         getSettings().save()
         dlg = wxMessageDialog(self, "Your settings have been saved.",
                           "Save Setting Confirmation", wxOK | wxICON_INFORMATION)
@@ -219,7 +232,7 @@ class SettingsDialog(wxDialog):
             
         elif self.tree.GetItemText(item) == "FileExtractor":
             self.contentHeading.SetValue("Settings for the FileExtractor.\nChoose a sub category from the tree.")
-            st = wx.StaticText(self.panel_swap, -1, "Available options:\n - General\n - File Types")
+            st = wx.StaticText(self.panel_swap, -1, "Available options:\n - General\n - File Types\n - Naming rules for output files")
             self.content_swap_box.Add(st, 1, wx.ALIGN_TOP, wx.ALIGN_CENTER_HORIZONTAL)
             self._lastChild = st
 
@@ -229,6 +242,9 @@ class SettingsDialog(wxDialog):
         elif self.tree.GetItemText(item) == "FileTypes":
             self.contentHeading.SetValue("Specify default behaviour for file types.")
             self._putFiletypeOptionsContent()
+        elif self.tree.GetItemText(item) == "Output Files":
+            self.contentHeading.SetValue("Define the way your recovered files shall be named.")
+            self._putFilenameOptionsContent()
             
         self.content_swap_box.Layout()
             
@@ -389,7 +405,7 @@ class SettingsDialog(wxDialog):
 ##        panel_fill = wx.Panel(panel_top, -1)
         topBox = wxBoxSizer(wxVERTICAL)
         topBox.Add(label_signatures,1, wx.ALIGN_BOTTOM | wx.ALIGN_LEFT)
-        topBox.Add(self.signaturelist, 6, wx.EXPAND, wx.TOP)
+        topBox.Add(self.signaturelist, 5, wx.EXPAND, wx.TOP)
 ##        topBox.Add(panel_fill, 1, wx.EXPAND)
         panel_top.SetAutoLayout(True)
         panel_top.SetSizer(topBox)
@@ -398,6 +414,54 @@ class SettingsDialog(wxDialog):
         
         self._lastChild = panel_top
         
+    def _putFilenameOptionsContent(self):
+        from FESettings import getSettings
+        panel_top = wx.Panel(self.panel_swap, -1)
+        lDigits = wxStaticText (panel_top, -1 , "Number of numeric digits in the filename")
+        if getSettings().getValue('naming_digits'):
+            initial = int(getSettings().getValue('naming_digits'))
+        else:
+            initial = 5
+        self.spinDigits = wx.SpinCtrl (panel_top, 801, str(initial), min = 1, max=100, initial = initial)
+        
+        lStart = wxStaticText (panel_top, -1 , "Number to start with")
+        if getSettings().getValue('naming_start'):
+            start = int(getSettings().getValue('naming_start'))
+        else:
+            start = 0
+        self.spinStart = wx.SpinCtrl (panel_top, 802, str(start), min = 0, max=10000, initial = start)
+
+        self.nameExample = wx.TextCtrl(panel_top, -1, "Example: ", style = wx.TE_READONLY )
+        self.nameExample.Enable(0)
+        self.nameExample.SetBackgroundColour(self.GetBackgroundColour())
+        self._updateNameExample()
+        
+        panel_fill0 = wx.Panel(panel_top, -1)
+##        panel_fill0.SetBackgroundColour(wx.RED)
+        panel_fill = wx.Panel(panel_top, -1)
+##        panel_fill.SetBackgroundColour(wx.RED)
+        topBox = wxBoxSizer(wxVERTICAL)
+        topBox.Add(lDigits,1, wx.ALIGN_BOTTOM | wx.ALIGN_LEFT)
+        topBox.Add(self.spinDigits, 1, wx.EXPAND, wx.TOP)
+        topBox.Add(panel_fill0, 1, wx.EXPAND)
+        topBox.Add(lStart, 1, wx.ALIGN_BOTTOM | wx.ALIGN_LEFT)
+        topBox.Add(self.spinStart, 1, wx.EXPAND, wx.TOP)
+        topBox.Add(panel_fill, 1, wx.EXPAND)
+        topBox.Add(self.nameExample, 1, wx.EXPAND)
+        panel_top.SetAutoLayout(True)
+        panel_top.SetSizer(topBox)
+        panel_top.Layout()
+        self.content_swap_box.Add(panel_top, 1, wx.EXPAND)
+
+        EVT_SPINCTRL(self, 801, self._updateNameExample)
+        EVT_SPINCTRL(self, 802, self._updateNameExample)
+        self._lastChild = panel_top
+        
+    def _updateNameExample(self, event = None):
+        digits = int (self.spinDigits.GetValue())
+        first = int ( self.spinStart.GetValue())
+        st = "0" * (digits - len(str(first))) + str (first)
+        self.nameExample.SetValue("Example: JPEG_%s.jpg" %(st))
         
     def _OnExit(self, event):
         self.EndModal(0)

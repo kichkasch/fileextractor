@@ -101,7 +101,12 @@ class FileExtractorFrame(wxFrame):
 
         wxFrame.__init__(self, parent, ID, title,
                          wxDefaultPosition, wxSize(600, 500))
-        self.dest_folder = "./"
+        
+        from FESettings import getSettings
+        if getSettings().getValue('output_dir'):
+            self.dest_folder = getSettings().getValue('output_dir')
+        else:
+            self.dest_folder = "./"
         
         self.CreateStatusBar()
         self.SetStatusText("FileExtractor initialised ...")
@@ -438,8 +443,16 @@ class FileExtractorFrame(wxFrame):
         for i in range(0, len(self.sigcontent)):
             if not self.signaturelist.IsChecked(i):
                 dis_sigs.append(self.sigcontent[i])
-        settings = ExecutionSettings(disabled_signatures = dis_sigs, sourceFiles = sourceFiles, dest_folder=self.dest_folder,
-                signatures = signatures.getCopyOfAllSignauteres(), output_level = 0, output_frequency=10000)
+        from FESettings import getSettings
+        if getSettings().getValue('naming_digits'):
+            digits = getSettings().getValue('naming_digits')
+            start = getSettings().getValue('naming_start') # they only come together
+            settings = ExecutionSettings(disabled_signatures = dis_sigs, sourceFiles = sourceFiles, dest_folder=self.dest_folder,
+                    signatures = signatures.getCopyOfAllSignauteres(), output_level = 0, output_frequency=10000, digits = digits, 
+                    counterstart = start)
+        else:
+            settings = ExecutionSettings(disabled_signatures = dis_sigs, sourceFiles = sourceFiles, dest_folder=self.dest_folder,
+                    signatures = signatures.getCopyOfAllSignauteres(), output_level = 0, output_frequency=10000)
         progressDialog = ProgressDialog.ProgressDialog(self, -1, "Progress of Search",
                 settings)
 
