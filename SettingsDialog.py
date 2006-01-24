@@ -146,6 +146,11 @@ class SettingsDialog(wxDialog):
         self.Centre()
         self.CentreOnParent()
         
+        st = wx.StaticText(self.panel_swap, -1, "Content:\n* FileExtractor\n   - General\n   - File Types\n   - Naming of output files\n* Modules\n   - ImageGenerator")
+        self.content_swap_box.Add(st, 1, wx.ALIGN_TOP, wx.ALIGN_CENTER_HORIZONTAL)
+        self._lastChild = st
+        
+        
         EVT_BUTTON(self, 602, self._OnExit)
         EVT_BUTTON(self, 601, self._OnApply)
         

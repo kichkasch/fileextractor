@@ -8,7 +8,7 @@ Content:
 version 0.2 (??/??/????)
 ========================
 * Options dialog integrated
-    - fileextractor options
+    - fileextractor options (general and output file name rules)
     - image generator options
     - global settings are stored in FESettings module
 * new GUI design

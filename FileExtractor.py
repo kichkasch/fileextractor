@@ -146,6 +146,7 @@ class FileExtractorFrame(wxFrame):
         sbmLogo = wxStaticBitmap(panel_left, 567, bmLogo, size = (250, 140))
         
         panel_fill = wxPanel(panel_left, -1)
+
         #panel_fill1 = wxPanel(panel_left, -1)
         
         box = wxBoxSizer(wxVERTICAL)
@@ -216,7 +217,7 @@ class FileExtractorFrame(wxFrame):
         panel_dir.Layout()
         
         
-        pFill1 = wxPanel(panel_right, -1)
+##        pFill1 = wxPanel(panel_right, -1)
         pFill2 = wxPanel(panel_right, -1)
         pFill3 = wxPanel(panel_right, -1)
 
@@ -444,9 +445,9 @@ class FileExtractorFrame(wxFrame):
             if not self.signaturelist.IsChecked(i):
                 dis_sigs.append(self.sigcontent[i])
         from FESettings import getSettings
-        if getSettings().getValue('naming_digits'):
+        if getSettings().getValue('naming_digits') and getSettings().getValue('naming_digits'): # they only come together
             digits = getSettings().getValue('naming_digits')
-            start = getSettings().getValue('naming_start') # they only come together
+            start = getSettings().getValue('naming_start') 
             settings = ExecutionSettings(disabled_signatures = dis_sigs, sourceFiles = sourceFiles, dest_folder=self.dest_folder,
                     signatures = signatures.getCopyOfAllSignauteres(), output_level = 0, output_frequency=10000, digits = digits, 
                     counterstart = start)
