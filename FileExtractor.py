@@ -64,15 +64,17 @@ _ID_B_START = 305
 _helpFile_arch = "fileextractorhelp.zip"
 
 class FileExtractorFrame(wxFrame):
-    """ MainFrame for the FileExtractor GUI FrontEnd
+    """ 
+    MainFrame for the FileExtractor GUI FrontEnd
     
-        Responsible for the MainFrame of the application, containing all the panels, a menubar and
-        also the Event Handling. Further classes from the modules ProgressDialog and ResultDialog
-        are required for displaying dialogs during runtime.
+    Responsible for the MainFrame of the application, containing all the panels, a menubar and
+    also the Event Handling. Further classes from the modules ProgressDialog and ResultDialog
+    are required for displaying dialogs during runtime.
     """
     
     def __init__(self, parent, ID, title):
-        """Instantiate a FileExtractorFrame.
+        """
+        Instantiate a FileExtractorFrame.
     
         A wxFrame will be created with the size L{wxSize}(600,400). The position
         is default position, indicated by the keyword wxDefaultPosition. The events for the
@@ -163,8 +165,20 @@ class FileExtractorFrame(wxFrame):
             self.sigDict[name] = sig
         self.sigcontent = self.sigDict.keys()
         self.signaturelist.Set(self.sigcontent)
+##        for i in range(0, len(self.sigcontent)):
+##            self.signaturelist.Check(i)
+        
+        st = getSettings().getValue('signatues_off')
+        d  = {}
+        if st:
+            for x in st.split('|'):
+                d[x.strip()] = x.strip()
         for i in range(0, len(self.sigcontent)):
-            self.signaturelist.Check(i)
+            if d.has_key(self.signaturelist.GetString(i)):
+                self.signaturelist.Check(i, false)
+            else:
+                self.signaturelist.Check(i)
+        
             
         
         bmInfo = wx.Bitmap("icons/info.png", wx.BITMAP_TYPE_PNG);
@@ -176,7 +190,11 @@ class FileExtractorFrame(wxFrame):
         
         label_outputdir = wxStaticText (panel_right, -1, "Output Directory")
         panel_dir = wxPanel(panel_right, -1)
-        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+##        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+        if getSettings().getValue('output_dir'):
+            self.if_dir = wxTextCtrl(panel_dir, -1, getSettings().getValue('output_dir'))
+        else:
+            self.if_dir = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
         self.if_dir.SetEditable(false)
         #bChooseDir = wxButton(panel_dir, _ID_B_DIR, "Change Directory")        
         
@@ -463,8 +481,14 @@ class FileExtractorFrame(wxFrame):
     
     def _startImageGenerator(self, event):
         print "Starting module Image Generator..."
+        parameters = {}
+        from FESettings import getSettings
+        if getSettings().getValue('ig_default_core'):
+            parameters['default_core'] = getSettings().getValue('ig_default_core')
+        if getSettings().getValue('ig_output_dir'):
+            parameters['output_dir'] = getSettings().getValue('ig_output_dir')
         imageGenerator = ImageGenerator.ImageGenerator(callback = self, parentControl = self)
-        imageGenerator.start()
+        imageGenerator.start(parameters = parameters)
         
     def _showHelp(self, event):
         global helpFile

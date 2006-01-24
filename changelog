@@ -10,6 +10,7 @@ version 0.2 (??/??/????)
 * Options dialog integrated
     - fileextractor options
     - image generator options
+    - global settings are stored in FESettings module
 * new GUI design
     - lots of icons instead of text
     - nice loge is on there as well now :)

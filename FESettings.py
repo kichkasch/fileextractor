@@ -17,7 +17,11 @@ class Settings:
         self._values = {}
         
     def load(self, filename = DEFAULT_FILE):
-        file = open(filename, 'r')
+        try:
+            file = open(filename, 'r')
+        except IOError, msg:
+            # fair enough; there is not yet any settings on this machine
+            return
         line1 = ' '
         line2 = ' '
         while line1 and line2:

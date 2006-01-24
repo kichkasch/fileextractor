@@ -1,12 +1,33 @@
-#
-# Settings for FileExtractor
-#
+"""
+Dialog for configuring FileExtractor and its modules
+
+The GUI is wxDigit / wxPython based. 
+@see: http://wxpython.org for details on wxPython
+
+Changes here are written through to the L{FESettings} module. After hitting the OK button,
+the save function in there will be invoked as well to make the settings persistent.
+
+@author: Michael Pilgermann
+@contact: mailto:mpilgerm@glam.ac.uk
+@organization: Information Security Group / University of Glamorgan 
+@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@license: GPL (General Public License)
+"""
 
 from wxPython.wx import *
 import wx
 
+DIR_CURRENT_ST = 'Working directory'
+
 class SettingsDialog(wxDialog):
+    """
+    Holding all the information about the dialog.
+    """
+    
     def __init__(self, parent, ID, title):
+        """
+        Initialises all controls and registers the event listeners.
+        """
         wxDialog.__init__(self, parent, ID, title, size=(600,400))
 
         outerBox = wx.BoxSizer(wx.VERTICAL)
@@ -133,7 +154,8 @@ class SettingsDialog(wxDialog):
         from FESettings import getSettings
         try:
             val = self.if_dir.GetValue()
-            getSettings().setValue('output_dir', val)
+            if val != DIR_CURRENT_ST:
+                getSettings().setValue('output_dir', val)
         except AttributeError, msg:
             pass
             
@@ -147,6 +169,19 @@ class SettingsDialog(wxDialog):
         except AttributeError, msg:
             pass
 
+        try:
+            val = self.if_dir_img.GetValue()
+            if val != DIR_CURRENT_ST:
+                getSettings().setValue('ig_output_dir', val)
+        except AttributeError, msg:
+            pass
+            
+        try:
+            val = self._chCore.GetStringSelection()
+            getSettings().setValue('ig_default_core', val)
+        except AttributeError, msg:
+            pass
+            
         getSettings().save()
         dlg = wxMessageDialog(self, "Your settings have been saved.",
                           "Save Setting Confirmation", wxOK | wxICON_INFORMATION)
@@ -214,7 +249,7 @@ class SettingsDialog(wxDialog):
             if getSettings().getValue('output_dir'):
                 self.if_dir = wxTextCtrl(panel_dir, -1, getSettings().getValue('output_dir'))
             else:
-                self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
+                self.if_dir = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
             self.if_dir.SetEditable(false)
         
         bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
@@ -257,19 +292,29 @@ class SettingsDialog(wxDialog):
 
         lCore = wx.StaticText(panel_top, -1, "Choose default core")
 ##        choicesCore = CoreManager.getInstance().getListOfCoreNames()
-        choicesCore = ['Win32 dd clone', 'Linux / Unix']
+        import imagegenerator
+        choicesCore = imagegenerator.CoreManager.getInstance().getListOfCoreNames()
+##        choicesCore = ['Win32 dd clone', 'Linux / Unix']
+        from FESettings import getSettings
         try:
             self._chCore.Reparent(panel_top)
         except AttributeError, msg:
             self._chCore = wx.Choice(panel_top, 721, choices = choicesCore)
             self._chCore.SetSelection(0)
+            if getSettings().getValue('ig_default_core'):
+                for i in range(len(choicesCore)):
+                    if choicesCore[i] == getSettings().getValue('ig_default_core'):
+                        self._chCore.SetSelection(i)
 
         label_outputdir = wxStaticText (panel_top, -1, "Directory  for image")
         panel_dir = wxPanel(panel_top, -1)
         try:
             self.if_dir_img.Reparent(panel_dir)
         except AttributeError, msg:
-            self.if_dir_img = wxTextCtrl(panel_dir, -1, "Working Directory")
+            if getSettings().getValue('ig_output_dir'):
+                self.if_dir_img = wxTextCtrl(panel_dir, -1, getSettings().getValue('ig_output_dir'))
+            else:
+                self.if_dir_img = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
             self.if_dir_img.SetEditable(false)
         
         bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
@@ -332,8 +377,9 @@ class SettingsDialog(wxDialog):
             self.signaturelist.Set(self.sigcontent)
             st = getSettings().getValue('signatues_off')
             d  = {}
-            for x in st.split('|'):
-                d[x.strip()] = x.strip()
+            if st:
+                for x in st.split('|'):
+                    d[x.strip()] = x.strip()
             for i in range(0, len(self.sigcontent)):
                 if d.has_key(self.signaturelist.GetString(i)):
                     self.signaturelist.Check(i, false)
