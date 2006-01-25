@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2006-01-25, 00:24:57 -->
+<!-- Saved: 2006-01-25, 16:07:03 -->
 <!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -95,6 +95,9 @@
       <Dir>imagegenerator</Dir>
       <Name>__init__.py</Name>
     </Source>
+    <Source>
+      <Name>setup.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -168,6 +171,9 @@
       <Dir>imagegenerator</Dir>
       <Name>README</Name>
     </Other>
+    <Other>
+      <Name>MANIFEST.in</Name>
+    </Other>
   </Others>
   <MainScript>
     <Name>FileExtractor.py</Name>
@@ -184,10 +190,10 @@
     <Eric3ApiParams>{'outputFile': u'doc2/documentation', 'ignoreDirectories': [u'doc', u'doc2', u'CVS'], 'useRecursion': True}</Eric3ApiParams>
   </Eric3Api>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

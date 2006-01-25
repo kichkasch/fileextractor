@@ -1,0 +1,5 @@
+recursive-include icons *.png
+include readme
+include install
+include changelog
+include fileextractorhelp.zip

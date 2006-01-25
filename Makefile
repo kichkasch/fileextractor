@@ -34,6 +34,8 @@ ZIP=		/usr/bin/zip
 ZIP_PAR=	-j
 MKDIR=		mkdir
 RM=		rm
+PYTHON=         python
+
 
 $(API_DOC_DIR):
 	$(MKDIR) $(API_DOC_DIR)
@@ -51,3 +53,8 @@ help: $(HELP_ZIPNAME)
 
 clean:
 	$(RM) *.pyc imagegenerator/*.pyc
+
+distribution:
+	$(PYTHON) setup.py sdist --formats=gztar,zip
+	
+	

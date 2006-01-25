@@ -94,7 +94,9 @@ class GeneratorWizardPage(WizardPageSimple):
 
         label_title = wx.StaticText(panel_outer, -1, self._title)
         label_title.SetFont(font_headings)
-        label_message = wx.StaticText(panel_outer, -1, self._message)
+##        label_message = wx.StaticText(panel_outer, -1, self._message)
+        label_message = wx.TextCtrl(panel_outer, -1, self._message, size= (300,60), style = wx.TE_MULTILINE | wx.TE_READONLY | wx.NO_BORDER)
+        label_message.Enable(0)
         self._panel_content = wx.Panel(panel_outer, -1)
         
         panel_fill_hor2 = wx.Panel(panel_outer, -1)
