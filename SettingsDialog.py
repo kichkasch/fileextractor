@@ -24,11 +24,15 @@ class SettingsDialog(wxDialog):
     Holding all the information about the dialog.
     """
     
-    def __init__(self, parent, ID, title):
+    def __init__(self, parent, ID, title, baseDir):
         """
         Initialises all controls and registers the event listeners.
         """
         wxDialog.__init__(self, parent, ID, title, size=(600,400))
+        
+        self._baseDir = baseDir
+        import os
+        import os.path
 
         outerBox = wx.BoxSizer(wx.VERTICAL)
         panel = wx.Panel(self, -1)
@@ -84,9 +88,9 @@ class SettingsDialog(wxDialog):
         panel_buttons = wx.Panel(self, -1)
         panel_fill = wx.Panel(panel_buttons, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
-        bmApply = wx.Bitmap("icons/apply.png", wx.BITMAP_TYPE_PNG);
+        bmApply = wx.Bitmap(os.path.join(self._baseDir, "icons/apply.png"), wx.BITMAP_TYPE_PNG);
         b1 = wx.BitmapButton(panel_buttons, 601, bmApply, size=(30,25))
-        bmCancel = wx.Bitmap("icons/cancel.png", wx.BITMAP_TYPE_PNG);
+        bmCancel = wx.Bitmap(os.path.join(self._baseDir, "icons/cancel.png"), wx.BITMAP_TYPE_PNG);
         b2 = wx.BitmapButton(panel_buttons, 602, bmCancel, size=(30,25))
         panel_fill1 = wx.Panel(panel_buttons, -1)
 ##        panel_fill1.SetBackgroundColour(wx.RED)
@@ -260,6 +264,7 @@ class SettingsDialog(wxDialog):
 ##        self._topName = None
             
     def _putGeneralOptionsContent(self):
+        import os.path
         panel_top = wx.Panel(self.panel_swap, -1)
         label_outputdir = wxStaticText (panel_top, -1, "Output Directory")
         panel_dir = wxPanel(panel_top, -1)
@@ -273,7 +278,7 @@ class SettingsDialog(wxDialog):
                 self.if_dir = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
             self.if_dir.SetEditable(false)
         
-        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bChooseDir = wxBitmapButton(panel_dir, 701, bmDir, size=(25,25))        
@@ -309,6 +314,7 @@ class SettingsDialog(wxDialog):
         dirDialog.Destroy()
 
     def _putImageGeneratorOptionsContent(self):
+        import os.path
         panel_top = wx.Panel(self.panel_swap, -1)
 
         lCore = wx.StaticText(panel_top, -1, "Choose default core")
@@ -338,7 +344,7 @@ class SettingsDialog(wxDialog):
                 self.if_dir_img = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
             self.if_dir_img.SetEditable(false)
         
-        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bChooseDir = wxBitmapButton(panel_dir, 722, bmDir, size=(25,25))        

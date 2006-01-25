@@ -134,7 +134,7 @@ class ImageGenerator:
     @ivar _parentControl: The exPython parent control of the wizard
     @type _parentControl: L{wx.Control}
     """
-    def __init__(self, callback = None, parentControl = None):
+    def __init__(self, callback = None, parentControl = None, baseDir = "."):
         """
         Initialises the image generator.
         
@@ -154,6 +154,8 @@ class ImageGenerator:
             self._callback = callback
         self._parentControl = parentControl
         
+        self._baseDir = baseDir
+        
     def start(self, parameters = {}):
         """
         Initialises the wizard and hands the control to it.
@@ -167,7 +169,7 @@ class ImageGenerator:
         @type parameters: C{Dict}
         """
         wiz_callback = WizardCallback(self)
-        wizard = ImageGeneratorWizard.ImageGeneratorWizard(wiz_callback, parent = self._parentControl, parameters = parameters)
+        wizard = ImageGeneratorWizard.ImageGeneratorWizard(wiz_callback, parent = self._parentControl, parameters = parameters, baseDir = self._baseDir)
         wizard.show()
         wizard.Destroy()
     

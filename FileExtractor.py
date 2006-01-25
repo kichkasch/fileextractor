@@ -92,6 +92,10 @@ class FileExtractorFrame(wxFrame):
         @param title: The title of the frame (passed to super class constructor L{wxPython.wx.wxFrame.__init__})
         @type title: C{String}
         """
+        import os
+        import os.path
+        self._baseDir = os.getcwd() 
+        
         import wx
         wx.InitAllImageHandlers()
         
@@ -111,7 +115,7 @@ class FileExtractorFrame(wxFrame):
         self.CreateStatusBar()
         self.SetStatusText("FileExtractor initialised ...")
         
-        appLogo = wx.Icon("icons/fileextractor.png", wx.BITMAP_TYPE_PNG);
+        appLogo = wx.Icon(os.path.join(self._baseDir, "icons/fileextractor.png"), wx.BITMAP_TYPE_PNG);
         self.SetIcon(appLogo)
         
         panel_outer = wxPanel(self, -1)
@@ -130,9 +134,9 @@ class FileExtractorFrame(wxFrame):
         #b2 = wxButton(panel_buttons, _ID_B_REMOVE, "Remove")
 
         panel_fill = wxPanel(panel_buttons, -1)
-        bmAdd = wx.Bitmap("icons/edit_add.png", wx.BITMAP_TYPE_PNG);
+        bmAdd = wx.Bitmap(os.path.join(self._baseDir, "icons/edit_add.png"), wx.BITMAP_TYPE_PNG);
         b1 = wxBitmapButton(panel_buttons, _ID_B_ADD, bmAdd, size=(30,25))
-        bmRem = wx.Bitmap("icons/edit_remove.png", wx.BITMAP_TYPE_PNG);
+        bmRem = wx.Bitmap(os.path.join(self._baseDir, "icons/edit_remove.png"), wx.BITMAP_TYPE_PNG);
         b2 = wxBitmapButton(panel_buttons, _ID_B_REMOVE, bmRem, size=(30,25))
 
         box = wxBoxSizer(wxHORIZONTAL)
@@ -145,7 +149,7 @@ class FileExtractorFrame(wxFrame):
         
         
         
-        bmLogo = wx.Bitmap("icons/felogo2.png", wx.BITMAP_TYPE_PNG);
+        bmLogo = wx.Bitmap(os.path.join(self._baseDir, "icons/felogo2.png"), wx.BITMAP_TYPE_PNG);
         sbmLogo = wxStaticBitmap(panel_left, 567, bmLogo, size = (250, 140))
         
         panel_fill = wxPanel(panel_left, -1)
@@ -190,7 +194,7 @@ class FileExtractorFrame(wxFrame):
         
             
         
-        bmInfo = wx.Bitmap("icons/info.png", wx.BITMAP_TYPE_PNG);
+        bmInfo = wx.Bitmap(os.path.join(self._baseDir, "icons/info.png"), wx.BITMAP_TYPE_PNG);
         bInfo = wxBitmapButton(panel_right, _ID_B_INFO, bmInfo, size=(60,20))
         
         
@@ -207,7 +211,7 @@ class FileExtractorFrame(wxFrame):
         self.if_dir.SetEditable(false)
         #bChooseDir = wxButton(panel_dir, _ID_B_DIR, "Change Directory")        
         
-        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
         bChooseDir = wxBitmapButton(panel_dir, _ID_B_DIR, bmDir, size=(30,30))        
 
@@ -228,7 +232,7 @@ class FileExtractorFrame(wxFrame):
         panel_fills1 = wxPanel(panel_start, -1)
 ##        panel_fills2 = wxPanel(panel_start, -1)
 
-        bmStart = wx.Bitmap("icons/start4.png", wx.BITMAP_TYPE_PNG);
+        bmStart = wx.Bitmap(os.path.join(self._baseDir, "icons/start4.png"), wx.BITMAP_TYPE_PNG);
         bStartSearch  = wxBitmapButton(panel_start, _ID_B_START, bmStart, size=(105,22))
 
         #bStartSearch = wxButton(panel_start, _ID_B_START, "Start Search")
@@ -292,23 +296,23 @@ class FileExtractorFrame(wxFrame):
         fileMenu = wx.Menu()
         addItem = wx.MenuItem(fileMenu, _ID_ADD, "&Add Source File",
                     "Add Source File to be searched in")
-        bm = wx.Bitmap("icons/small/edit_add.png", wx.BITMAP_TYPE_PNG);
+        bm = wx.Bitmap(os.path.join(self._baseDir, "icons/small/edit_add.png"), wx.BITMAP_TYPE_PNG);
         addItem.SetBitmap(bm)
         fileMenu.AppendItem(addItem)
         startItem = wx.MenuItem(fileMenu, _ID_START, "&Start Searching",
                     "Go and find your files")
-        bm = wx.Bitmap("icons/small/start.png", wx.BITMAP_TYPE_PNG);
+        bm = wx.Bitmap(os.path.join(self._baseDir, "icons/small/start.png"), wx.BITMAP_TYPE_PNG);
         startItem.SetBitmap(bm)
         fileMenu.AppendItem(startItem)
         fileMenu.AppendSeparator()
         prefItem = wx.MenuItem(fileMenu, _ID_OPTIONS, "&Options",
                     "Apply Settings for the program")
-        bm = wx.Bitmap("icons/small/configure.png", wx.BITMAP_TYPE_PNG);
+        bm = wx.Bitmap(os.path.join(self._baseDir, "icons/small/configure.png"), wx.BITMAP_TYPE_PNG);
         prefItem.SetBitmap(bm)
         fileMenu.AppendItem(prefItem)
         fileMenu.AppendSeparator()
         exitItem = wx.MenuItem(fileMenu, _ID_EXIT, "E&xit", "Terminate the program")
-        bmExit = wx.Bitmap("icons/small/exit.png", wx.BITMAP_TYPE_PNG);
+        bmExit = wx.Bitmap(os.path.join(self._baseDir, "icons/small/exit.png"), wx.BITMAP_TYPE_PNG);
         exitItem.SetBitmap(bmExit)
         fileMenu.AppendItem(exitItem)
         
@@ -318,7 +322,7 @@ class FileExtractorFrame(wxFrame):
         toolsMenu = wxMenu()
         imageItem = wx.MenuItem(toolsMenu, _ID_IMAGEGENERATOR, "&ImageGenerator...",
                     "Create an image file")
-        bm = wx.Bitmap("icons/small/tools_image.png", wx.BITMAP_TYPE_PNG);
+        bm = wx.Bitmap(os.path.join(self._baseDir, "icons/small/tools_image.png"), wx.BITMAP_TYPE_PNG);
         imageItem.SetBitmap(bm)
         toolsMenu.AppendItem(imageItem)
         menuBar.Append(toolsMenu, "&Tools")
@@ -326,13 +330,13 @@ class FileExtractorFrame(wxFrame):
         helpMenu = wxMenu()
         helpItem = wx.MenuItem(helpMenu, _ID_CONTENT, "&Content",
                     "How to use this Program in detail")
-        bm = wx.Bitmap("icons/small/help.png", wx.BITMAP_TYPE_PNG);
+        bm = wx.Bitmap(os.path.join(self._baseDir, "icons/small/help.png"), wx.BITMAP_TYPE_PNG);
         helpItem.SetBitmap(bm)
         helpMenu.AppendItem(helpItem)
         helpMenu.AppendSeparator()
         aboutItem = wx.MenuItem(helpMenu, _ID_ABOUT, "&About",
                     "Basic Information about this program")
-        bm = wx.Bitmap("icons/small/info.png", wx.BITMAP_TYPE_PNG);
+        bm = wx.Bitmap(os.path.join(self._baseDir, "icons/small/info.png"), wx.BITMAP_TYPE_PNG);
         aboutItem.SetBitmap(bm)
         helpMenu.AppendItem(aboutItem)
         menuBar.Append(helpMenu, "&Help")
@@ -365,27 +369,27 @@ class FileExtractorFrame(wxFrame):
         self.ToolBar = toolbar
         toolbar.SetToolBitmapSize((21,21))
         # 1. global
-        bmExit = wx.Bitmap("icons/exit.png", wx.BITMAP_TYPE_PNG);
+        bmExit = wx.Bitmap(os.path.join(self._baseDir, "icons/exit.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1001, bitmap = bmExit, label="Exit", shortHelp = "Quit FileExtractor")
         toolbar.AddSeparator()
         # 2. Actions
-        bmAdd = wx.Bitmap("icons/edit_add.png", wx.BITMAP_TYPE_PNG);
+        bmAdd = wx.Bitmap(os.path.join(self._baseDir, "icons/edit_add.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1002, bitmap = bmAdd, label="Add", shortHelp = "Add Source File")
-        bmRem = wx.Bitmap("icons/edit_remove.png", wx.BITMAP_TYPE_PNG);
+        bmRem = wx.Bitmap(os.path.join(self._baseDir, "icons/edit_remove.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1003, bitmap = bmRem, label="Remove", shortHelp = "Remove Source File")
-        bmStart = wx.Bitmap("icons/start.png", wx.BITMAP_TYPE_PNG);
+        bmStart = wx.Bitmap(os.path.join(self._baseDir, "icons/start.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1004, bitmap = bmStart, label="Start", shortHelp = "Start recovery")
         toolbar.AddSeparator()
         # 3. Tools
-        bmImage = wx.Bitmap("icons/tools_image.png", wx.BITMAP_TYPE_PNG);
+        bmImage = wx.Bitmap(os.path.join(self._baseDir, "icons/tools_image.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1005, bitmap = bmImage, label="Image", shortHelp = "Image your data source")
         toolbar.AddSeparator()
         # 4. Configure
-        bmConf = wx.Bitmap("icons/configure.png", wx.BITMAP_TYPE_PNG);
+        bmConf = wx.Bitmap(os.path.join(self._baseDir, "icons/configure.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1006, bitmap = bmConf, label="Configure", shortHelp = "Configure FileExtractor")
         toolbar.AddSeparator()
         # 5. Help
-        bmHelp = wx.Bitmap("icons/help.png", wx.BITMAP_TYPE_PNG);
+        bmHelp = wx.Bitmap(os.path.join(self._baseDir, "icons/help.png"), wx.BITMAP_TYPE_PNG);
         toolbar.DoAddTool(id = 1007, bitmap = bmHelp, label="Help", shortHelp = "FileExtractor Help")
         toolbar.AddSeparator()
 
@@ -404,7 +408,7 @@ class FileExtractorFrame(wxFrame):
 
     def _OnSettings(self, event):
         import SettingsDialog
-        dia  = SettingsDialog.SettingsDialog(self, -1, "FileExtractor Configuration")
+        dia  = SettingsDialog.SettingsDialog(self, -1, "FileExtractor Configuration", self._baseDir)
         dia.ShowModal()
         dia.Destroy()        
 
@@ -526,7 +530,7 @@ class FileExtractorFrame(wxFrame):
             parameters['default_core'] = getSettings().getValue('ig_default_core')
         if getSettings().getValue('ig_output_dir'):
             parameters['output_dir'] = getSettings().getValue('ig_output_dir')
-        imageGenerator = ImageGenerator.ImageGenerator(callback = self, parentControl = self)
+        imageGenerator = ImageGenerator.ImageGenerator(callback = self, parentControl = self, baseDir = self._baseDir)
         imageGenerator.start(parameters = parameters)
         
     def _showHelp(self, event):
@@ -548,7 +552,9 @@ class FileExtractorFrame(wxFrame):
         # Create the viewer
         self.helpctrl = wxHtmlHelpController(wxHF_TOOLBAR | wxHF_CONTENTS | wxHF_INDEX | wxHF_PRINT | wxHF_BOOKMARKS)
         # and add the books
-        self.helpctrl.AddBook(_helpFile_arch, 1)
+        global _helpFile_arch
+        import os.path
+        self.helpctrl.AddBook(os.path.join(self._baseDir,_helpFile_arch), 1)
     
     def _showIt(self):
         # start it up!

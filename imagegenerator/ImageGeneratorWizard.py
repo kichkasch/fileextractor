@@ -154,7 +154,7 @@ class ImageGeneratorWizard(Wizard):
     @ivar _page2: Second wizard page
     @type _page2: L{GeneratorWizardPage}
     """
-    def __init__(self, callback = None, parent = None, title = DEF_TITLE, parameters = {}):
+    def __init__(self, callback = None, parent = None, title = DEF_TITLE, parameters = {}, baseDir = "."):
         """
         Initialises the wizard instance.
         
@@ -177,6 +177,8 @@ class ImageGeneratorWizard(Wizard):
         @type parameters: C{Dict}
         """
         Wizard.__init__(self, parent, _ID_WIZARD, title)
+        
+        self._baseDir = baseDir
         
         self._core = None
         self._callback = callback
@@ -219,6 +221,7 @@ class ImageGeneratorWizard(Wizard):
         the dd command are placed on the content pane of the first
         wizard page.
         """
+        import os.path
         panel_outer = wx.Panel(self._page1.getContentPane(), -1)
         
         lCore = wx.StaticText(panel_outer, -1, "Choose Core")
@@ -236,7 +239,7 @@ class ImageGeneratorWizard(Wizard):
 ##        bBrowse = wx.Button(panel_outer, _ID_BROWSE_DD, "Browse")
         panel_dir = wx.Panel(panel_outer, -1)
         self._tcLocDD = wx.TextCtrl(panel_dir , -1)        
-        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bBrowse = wx.BitmapButton(panel_dir, _ID_BROWSE_DD, bmDir, size=(25,25))        
@@ -282,6 +285,7 @@ class ImageGeneratorWizard(Wizard):
         wizard page.
         """
         import wx
+        import os.path
         panel_outer = wx.Panel(self._page2.getContentPane(), -1)
         
         lSources = wx.StaticText(panel_outer, -1, "Choose or specify source")
@@ -290,7 +294,7 @@ class ImageGeneratorWizard(Wizard):
         choicesSources = []
         self._cbSources = wx.ComboBox(panel_info, -1, choices = choicesSources)
 
-        bmDir = wx.Bitmap("icons/info.png", wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/info.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_info, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bInfoSources = wx.BitmapButton(panel_info, _ID_INFO_SOURCES, bmDir, size=(25,25))        
@@ -311,7 +315,7 @@ class ImageGeneratorWizard(Wizard):
         if parameters.has_key('output_dir'):
             self._tcLocDest.SetValue(parameters['output_dir'])
 
-        bmDir = wx.Bitmap("icons/browse.png", wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bBrowseDest = wx.BitmapButton(panel_dir, _ID_BROWSE_DEST, bmDir, size=(25,25))        
