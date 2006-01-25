@@ -1,3 +1,6 @@
+# do not use this file anymore
+# all actions in here can be carried out by the major Makefile of FileExtractor
+#
 # Makefile
 #
 # SignatureCreator for FileExtractor

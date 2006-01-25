@@ -1,3 +1,6 @@
+2006-01-25
+* ImageGenerator is now part of FileExtractor and documentation will be maintained in there.
+
 2005-05-31    <michael@j130-mp>
 * Windows Core
     - integrate with dd implementation of John Newbigin (http://uranus.it.swin.edu.au/~jn/linux/rawwrite/dd.htm)
