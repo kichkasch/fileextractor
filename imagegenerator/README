@@ -1,0 +1,49 @@
+README for ImageGenerator
+
+Michael Pilgermann
+Email to: mpilgerm@glam.ac.uk
+Licensed under the Genreal Public License (GPL) 
+
+Content
+1. Introduction
+2. Mode of operation
+3. ToDo
+4. Known Bugs
+
+1. Introduction
+---------------
+Enables users to image devices or partitions. This way, you may image a harddisk partition,
+a memory stick, the memory of your digital camera, a CD you overwrote, a ZIP disk and 
+the like. In fact, whenever you have a driver and have been able to access the device before
+it turned corrupted or you deleted for formated you should be able to image.
+
+2. Mode of operation
+--------------------
+Basically, the OS system commands dd are utilised. The system call is performed and some
+observations for file size and so on are done. Finally, it's more or less not much more than a
+python based front end for the dd command; but it's working :)
+
+3. ToDo
+-------
+* Preselect core (if os.name == 'posix'  ...... if sys.platform[:3] == 'win'
+* All Cores 
+    - Few functions seem to be the same for all OSs ... consider moving to abstract class
+* ImageGenerator (Graphical Interface)
+* CLI
+    - process command line arguments in order to avoid user input
+    - delete file for buffering output
+* Error Handling
+    - source file available
+    - not sufficient permissions for destination file
+* Linux Core
+    - ???
+* Default values for source and destination must be moved from Runtime module to core 
+    implementation modules
+* Revise the importing of core implementation - not really nice at the end of the CoreManager - into the abstract?
+* check for user name - program must run as "root" - sufficient privileges to directly access the device
+
+4. Known Bugs
+-------------
+* Crash if source {file / device} not available
+* Check spaces in input files / output files
+* End of CDs not recognised (seen in Linux)

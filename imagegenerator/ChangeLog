@@ -1,0 +1,5 @@
+2005-05-31    <michael@j130-mp>
+* Windows Core
+    - integrate with dd implementation of John Newbigin (http://uranus.it.swin.edu.au/~jn/linux/rawwrite/dd.htm)
+* Linux Core
+    - assemble list of possible sources (consider information provided in fstab)
