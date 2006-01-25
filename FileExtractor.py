@@ -101,7 +101,7 @@ class FileExtractorFrame(wxFrame):
         
         # load settings
         from FESettings import getSettings
-        getSettings().load()
+        getSettings().load(location = self._baseDir)
 
         wxFrame.__init__(self, parent, ID, title,
                          wxDefaultPosition, wxSize(600, 500))
@@ -576,8 +576,9 @@ class FileExtractorFrame(wxFrame):
             self.filelist.Set(self.content)
         dlg.Destroy()
         
-    def error(self):
-        dlg = wxMessageDialog(self, "The image file could not be created\n",
+    def error(self, msg):
+        dlg = wxMessageDialog(self, "The image file could not be created\n\n"
+                                "Low level Error Message:\n%s" %(msg),
                               "Imaging error", wxOK | wxICON_ERROR)
         dlg.ShowModal()
         dlg.Destroy()

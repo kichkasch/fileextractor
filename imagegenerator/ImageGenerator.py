@@ -103,13 +103,13 @@ class ImagingCallback:
         """
         print "Imaging sucessful"
         
-    def error(self):
+    def error(self, msg = None):
         """
         To be called by the generator in case of finishing a generation not sucessfully.
         
         Print "Error whilst Imaging" to standard out.
         """
-        print "Error whilst Imaging"
+        print "Error whilst Imaging: \n%s" %(msg)
         
     def cancelled(self):
         """
@@ -194,7 +194,7 @@ class ImageGenerator:
         progress = ProgressDialog.ProgressDialog(parent = self._parentControl, settings = settings, status = status)
         if self._callback != None:
             if status.getError() != None:
-                self._callback.error()
+                self._callback.error(status.getError())
             elif status.isFinished():
                 self._callback.success(settings.getDestination())
     

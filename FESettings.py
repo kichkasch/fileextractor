@@ -2,7 +2,8 @@
 # Settings for FileExtractor
 #
 
-DEFAULT_FILE = './fileextractor_settings.dat'
+DEFAULT_FILE = 'fileextractor_settings.dat'
+DEFAULT_LOCATION  ='.'
 
 settings = None
 def getSettings():
@@ -16,9 +17,10 @@ class Settings:
     def __init__(self):
         self._values = {}
         
-    def load(self, filename = DEFAULT_FILE):
+    def load(self, filename = DEFAULT_FILE, location = DEFAULT_LOCATION):
+        import os.path
         try:
-            file = open(filename, 'r')
+            file = open(os.path.join(location, filename), 'r')
         except IOError, msg:
             # fair enough; there is not yet any settings on this machine
             return
@@ -31,8 +33,9 @@ class Settings:
                 if line2:
                     self._values[line1.strip()] = line2.strip()
         
-    def save(self, filename = DEFAULT_FILE):
-        file = open(filename, 'w')
+    def save(self, filename = DEFAULT_FILE, location = DEFAULT_LOCATION):
+        import os.path
+        file = open(os.path.join(location, filename), 'w')
         for key in self._values.keys():
             file.write("%s\n" %(key))
             file.write("%s\n" %(self._values[key]))

@@ -204,7 +204,7 @@ class SettingsDialog(wxDialog):
         except AttributeError, msg:
             pass
 
-        getSettings().save()
+        getSettings().save(location = self._baseDir)
         dlg = wxMessageDialog(self, "Your settings have been saved.",
                           "Save Setting Confirmation", wxOK | wxICON_INFORMATION)
         dlg.ShowModal()

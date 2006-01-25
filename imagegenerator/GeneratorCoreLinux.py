@@ -80,7 +80,15 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         
         status.setFinished()
         if ret != 0:
-            status.setError("Error whilst imaging")
+            st = "Check log file '%s'." %(self._settings.getRedirectOutputBuffer())
+            try:
+                file = open(self._settings.getRedirectOutputBuffer(), 'r')
+                msg = file.read()
+                file.close()
+                st = msg
+            except Error, msg:
+                pass
+            status.setError("Linux Core: \nError whilst imaging\nErrorCode: %s\n%s" %(str(ret), st))
         return ret
         
     def _assembleCommand(self):

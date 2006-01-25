@@ -467,6 +467,8 @@ class ImageGeneratorWizard(Wizard):
             settings = Runtime.Settings(path_dd = location_dd, source = source, 
                 destination = location_dest, redirectOutput = redirectBuffer)
             corename = self._chCore.GetStringSelection()
+            import os
+            os.chdir(self._baseDir)
             core = self._initCore(corename, settings)
             self._callback.finished(core, settings)
 
