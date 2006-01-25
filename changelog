@@ -7,6 +7,9 @@ Content:
 
 version 0.2 (??/??/????)
 ========================
+* Help for FileExtractor
+    - new structure (overview, quickstart, terminology, userguide (still
+    empty), signatures)
 * ImageGenerator is now direct component of FileExtractor - coming as a package in its directory
 * Options dialog integrated
     - fileextractor options (general and output file name rules)

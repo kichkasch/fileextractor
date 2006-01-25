@@ -3,8 +3,54 @@
            <param name="Name" value="Introduction">
            <param name="Local" value="overview.htm">
        </object>
-  <li> <object type="text/sitemap">
-           <param name="Name" value="Installation">
-           <param name="Local" value="installation.htm">
+  
+       <li> <object type="text/sitemap">
+               <param name="Name" value="FileTypes (Terminlogy)">
+                   <param name="Local" value="terminology.htm#file_types">
+                   </object>
+       
+       <li> <object type="text/sitemap">
+           <param name="Name" value="Image (Terminlogy)">
+           <param name="Local" value="terminology.htm#image">
        </object>
+       <li> <object type="text/sitemap">
+               <param name="Name" value="Image">
+                   <param name="Local" value="quick_guide.html#image">
+                   </object>
+        <li> <object type="text/sitemap">
+                <param name="Name" value="Imaging (Terminlogy)">
+                    <param name="Local" value="terminology.htm#imaging">
+                    </object>
+       <li> <object type="text/sitemap">
+               <param name="Name" value="Imaging">
+                   <param name="Local" value="quick_guide.html#image">
+                   </object>
+        <li> <object type="text/sitemap">
+                <param name="Name" value="Core (ImageGenerator)">
+                    <param name="Local" value="terminology.htm#core">
+            </object>
+        <li> <object type="text/sitemap">
+                <param name="Name" value="ImageGenerator">
+                    <param name="Local" value="terminology.htm#ig">
+                    </object>
+        <li> <object type="text/sitemap">
+                <param name="Name" value="Output Directory (Terminlogy)">
+                    <param name="Local" value="terminology.htm#output_dir">
+                    </object>
+        
+        <li> <object type="text/sitemap">
+                <param name="Name" value="Operating System (Terminlogy)">
+                    <param name="Local" value="terminology.htm#os">
+                    </object>
+            
+        <li> <object type="text/sitemap">
+                <param name="Name" value="Quick start">
+                    <param name="Local" value="quick_guide.html">
+        </object>
+                    
+        <li> <object type="text/sitemap">
+                <param name="Name" value="Howto">
+                    <param name="Local" value="quick_guide.html">
+                    </object>
+        
 </ul> 

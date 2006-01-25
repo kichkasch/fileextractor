@@ -23,24 +23,42 @@
        </ul>
        </li>
   <li> <object type="text/sitemap">
-           <param name="Name" value="Installation">
+           <param name="Name" value="Quickstart">
            <param name="ID" value=102>
-           <param name="Local" value="installation.htm">
+           <param name="Local" value="quick_guide.html">
        </object> 
        <ul>
         <li><object type="text/sitemap">
-           <param name="Name" value="Requirements">
+                <param name="Name" value="Start">
+                    <param name="ID" value=2010>
+                        <param name="Local" value="quick_guide.html#start">
+                        </object></li>
+        <li><object type="text/sitemap">
+           <param name="Name" value="Create image">
            <param name="ID" value=2011>
-           <param name="Local" value="installation.htm#require">
+               <param name="Local" value="quick_guide.html#image">
         </object></li>
         <li><object type="text/sitemap">
-           <param name="Name" value="Extract archive and Start">
+           <param name="Name" value="Recover">
            <param name="ID" value=2012>
-           <param name="Local" value="installation.htm#place">
+               <param name="Local" value="quick_guide.html#recover">
         </object></li>
        </ul>
        </li>
-  <li> <object type="text/sitemap">
+  
+       <li> <object type="text/sitemap">
+               <param name="Name" value="Terminology">
+                   <param name="ID" value=104>
+                       <param name="Local" value="terminology.htm">
+                       </object></li>
+       
+        <li> <object type="text/sitemap">
+                <param name="Name" value="User Guide">
+                    <param name="ID" value=104>
+                        <param name="Local" value="userguide.htm">
+                        </object></li>
+                   
+       <li> <object type="text/sitemap">
            <param name="Name" value="Signatures">
            <param name="ID" value=103>
            <param name="Local" value="signatures.htm">
@@ -68,9 +86,4 @@
         </object></li>
        </ul>
        </li>
-  <li> <object type="text/sitemap">
-           <param name="Name" value="Research">
-           <param name="ID" value=103>
-           <param name="Local" value="research.htm">
-       </object></li>
 </ul> 

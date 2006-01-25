@@ -12,15 +12,15 @@ URL=		"kkfileextractor.sourceforge.net"
 HELP_DIR=	help
 HELP_ZIPNAME=	fileextractorhelp.zip
 HELP_HTMLS=	\
-		$(HELP_DIR)/installation.htm \
+		$(HELP_DIR)/terminology.htm \
 		$(HELP_DIR)/overview.htm \
-		$(HELP_DIR)/research.htm \
-		$(HELP_DIR)/signatures.htm 
+		$(HELP_DIR)/userguide.htm \
+		$(HELP_DIR)/signatures.htm \
+		$(HELP_DIR)/quickstart/quick_guide.html
 HELP_PIC_DIR=	$(HELP_DIR)/pics
-HELP_PICS=	$(HELP_PIC_DIR)/background.jpg \
-		$(HELP_PIC_DIR)/background2.jpg \
-		$(HELP_PIC_DIR)/background3.jpg \
-		$(HELP_PIC_DIR)/background4.jpg
+HELP_PICS=	 \
+		$(HELP_DIR)/felogo2.png \
+		$(HELP_DIR)/quickstart/*.jpg
 HELP_CONFIGS=	\
 		$(HELP_DIR)/general.hhc \
 		$(HELP_DIR)/general.hhk \
@@ -45,7 +45,7 @@ docs:   api-docs
 
 
 $(HELP_ZIPNAME):	$(HELP_CONFIGS) $(HELP_HTMLS) 
-	$(ZIP) $(ZIP_PAR) $(HELP_ZIPNAME) $(HELP_CONFIGS) $(HELP_HTMLS)
+	$(ZIP) $(ZIP_PAR) $(HELP_ZIPNAME) $(HELP_CONFIGS) $(HELP_HTMLS) $(HELP_PICS)
 
 help: $(HELP_ZIPNAME)
 
