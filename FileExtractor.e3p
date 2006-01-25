@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2006-01-23, 12:29:43 -->
+<!-- Saved: 2006-01-25, 00:24:57 -->
 <!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -47,6 +47,54 @@
     <Source>
       <Name>FESettings.py</Name>
     </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>GeneratorCoreLinux.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>ImageGeneratorCLI.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>GeneratorCoreAbstract.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>ImageGeneratorWizard.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>Tools.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>ProgressDialog.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>ImageGenerator.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>Runtime.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>GeneratorCoreWin32.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>CoreManager.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>Test.py</Name>
+    </Source>
+    <Source>
+      <Dir>imagegenerator</Dir>
+      <Name>__init__.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -55,9 +103,6 @@
   <Interfaces>
   </Interfaces>
   <Others>
-    <Other>
-      <Name>README</Name>
-    </Other>
     <Other>
       <Dir>sql</Dir>
       <Name>createtables.sql</Name>
@@ -73,9 +118,6 @@
     <Other>
       <Dir>sql</Dir>
       <Name>truncdata.sql</Name>
-    </Other>
-    <Other>
-      <Name>INSTALL</Name>
     </Other>
     <Other>
       <Name>readme</Name>
@@ -114,6 +156,18 @@
     <Other>
       <Name>changelog</Name>
     </Other>
+    <Other>
+      <Dir>imagegenerator</Dir>
+      <Name>ChangeLog</Name>
+    </Other>
+    <Other>
+      <Dir>imagegenerator</Dir>
+      <Name>Makefile</Name>
+    </Other>
+    <Other>
+      <Dir>imagegenerator</Dir>
+      <Name>README</Name>
+    </Other>
   </Others>
   <MainScript>
     <Name>FileExtractor.py</Name>
@@ -130,10 +184,10 @@
     <Eric3ApiParams>{'outputFile': u'doc2/documentation', 'ignoreDirectories': [u'doc', u'doc2', u'CVS'], 'useRecursion': True}</Eric3ApiParams>
   </Eric3Api>
   <FiletypeAssociations>
-    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
     <FiletypeAssociation pattern="*.py" type="SOURCES" />
+    <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

@@ -8,7 +8,7 @@
 #
 # global parameters
 TITLE=		"File Extractor"
-URL=		"http://sourceforge.net/projects/kkfileextractor/"
+URL=		"kkfileextractor.sourceforge.net"
 HELP_DIR=	help
 HELP_ZIPNAME=	fileextractorhelp.zip
 HELP_HTMLS=	\
@@ -50,4 +50,4 @@ $(HELP_ZIPNAME):	$(HELP_CONFIGS) $(HELP_HTMLS)
 help: $(HELP_ZIPNAME)
 
 clean:
-	$(RM) *.pyc
+	$(RM) *.pyc imagegenerator/*.pyc
