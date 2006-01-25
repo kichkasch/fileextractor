@@ -14,10 +14,12 @@ version 0.2 (??/??/????)
 * new GUI design
     - lots of icons instead of text
     - nice loge is on there as well now :)
+    - icons for menu items
 * Before start search - check, whether at least one source file is given
 * Error handling
     - missing package wxpython reported with a proper error message
 * Integration of module for Image Generating
+* fixed bug with relative path for windows dd
 
 
 version 0.1 (12/05/2005)

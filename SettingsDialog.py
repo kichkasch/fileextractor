@@ -386,9 +386,15 @@ class SettingsDialog(wxDialog):
 
         label_signatures = wxStaticText (panel_top, -1 , "Select file types enabled by default")
         try:
-            self.signaturelist.Reparent(panel_top)
+            #self.signaturelist.Reparent(panel_top)
+            oldList = self.signaturelist
+            self.signaturelist = wxCheckListBox(panel_top, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)    
+            self.signaturelist.Set(self.sigcontent)
+            for i in range(len(self.sigcontent)):
+                self.signaturelist.Check(i, oldList.IsChecked(i))
+
         except AttributeError, msg:
-            self.signaturelist = wxCheckListBox(panel_top, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)
+            self.signaturelist = wxCheckListBox(panel_top, -1, style = wxLC_REPORT|wxSUNKEN_BORDER)    
             thesignatures = FileExtractorCore.getAvailableSignatures()
             self.sigDict = {}
             for sig in thesignatures:

@@ -111,6 +111,9 @@ class FileExtractorFrame(wxFrame):
         self.CreateStatusBar()
         self.SetStatusText("FileExtractor initialised ...")
         
+        appLogo = wx.Icon("icons/fileextractor.png", wx.BITMAP_TYPE_PNG);
+        self.SetIcon(appLogo)
+        
         panel_outer = wxPanel(self, -1)
         
         panel_left = wxPanel(panel_outer, -1)
@@ -200,7 +203,7 @@ class FileExtractorFrame(wxFrame):
         if getSettings().getValue('output_dir'):
             self.if_dir = wxTextCtrl(panel_dir, -1, getSettings().getValue('output_dir'))
         else:
-            self.if_dir = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
+            self.if_dir = wxTextCtrl(panel_dir, -1, 'Working Directory')
         self.if_dir.SetEditable(false)
         #bChooseDir = wxButton(panel_dir, _ID_B_DIR, "Change Directory")        
         
@@ -286,30 +289,52 @@ class FileExtractorFrame(wxFrame):
         self.Layout()
 
         
-        fileMenu = wxMenu()
-        fileMenu.Append(_ID_ADD, "&Add Source File",
+        fileMenu = wx.Menu()
+        addItem = wx.MenuItem(fileMenu, _ID_ADD, "&Add Source File",
                     "Add Source File to be searched in")
-        fileMenu.Append(_ID_START, "&Start Searching",
+        bm = wx.Bitmap("icons/small/edit_add.png", wx.BITMAP_TYPE_PNG);
+        addItem.SetBitmap(bm)
+        fileMenu.AppendItem(addItem)
+        startItem = wx.MenuItem(fileMenu, _ID_START, "&Start Searching",
                     "Go and find your files")
+        bm = wx.Bitmap("icons/small/start.png", wx.BITMAP_TYPE_PNG);
+        startItem.SetBitmap(bm)
+        fileMenu.AppendItem(startItem)
         fileMenu.AppendSeparator()
-        fileMenu.Append(_ID_OPTIONS, "&Options",
+        prefItem = wx.MenuItem(fileMenu, _ID_OPTIONS, "&Options",
                     "Apply Settings for the program")
+        bm = wx.Bitmap("icons/small/configure.png", wx.BITMAP_TYPE_PNG);
+        prefItem.SetBitmap(bm)
+        fileMenu.AppendItem(prefItem)
         fileMenu.AppendSeparator()
-        fileMenu.Append(_ID_EXIT, "E&xit", "Terminate the program")
+        exitItem = wx.MenuItem(fileMenu, _ID_EXIT, "E&xit", "Terminate the program")
+        bmExit = wx.Bitmap("icons/small/exit.png", wx.BITMAP_TYPE_PNG);
+        exitItem.SetBitmap(bmExit)
+        fileMenu.AppendItem(exitItem)
+        
         menuBar = wxMenuBar()
         menuBar.Append(fileMenu, "&File");
         
         toolsMenu = wxMenu()
-        toolsMenu.Append(_ID_IMAGEGENERATOR, "&ImageGenerator...",
+        imageItem = wx.MenuItem(toolsMenu, _ID_IMAGEGENERATOR, "&ImageGenerator...",
                     "Create an image file")
+        bm = wx.Bitmap("icons/small/tools_image.png", wx.BITMAP_TYPE_PNG);
+        imageItem.SetBitmap(bm)
+        toolsMenu.AppendItem(imageItem)
         menuBar.Append(toolsMenu, "&Tools")
         
         helpMenu = wxMenu()
-        helpMenu.Append(_ID_CONTENT, "&Content",
+        helpItem = wx.MenuItem(helpMenu, _ID_CONTENT, "&Content",
                     "How to use this Program in detail")
+        bm = wx.Bitmap("icons/small/help.png", wx.BITMAP_TYPE_PNG);
+        helpItem.SetBitmap(bm)
+        helpMenu.AppendItem(helpItem)
         helpMenu.AppendSeparator()
-        helpMenu.Append(_ID_ABOUT, "&About",
+        aboutItem = wx.MenuItem(helpMenu, _ID_ABOUT, "&About",
                     "Basic Information about this program")
+        bm = wx.Bitmap("icons/small/info.png", wx.BITMAP_TYPE_PNG);
+        aboutItem.SetBitmap(bm)
+        helpMenu.AppendItem(aboutItem)
         menuBar.Append(helpMenu, "&Help")
         self.SetMenuBar(menuBar)
 
@@ -446,8 +471,8 @@ class FileExtractorFrame(wxFrame):
                 dis_sigs.append(self.sigcontent[i])
         from FESettings import getSettings
         if getSettings().getValue('naming_digits') and getSettings().getValue('naming_digits'): # they only come together
-            digits = getSettings().getValue('naming_digits')
-            start = getSettings().getValue('naming_start') 
+            digits = int(getSettings().getValue('naming_digits'))
+            start = int(getSettings().getValue('naming_start') )
             settings = ExecutionSettings(disabled_signatures = dis_sigs, sourceFiles = sourceFiles, dest_folder=self.dest_folder,
                     signatures = signatures.getCopyOfAllSignauteres(), output_level = 0, output_frequency=10000, digits = digits, 
                     counterstart = start)
