@@ -162,6 +162,7 @@ class Status:
         self._starttime = None
         self._endtime = None
         self._error = None
+        self._end_filesize = None       # final file size estimation
     
     def updateDestinationFileSize(self, value):
         """
@@ -250,7 +251,7 @@ class Status:
         """
         SETTER
         
-        Sets the value for an error for the statsu instance.
+        Sets the value for an error for the status instance.
         
         @param error: Error message for the execution.
         @type error: C{String}
@@ -265,6 +266,26 @@ class Status:
         @rtype: C{String}
         """
         return self._error
+        
+    def setEndFilesize(self, value):
+        """
+        SETTER
+        
+        Sets the value for the size estimation of the image file for the status instance.
+        
+        @param error: Error message for the execution.
+        @type error: C{String}
+        """
+        self._end_filesize = value
+        
+    def getEndFilesize(self):
+        """
+        GETTER
+        
+        @return: Value for the file size estimation of the image file.
+        @rtype: C{int}
+        """
+        return self._end_filesize
 
 class FileSizeObserver(threading.Thread):
     """

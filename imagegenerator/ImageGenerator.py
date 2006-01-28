@@ -190,6 +190,9 @@ class ImageGenerator:
         """
         status = Runtime.Status()
         status.setStarted()
+        sizeEstimation = core.getSizeEstimationForPartition(settings.getSource())
+        if sizeEstimation:
+            status.setEndFilesize(sizeEstimation)
         thread.start_new_thread(core.createImage,(status,))
         progress = ProgressDialog.ProgressDialog(parent = self._parentControl, settings = settings, status = status)
         if self._callback != None:

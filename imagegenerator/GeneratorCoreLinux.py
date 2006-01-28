@@ -23,6 +23,8 @@ This module registers itself with the L{CoreManager} as a core.
 @var FSTAB_LOCATION: Location for the file system table within the local file system. Required for 
 determing possible sources for the imaging.
 @type FSTAB_LOCATION: C{String}
+@var PROC_LOCATION: Location of the file holding partition information inside the proc file system
+@type PROC_LOCATION: C{String}
 @var DEFAULT_PATH_DD: Default location for the dd command
 @type DEFAULT_PATH_DD: C{String}
 
@@ -38,6 +40,8 @@ PARAM_OUTPUTFILE = "of"
 PARAM_BLOCKSIZE="bs"
 
 FSTAB_LOCATION = "/etc/fstab"
+PROC_LOCATION = "/proc/partitions"
+DEV_PREFIX = "/dev/"
 DEFAULT_PATH_DD = "/bin/dd"
 
 class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
@@ -126,7 +130,12 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         @return: Return Values of the function L{_getListFromFstab}
         @rtype: C{List} of C{Strings}; C{List} of {String}
         """
-        return self._getListFromFstab()
+        try:
+            list = self._getListFromProc()
+            if list:
+                return list
+        except Error, msg:
+            return self._getListFromFstab()
     
     def getSourceInfo(self):
         """
@@ -149,6 +158,93 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
                 "\tHD partition: \t/dev/hdc1\n" \
                 "\tCDROM drive:\t/dev/hdc\n" \
                 "Also check the commands 'fdisk -l' or 'mount' for more information."
+    
+    def _getListFromProc(self):
+        """
+        An implementation to get suggestions for imagable resourses.
+        
+        Information from the proc file system tree is evaluated.
+        
+        @return: List of names with some more information; List of names for devices extracted form the fstab file
+        @rtype: C{List} of C{String}; C{List} of C{String}
+        """
+        global DEV_PREFIX, PROC_LOCATION
+        
+        ret = []
+        ret_detail = []
+        try:
+            partitions = open(PROC_LOCATION)
+        except Error, msg:
+            return None
+        
+        line = " "
+        linecount = 0
+        columnName = 3
+        columnBlocks = None
+        while line != "":
+            line = partitions.readline()
+            if line.strip() == "":
+                continue
+            entries = line.split()
+            if linecount == 0:
+                columnName = entries.index('name')
+                try:
+                    columnBlocks = entries.index('#blocks')
+                except Error, msg:
+                    pass
+            else:
+                path = DEV_PREFIX + entries[columnName].strip()
+                ret.append(path)
+                if columnBlocks:
+                    details = path + "  (%d MB)" % (int(entries[columnBlocks].strip()) / 1024)  
+                    ret_detail.append(details)
+                else:
+                    ret_detail.append(path)
+        
+            linecount += 1
+        partitions.close()
+        return ret_detail, ret
+    
+    def getSizeEstimationForPartition(self, partitionName):
+        """
+        Extracts information from the proc file system to determine filesize.
+        
+        We can only read block size; we assume block size of 1024 Bytes to determine size in Byte.
+        """
+        global DEV_PREFIX, PROC_LOCATION
+        
+        try:
+            partitions = open(PROC_LOCATION)
+        except Error, msg:
+            return None
+
+        if not partitionName.startswith(DEV_PREFIX):
+            return None # estimation impossible - we assume, we are under /dev
+        name = partitionName[len(DEV_PREFIX):]
+        print name
+        
+        line = " "
+        linecount = 0
+        columnName = 3
+        columnBlocks = None
+        while line != "":
+            line = partitions.readline()
+            if line.strip() == "":
+                continue
+            entries = line.split()
+            if linecount == 0:
+                columnName = entries.index('name')
+                try:
+                    columnBlocks = entries.index('#blocks')
+                except Error, msg:
+                    return None         # we need this here
+            else:
+                if entries[columnName] == name:
+                    return int(entries[columnBlocks]) * 1024
+
+            linecount += 1
+
+        return None
     
     def _getListFromFstab(self):
         """

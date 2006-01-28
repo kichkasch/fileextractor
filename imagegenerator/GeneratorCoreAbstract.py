@@ -64,3 +64,10 @@ class CoreInterface:
         command for this implementation.
         """
         return None
+
+    def getSizeEstimationForPartition(self, partitionName):
+        """
+        Overwrite here if your core is able to estimate the size of a partition.
+        """
+        return None
+        

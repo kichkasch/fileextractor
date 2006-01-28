@@ -1,11 +1,19 @@
 Changelog for FileExtractor
 
 Content:
-- version 0.2
+- version 0.2.1
+- version 0.2 (25/01/2006)
 - version 0.1 (12/05/2005)
 - old entries for early development with name FindFiles
 
-version 0.2 (??/??/????)
+version 0.2.1 (??/??/2006)
+========================
+* ImageGenerator: GUI now supports evaluation of source device size and allign output corrospondingly
+* ImageGenerator LinuxCore: Size for device is attempted to be retrieved from the proc system; more details for device list (proc instead of fstab)
+* fixed bugs:
+    - base dir determination fixed in FileExtractor.py
+
+version 0.2 (25/01/2006)
 ========================
 * Help for FileExtractor
     - new structure (overview, quickstart, terminology, userguide (still

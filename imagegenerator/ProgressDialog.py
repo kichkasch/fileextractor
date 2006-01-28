@@ -86,10 +86,15 @@ class ProgressDialog(wx.Dialog):
         self._updateValues(None)
 
         panel_fill_hor1 = wx.Panel(panel_outer, -1)
+##        panel_fill_hor1.SetBackgroundColour(wx.RED)
         panel_fill_hor2 = wx.Panel(panel_outer, -1)
+##        panel_fill_hor2.SetBackgroundColour(wx.RED)
         panel_fill_hor3 = wx.Panel(panel_outer, -1)
+##        panel_fill_hor3.SetBackgroundColour(wx.RED)
         panel_fill_hor4 = wx.Panel(panel_outer, -1)
+##        panel_fill_hor4.SetBackgroundColour(wx.RED)
         panel_fill_hor5 = wx.Panel(panel_outer, -1)
+##        panel_fill_hor5.SetBackgroundColour(wx.RED)
         box = wx.BoxSizer(wx.VERTICAL)
         box.Add(panel_fill_hor1, 1, wx.EXPAND)
         box.Add(self._lTitle, 2, wx.ALIGN_CENTER )
@@ -111,10 +116,12 @@ class ProgressDialog(wx.Dialog):
         panel_outer.Layout()
 
         pFill1 = wx.Panel(self, -1)
+##        pFill1.SetBackgroundColour(wx.RED)
         pFill2 = wx.Panel(self, -1)
+##        pFill2.SetBackgroundColour(wx.RED)
         boxo = wx.BoxSizer(wx.HORIZONTAL)
         boxo.Add(pFill1, 1, wx.EXPAND)
-        boxo.Add(panel_outer, 20, wx.EXPAND)
+        boxo.Add(panel_outer, 12, wx.EXPAND)
         boxo.Add(pFill2, 1, wx.EXPAND)
 
 
@@ -149,12 +156,16 @@ class ProgressDialog(wx.Dialog):
         starttime = Tools.processTime(int(self._status.getStartTime()) % (60 * 60 * 24))
         self._lStartTime.SetLabel("Start Time: " + starttime[0] + ":" + starttime[1] + ":" + starttime[2])
 
-        self._lFilesize.SetLabel("File Size: " + str(self._status.getDestinationFileSize()) + " Bytes")
+        if self._status.getEndFilesize():
+            self._lFilesize.SetLabel("File Size: %s / %s (%d %%)" %(self._formatSize(self._status.getDestinationFileSize()), self._formatSize(self._status.getEndFilesize()), (self._status.getDestinationFileSize() * 100 / self._status.getEndFilesize())))
+            self._gauge.SetValue(int(self._status.getDestinationFileSize() * 10000 / self._status.getEndFilesize()))
+        else:
+            self._lFilesize.SetLabel("File Size: %s" %(self._formatSize(self._status.getDestinationFileSize())))
+            val = self._gauge.GetValue()
+            self._gauge.SetValue((val + 2000 ) % 10000)
         elapsed = Tools.processTime(self._status.getElapsedTime())
         self._lTimeElapsed.SetLabel("Time elapsed: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2])
         
-        val = self._gauge.GetValue()
-        self._gauge.SetValue((val + 2000 ) % 10000)
         
         if self._status.isFinished():
             if self._status.getError() != None:
@@ -164,6 +175,12 @@ class ProgressDialog(wx.Dialog):
             self._gauge.SetValue(10000)
             self._bOK.Enable(1)
             
+    def _formatSize(self, size):
+        if size / 1024 < 1:
+            return "%d Bytes" %(size)
+        if size / (1024 * 1024) < 1:
+            return "%d KB" %(size / 1024)
+        return "%d MB" %((size) / (1024  * 1024))
 
     def _evtOK(self, event):
         """
