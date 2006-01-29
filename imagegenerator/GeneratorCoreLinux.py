@@ -41,8 +41,11 @@ PARAM_BLOCKSIZE="bs"
 
 FSTAB_LOCATION = "/etc/fstab"
 PROC_LOCATION = "/proc/partitions"
+FDISK_LOCATION = "/sbin/fdisk"
 DEV_PREFIX = "/dev/"
 DEFAULT_PATH_DD = "/bin/dd"
+TMP_FDISK_FILE = "fdisk.tmp"
+FILE_TYPES = "types.dat"
 
 class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
     """
@@ -177,6 +180,8 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         except Error, msg:
             return None
         
+        types = self._getTypesFromFdisk()
+        
         line = " "
         linecount = 0
         columnName = 3
@@ -195,15 +200,63 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
             else:
                 path = DEV_PREFIX + entries[columnName].strip()
                 ret.append(path)
-                if columnBlocks:
+                if columnBlocks:    # if size information available
                     details = path + "  (%d MB)" % (int(entries[columnBlocks].strip()) / 1024)  
-                    ret_detail.append(details)
                 else:
-                    ret_detail.append(path)
+                    details = path
+                if types:   # if information about partition type available
+                    if types.has_key(path):
+                        details += "  [%s]" %(types[path])
+                ret_detail.append(details)
         
             linecount += 1
         partitions.close()
         return ret_detail, ret
+        
+    def _getTypesFromFdisk(self):
+        global DEV_PREFIX
+        command = FDISK_LOCATION + " -l > " + TMP_FDISK_FILE
+        ret = os.system(command)
+        if ret != 0:
+            print "Partition type determination failed on fdisk execution"
+            return None
+        
+        tmpFile = open(TMP_FDISK_FILE, 'r')
+        posId = None
+        ret = {}
+        while 1:
+            line = tmpFile.readline()
+            if not line:
+                break
+            if line.strip().startswith('Device'):   # header of the table
+                posId = line.index('Id')
+            
+            if line.startswith(DEV_PREFIX):      # that's our entry
+                if posId:
+                    partName = line.split()[0].strip()
+                    typeId = line[posId:posId+2]
+                    ret[partName] = self._getNameForType(typeId)
+        tmpFile.close()
+        return ret
+        
+    def _getNameForType(self, typeId):
+        import os
+        import os.path
+        import sys
+        baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))       
+        f = open(os.path.join(baseDir, FILE_TYPES), 'r')
+        while 1:
+            line = f.readline()
+            if not line:
+                break
+            if line.startswith(typeId.strip()):
+                startPosString = line.split()[1]
+                startPos = line.index(startPosString)
+                name = line[startPos:].strip()
+                return name
+        f.close()
+        
+        return typeId
     
     def getSizeEstimationForPartition(self, partitionName):
         """

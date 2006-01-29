@@ -94,7 +94,7 @@ class FileExtractorFrame(wxFrame):
         """
         import os
         import os.path
-        self._baseDir = os.getcwd() 
+        self._baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))                #os.getcwd() 
         
         import wx
         wx.InitAllImageHandlers()
