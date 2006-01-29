@@ -212,6 +212,13 @@ class ProgressDialog(wxDialog):
             elapsed = self.status.getCurrentElapsedTime()
             time1 = tools.processTime(elapsed)
             self.label_current_time_value = "Time elapsed: "+time1[0]+":"+time1[1]+":"+time1[2]
+            
+            if  self.status.getCurrentFinished() != 0 and (self.status.getCurrentSize() - self.status.getCurrentFinished()) != 0:
+                remaining = self.status.getCurrentElapsedTime() / self.status.getCurrentFinished() * (self.status.getCurrentSize() - self.status.getCurrentFinished())
+                remaining = tools.processTime(remaining)
+                elapsed = time1
+                self.label_current_time_value = "Time elapsed: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2] + "  (remaining: " + remaining[0] + ":" + remaining[1] + ":" + remaining[2] + ")"
+            
             self.gauge_current_file_value = self.status.getCurrentFinished() * 10000 / self.status.getCurrentSize()
             progress = int(round(self.status.getCurrentFinished() * 10000.0 / self.status.getCurrentSize())) 
             self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress % 100) +"% ("+ self._formatSize(self.status.getCurrentFinished())+" / "+self._formatSize(self.status.getCurrentSize()) + ")"

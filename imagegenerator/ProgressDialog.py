@@ -156,15 +156,19 @@ class ProgressDialog(wx.Dialog):
         starttime = Tools.processTime(int(self._status.getStartTime()) % (60 * 60 * 24))
         self._lStartTime.SetLabel("Start Time: " + starttime[0] + ":" + starttime[1] + ":" + starttime[2])
 
+        elapsed = Tools.processTime(self._status.getElapsedTime())
         if self._status.getEndFilesize():
             self._lFilesize.SetLabel("File Size: %s / %s (%d %%)" %(self._formatSize(self._status.getDestinationFileSize()), self._formatSize(self._status.getEndFilesize()), (self._status.getDestinationFileSize() * 100 / self._status.getEndFilesize())))
             self._gauge.SetValue(int(self._status.getDestinationFileSize() * 10000 / self._status.getEndFilesize()))
+            if  self._status.getDestinationFileSize() != 0 and  self._status.getEndFilesize() - self._status.getDestinationFileSize() != 0:
+                remaining = self._status.getElapsedTime() / self._status.getDestinationFileSize() * (self._status.getEndFilesize() - self._status.getDestinationFileSize())
+                remaining = Tools.processTime(remaining)
+                self._lTimeElapsed.SetLabel("Time elapsed: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2] + "  (remaining: " + remaining[0] + ":" + remaining[1] + ":" + remaining[2] + ")")
         else:
             self._lFilesize.SetLabel("File Size: %s" %(self._formatSize(self._status.getDestinationFileSize())))
             val = self._gauge.GetValue()
             self._gauge.SetValue((val + 2000 ) % 10000)
-        elapsed = Tools.processTime(self._status.getElapsedTime())
-        self._lTimeElapsed.SetLabel("Time elapsed: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2])
+            self._lTimeElapsed.SetLabel("Time elapsed: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2])
         
         
         if self._status.isFinished():
@@ -172,6 +176,7 @@ class ProgressDialog(wx.Dialog):
                 self._lTitle.SetLabel("Error whilst Imaging")
             else:
                 self._lTitle.SetLabel("Imaging finished")
+            self._lTimeElapsed.SetLabel("Time elapsed: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2])
             self._gauge.SetValue(10000)
             self._bOK.Enable(1)
             

@@ -37,6 +37,7 @@ import CoreManager
 import Runtime
 import wx
 from wx.wizard import *
+import os
 
 DEF_TITLE = "ImageGenerator"
 DEBUG_FILENAME = "./fileextractordebug.txt"
@@ -442,6 +443,7 @@ class ImageGeneratorWizard(Wizard):
         """
         if self._callback != None:
             self._callback.cancelled()
+##        self.Destroy()
         
     def _evtFinished(self, evt):
         """
@@ -454,6 +456,7 @@ class ImageGeneratorWizard(Wizard):
         
         @param evt: Event instance
         """
+##        self.Destroy()
         if self._callback != None:
             location_dd = self._tcLocDD.GetValue()
             sourceTmp = self._cbSources.GetValue()
@@ -463,14 +466,42 @@ class ImageGeneratorWizard(Wizard):
             else:
                 source = sourceTmp
             location_dest = self._tcLocDest.GetValue()
+            if not self._checkOverwrite(location_dest):
+                return
             redirectBuffer = DEBUG_FILENAME
             settings = Runtime.Settings(path_dd = location_dd, source = source, 
                 destination = location_dest, redirectOutput = redirectBuffer)
             corename = self._chCore.GetStringSelection()
-            import os
             os.chdir(self._baseDir)
             core = self._initCore(corename, settings)
             self._callback.finished(core, settings)
+            
+    def _checkOverwrite(self, path):
+##        import os, wx
+        if os.access(path, os.F_OK):
+            # the file is there already - ask for overwriting
+            dlg = wx.MessageDialog(self, "The destination image file exsists already." \
+                                    "\n(name: " + path + ")" \
+                                    "\n\nOverwrite this file?",
+                                  "Overwrite image file", wx.YES_NO | wx.ICON_QUESTION)
+            if dlg.ShowModal() == wx.ID_YES:
+                # ok; let's try to delete this thing then
+                dlg.Destroy()
+                try:
+                    os.unlink(path)
+                except OSError, msg:
+                    # ups
+                    dlg1 = wx.MessageDialog(self, "Problem with deleting old file.\n\n" 
+                                            "Low level Error Message:\n%s" 
+                                            "\n\nProcessing aborted!" %(msg) ,
+                                          "Overwrite error", wx.OK | wx.ICON_ERROR)
+                    dlg1.ShowModal()
+                    dlg1.Destroy()
+                    return 0
+            else:
+                dlg.Destroy()
+                return 0
+        return 1
 
     def _evtCoreSeclect(self, evt):
         """
