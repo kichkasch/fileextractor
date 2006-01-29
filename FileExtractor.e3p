@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-3.8.dtd">
 <!-- Project file for project FileExtractor -->
-<!-- Saved: 2006-01-25, 16:07:03 -->
+<!-- Saved: 2006-01-28, 23:19:47 -->
 <!-- Copyright (C) 2006 Michael Pilgermann, mpilgerm@glam.ac.uk -->
 <Project version="3.8">
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -98,6 +98,9 @@
     <Source>
       <Name>setup.py</Name>
     </Source>
+    <Source>
+      <Name>setup_win.py</Name>
+    </Source>
   </Sources>
   <Forms>
   </Forms>
@@ -191,9 +194,9 @@
   </Eric3Api>
   <FiletypeAssociations>
     <FiletypeAssociation pattern="*.ui.h" type="FORMS" />
-    <FiletypeAssociation pattern="*.ui" type="FORMS" />
-    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
-    <FiletypeAssociation pattern="*.py" type="SOURCES" />
     <FiletypeAssociation pattern="*.ptl" type="SOURCES" />
+    <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
+    <FiletypeAssociation pattern="*.ui" type="FORMS" />
+    <FiletypeAssociation pattern="*.py" type="SOURCES" />
   </FiletypeAssociations>
 </Project>

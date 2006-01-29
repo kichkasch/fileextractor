@@ -152,6 +152,14 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         @return: User readable List with possible devices to be imaged; real device list
         @rtype: C{List} of C{String}; C{List} of C{String}
         """
+        try:
+            import win32api
+            win32there = 1
+        except Error, msg:
+            print "Debug: Win32API is not installed. Size of device cannot be determined"
+            win32there = 0
+
+
         command = self._settings.getPathDD()
         command = '"\"' + command + '\"' + ' ' + DD_LIST_PARAMETER + ' >' + '\"' + TMP_FILE_NAME + '\"'
         ret = os.system(command)
@@ -178,7 +186,18 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
                     type = type.strip()
                     mount = mount.strip()
                     mount = mount[11:]
-                    line = link + " (" + type + ") " + mount
+##                    line = link + " (" + type + ") " + mount
+                    line = mount.upper()[0:len(mount)-1] +  "   (" + type + ") " # + link 
+
+                    if win32there:
+                        import pywintypes
+                        try:
+                            sizeList = win32api.GetDiskFreeSpace(mount)
+                            size = sizeList[0] * sizeList[1] * sizeList[3]
+                            line += " - %d MB" %(size / 1024 / 1024)
+                        except pywintypes.error, msg:
+                            pass
+
                     ret_line = link
                 ret_dev.append(ret_line)
                 ret.append(line)
@@ -201,5 +220,51 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
             return os.path.abspath(DEFAULT_PATH_DD)
         return DEFAULT_PATH_DD
         
+
+    def getSizeEstimationForPartition(self, partitionName):
+        """
+        Extracts information from the winapi.
+        """
+        try:
+            import win32api
+        except Error, msg:
+            print "Debug: Win32API is not installed. Size of device cannot be determined"
+            return None
+        
+        # firstly, we need the letter for the drive
+        command = self._settings.getPathDD()
+        command = '"\"' + command + '\"' + ' ' + DD_LIST_PARAMETER + ' >' + '\"' + TMP_FILE_NAME + '\"'
+        ret = os.system(command)
+        
+        if ret == 0:
+            file = open(TMP_FILE_NAME)
+            line = " "
+            ret = []
+            ret_dev = []               # real device
+            while line != "":
+                line = file.readline()
+                if line == "":          # skip if EOF
+                    continue
+                if line[0] != "\\":      # proper entires seem to start with doubles back slash
+                    continue
+                line = line.strip()      # remove white spaces around the entry
+                if line[2] == ".":      # this is a mounted device - we can get some more infos - check web page
+                    link = file.readline()
+                    type = file.readline()
+                    mount = file.readline()
+                    link = link.strip()
+                    link = link[8:]
+                    if not link == partitionName and not line == partitionName:
+                        continue
+                    
+                    type = type.strip()
+                    mount = mount.strip()
+                    mount = mount[11:]
+                    
+                    sizeList = win32api.GetDiskFreeSpace(mount)
+                    size = sizeList[0] * sizeList[1] * sizeList[3]
+                    return size
+                    
+        return None
     
 CoreManager.getInstance().registerCore(NAME_IMPL, GeneratorCore)
