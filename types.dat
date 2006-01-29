@@ -1,0 +1,94 @@
+0	Empty
+1	FAT12
+2	XENIX root
+3	XENIX usr
+4	FAT16 <32M
+5	Extended
+6	FAT16
+7	HPFS/NTFS
+8	AIX
+9	AIX bootable
+a	OS/2 Boot Manag
+b	W95 FAT32
+c	W95 FAT32 (LBA)
+e	W95 FAT16 (LBA)
+f	W95 Ext'd (LBA)
+10	OPUS
+11	Hidden FAT12
+12	Compaq diagnost
+14	Hidden FAT16 <3
+16	Hidden FAT16
+17	Hidden HPFS/NTF
+18	AST SmartSleep
+1b	Hidden W95 FAT3
+1c	Hidden W95 FAT3
+1e	Hidden W95 FAT1
+24	NEC DOS
+39	Plan 9
+3c	PartitionMagic
+40	Venix 80286
+41	PPC PReP Boot
+42	SFS
+4d	QNX4.x
+4e	QNX4.x 2nd part
+4f	QNX4.x 3rd part
+50	OnTrack DM
+51	OnTrack DM6 Aux
+52	CP/M
+53	OnTrack DM6 Aux
+54	OnTrackDM6
+55	EZ-Drive
+56	Golden Bow
+5c	Priam Edisk
+61	SpeedStor
+63	GNU HURD or Sys
+64	Novell Netware
+65	Novell Netware
+70	DiskSecure Mult
+75	PC/IX
+80	Old Minix
+81	Minix / old Lin
+82	Linux swap / So
+83	Linux
+84	OS/2 hidden C:
+85	Linux extended
+86	NTFS volume set
+87	NTFS volume set
+88	Linux plaintext
+8e	Linux LVM
+93	Amoeba
+94	Amoeba BBT
+9f	BSD/OS
+a0	IBM Thinkpad hi
+a5	FreeBSD
+a6	OpenBSD
+a7	NeXTSTEP
+a8	Darwin UFS
+a9	NetBSD
+ab	Darwin boot
+b7	BSDI fs
+b8	BSDI swap
+bb	Boot Wizard hid
+be	Solaris boot
+bf	Solaris
+c1	DRDOS/sec (FAT-
+c4	DRDOS/sec (FAT-
+c6	DRDOS/sec (FAT-
+c7	Syrinx
+da	Non-FS data
+db	CP/M / CTOS / .
+de	Dell Utility
+df	BootIt
+e1	DOS access
+e3	DOS R/O
+e4	SpeedStor
+eb	BeOS fs
+ee	EFI GPT
+ef	EFI (FAT-12/16/
+f0	Linux/PA-RISC b
+f1	SpeedStor
+f4	SpeedStor
+f2	DOS secondary
+fd	Linux raid auto
+fe	LANstep
+ff	BBT

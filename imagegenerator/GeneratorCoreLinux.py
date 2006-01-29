@@ -137,7 +137,9 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
             list = self._getListFromProc()
             if list:
                 return list
-        except Error, msg:
+            else:
+                return self._getListFromFstab()
+        except IOError, msg:
             return self._getListFromFstab()
     
     def getSourceInfo(self):
