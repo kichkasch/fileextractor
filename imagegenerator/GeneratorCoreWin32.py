@@ -156,7 +156,7 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         try:
             import win32api
             win32there = 1
-        except Error, msg:
+        except ImportError, msg:
             print "Debug: Win32API is not installed. Size of device cannot be determined"
             win32there = 0
 
@@ -230,7 +230,7 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         """
         try:
             import win32api
-        except Error, msg:
+        except ImportError, msg:
             print "Debug: Win32API is not installed. Size of device cannot be determined"
             return None
         
