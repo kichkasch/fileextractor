@@ -8,8 +8,9 @@ Content:
 
 version 0.2.1 (??/??/2006)
 ========================
-* GeneratorCoreWiin - based on WMI extensions; Python for Windows extensions - sourceforge.net/projects/pywin32
-* ImageGenerator: GUI now supports evaluation of source device size and allign output corrospondingly
+* Some output enhancements for sizes (rather than only Bytes we have KB and MB as well now)
+* GeneratorCoreWiin - based on WMI extensions; Python for Windows extensions - http://sourceforge.net/projects/pywin32
+* ImageGenerator: GUI now supports evaluation of source device size and allign output corrospondingly (including progress bar)
 * ImageGenerator LinuxCore: Size for device is attempted to be retrieved from the proc system; more details for device list (proc instead of fstab)
 * fixed bugs:
     - base dir determination fixed in FileExtractor.py

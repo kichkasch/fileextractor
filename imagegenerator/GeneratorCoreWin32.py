@@ -135,6 +135,7 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         """
         return "\nHow to find your device\n" + "\n" \
                 "Assembled List from the output of the dd command with the --list option.\n" \
+                "Some information added from win32api - you need to install this module.\n" \
                 "\nAlso check the command 'dd --list' for more information or\n" \
                 "visit the website 'http://uranus.it.swin.edu.au/~jn/linux/rawwrite/dd.htm'"
                 
@@ -199,6 +200,8 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
                             pass
 
                     ret_line = link
+                else:
+                    line = "-- " + line
                 ret_dev.append(ret_line)
                 ret.append(line)
             file.close()

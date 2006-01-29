@@ -151,9 +151,9 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         @rtype: C{String}
         """
         return "\nHow to find your device\n" + "\n" \
-                "Assembled List from File Systems table (fstab)\n" \
-                "Each entry represents one line in the fstab file, always\n" \
-                "the first entry is taken - should be the device.\n\n" \
+                "Firstly, ImageGenerator attempts to process proc filesystem information in" \
+                "order to gather information about the available devices (path, size, type); " \
+                "if thise fails, a list is assembles using the Linux filesystem table (fstab)\n\n" \
                 "Some experiences:\n" \
                 "\tFloppy Disk: \t/dev/fd?\n" \
                 "\tMemory Stick: \t/dev/sda1\n" \

@@ -179,8 +179,8 @@ class ProgressDialog(wx.Dialog):
         if size / 1024 < 1:
             return "%d Bytes" %(size)
         if size / (1024 * 1024) < 1:
-            return "%d KB" %(size / 1024)
-        return "%d MB" %((size) / (1024  * 1024))
+            return "%d.%d KB" %(size / 1024, (size % 1024) / 103)
+        return "%d.%d MB" %(size / (1024  * 1024),  (size % (1024  * 1024))/ (103 * 1024))
 
     def _evtOK(self, event):
         """

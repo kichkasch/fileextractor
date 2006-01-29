@@ -214,7 +214,7 @@ class ProgressDialog(wxDialog):
             self.label_current_time_value = "Time elapsed: "+time1[0]+":"+time1[1]+":"+time1[2]
             self.gauge_current_file_value = self.status.getCurrentFinished() * 10000 / self.status.getCurrentSize()
             progress = int(round(self.status.getCurrentFinished() * 10000.0 / self.status.getCurrentSize())) 
-            self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress % 100) +"% ("+ str(self.status.getCurrentFinished())+" / "+str(self.status.getCurrentSize())+" Bytes)"
+            self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress % 100) +"% ("+ self._formatSize(self.status.getCurrentFinished())+" / "+self._formatSize(self.status.getCurrentSize()) + ")"
             self.label_current_found_value = "Files Found: " + str(self.status.getCurrentFound())
             self.label_overall_filesdone_value = "Current source file: "+ str(self.status.finished+1) + " / " + str(self.status.getSourceFileNumber())
             progress_per_file = 10000.0 / self.status.getSourceFileNumber()
@@ -250,6 +250,14 @@ class ProgressDialog(wxDialog):
         if not self.status.hasMoreSourceFiles():
             self.bResultButton.Enable(true)
 
+    def _formatSize(self, size):
+        if size / 1024 < 1:
+            return "%d Bytes" %(size)
+        if size / (1024 * 1024) < 1:
+            return "%d.%d KB" %(size / 1024, (size % 1024) / 103)
+        return "%d.%d MB" %(size / (1024  * 1024),  (size % (1024  * 1024))/ (103 * 1024))
+            
+            
     def _ShowResult(self, event):
         resDialog = ResultDialog.ResultDialog(self, -1, "Searching outcomes", self.status)
         
