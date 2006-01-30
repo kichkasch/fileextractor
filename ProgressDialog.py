@@ -221,7 +221,7 @@ class ProgressDialog(wxDialog):
             
             self.gauge_current_file_value = self.status.getCurrentFinished() * 10000 / self.status.getCurrentSize()
             progress = int(round(self.status.getCurrentFinished() * 10000.0 / self.status.getCurrentSize())) 
-            self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress % 100) +"% ("+ self._formatSize(self.status.getCurrentFinished())+" / "+self._formatSize(self.status.getCurrentSize()) + ")"
+            self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress  % 100 / 10) + str(progress % 100 % 10) +"% ("+ self._formatSize(self.status.getCurrentFinished())+" / "+self._formatSize(self.status.getCurrentSize()) + ")"
             self.label_current_found_value = "Files Found: " + str(self.status.getCurrentFound())
             self.label_overall_filesdone_value = "Current source file: "+ str(self.status.finished+1) + " / " + str(self.status.getSourceFileNumber())
             progress_per_file = 10000.0 / self.status.getSourceFileNumber()
@@ -231,13 +231,13 @@ class ProgressDialog(wxDialog):
             self.label_current_time_value = "Time elapsed: "
             self.gauge_current_file_value = 10000
             progress = 10000.0
-            self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress % 100) +"% "
+            self.label_current_percentage_value = "Finished: "+ str(progress / 100) +"."+ str(progress % 100 / 10) + str(progress % 100 % 10) +" % "
             self.label_current_found_value = "Files Found: "
             self.label_overall_filesdone_value = "Current source file: "+ str(self.status.getSourceFileNumber()) + " / " + str(self.status.getSourceFileNumber())
             progress_per_file = 10000.0 / self.status.getSourceFileNumber()
             progressOverall = 10000.0
         self.gauge_overall_value = progressOverall
-        self.label_overall_percentage_value = "Finished: "+str(progressOverall/100)+"."+str(progressOverall%100)+" %"
+        self.label_overall_percentage_value = "Finished: "+str(progressOverall/100)+"."+str(progressOverall%100/10)+ str(progressOverall%100%10) +" %"
         self.label_overall_found_value = "Files Found: " + str(self.status.getOverallFound())
         now = time.time()
         time1 = tools.processTime(now - self.startTime)
