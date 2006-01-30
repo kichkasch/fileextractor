@@ -153,9 +153,9 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         @rtype: C{String}
         """
         return "\nHow to find your device\n" + "\n" \
-                "Firstly, ImageGenerator attempts to process proc filesystem information in" \
-                "order to gather information about the available devices (path, size, type); " \
-                "if thise fails, a list is assembles using the Linux filesystem table (fstab)\n\n" \
+                "Firstly, ImageGenerator attempts to process proc \nfilesystem information in" \
+                "order to gather \ninformation about the available devices (path, size, type); \n" \
+                "if thise fails, a list is assembles using the Linux \nfilesystem table (fstab)\n\n" \
                 "Some experiences:\n" \
                 "\tFloppy Disk: \t/dev/fd?\n" \
                 "\tMemory Stick: \t/dev/sda1\n" \
