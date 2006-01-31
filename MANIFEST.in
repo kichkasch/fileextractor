@@ -2,4 +2,5 @@ recursive-include icons *.png
 include readme
 include install
 include changelog
+include types.dat
 include fileextractorhelp.zip

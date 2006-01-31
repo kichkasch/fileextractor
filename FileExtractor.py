@@ -413,7 +413,7 @@ class FileExtractorFrame(wxFrame):
         dia.Destroy()        
 
     def _OnAbout(self, event):
-        dlg = wxMessageDialog(self, "FileExtractor - Version 0.2beta\n"
+        dlg = wxMessageDialog(self, "FileExtractor - Version 0.2.1\n"
                               "Searching for Files within binary sources\n"
                               "\nAuthor: Michael Pilgermann\n"
                               "Email: mpilgerm@glam.ac.uk\n\n"
@@ -604,7 +604,7 @@ class FileExtractorSimpleApp(wxApp):
         @return: Indicates, whether the application was invoked successfully.
         @rtype: Bool
         """
-        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 0.2b")
+        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 0.2.1")
         frame.initHelp()
         frame.Show(true)
         self.SetTopWindow(frame)

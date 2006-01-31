@@ -1,13 +1,14 @@
 Changelog for FileExtractor
 
 Content:
-- version 0.2.1
+- version 0.2.1 (31/01/2006)
 - version 0.2 (25/01/2006)
 - version 0.1 (12/05/2005)
 - old entries for early development with name FindFiles
 
-version 0.2.1 (??/??/2006)
-========================
+version 0.2.1 (31/01/2006)
+==========================
+* New Windows-Executable - containing all stuff for Python / wxPython
 * Some output enhancements for sizes (rather than only Bytes we have KB and MB as well now)
 * GeneratorCoreWiin - based on WMI extensions; Python for Windows extensions - http://sourceforge.net/projects/pywin32
 * ImageGenerator: GUI now supports evaluation of source device size and allign output corrospondingly (including progress bar)
