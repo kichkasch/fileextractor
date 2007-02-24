@@ -25,7 +25,7 @@ import signatures
 import time
 
 def_digits = 5
-def_counterstart = 0
+def_counterstart = 1
 def_folder = "./"
 def_output_level = 2
 def_output_frequency = 100

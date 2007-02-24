@@ -1,10 +1,28 @@
 Changelog for FileExtractor
 
 Content:
+- version 1.0 (??)
 - version 0.2.1 (31/01/2006)
 - version 0.2 (25/01/2006)
 - version 0.1 (12/05/2005)
 - old entries for early development with name FindFiles
+
+TODO
+- apply settings for run - do not use hard coded parameters
+- maybe "os.startfile" for giving a link for browsing the results
+- new Version of DD available (rework windows Core for image generator)
+- new file formats (e.g. MP3)
+- SignatureCreator
+- Integration of Open-Source-Icon Library Tange (http://digg.com/design/Open_Source_Icons)
+- document that Win2000 users have to download gdiplus.dll into system32 folder.
+
+version 1.0
+==========================
+- Wizard based GUI
+- Windows XP Look&Feel also for Executable version
+- Integration of new version of wxPython
+- FIXED: clean up prozesses (there are threads remaining after closing the app)
+
 
 version 0.2.1 (31/01/2006)
 ==========================

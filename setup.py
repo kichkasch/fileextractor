@@ -13,7 +13,7 @@ from distutils.core import setup
 if __name__ == "__main__":
     setup (
         name = "fileextractor",
-        version = "0.2.1",
+        version = "1.0",
         description = "FileExtractor - recover your data",
         author = "Michael Pilgermann",
         author_email = "mpilgerm@glam.ac.uk",

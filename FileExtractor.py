@@ -10,9 +10,8 @@ This module can start the application. It is checking for the call of the __main
 will in case of start the simple Application.
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:michael.pilgermann@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """
 
@@ -20,6 +19,7 @@ import sys
 
 
 try:
+#    from wxPython.wx import * - compatibility issue
     from wxPython.wx import *
     import wxPython.html
     from wxPython.htmlhelp import *
@@ -203,7 +203,6 @@ class FileExtractorFrame(wxFrame):
         
         label_outputdir = wxStaticText (panel_right, -1, "Output Directory")
         panel_dir = wxPanel(panel_right, -1)
-##        self.if_dir = wxTextCtrl(panel_dir, -1, "Working Directory")
         if getSettings().getValue('output_dir'):
             self.if_dir = wxTextCtrl(panel_dir, -1, getSettings().getValue('output_dir'))
         else:
@@ -413,7 +412,7 @@ class FileExtractorFrame(wxFrame):
         dia.Destroy()        
 
     def _OnAbout(self, event):
-        dlg = wxMessageDialog(self, "FileExtractor - Version 0.2.1\n"
+        dlg = wxMessageDialog(self, "FileExtractor - Version 1.0\n"
                               "Searching for Files within binary sources\n"
                               "\nAuthor: Michael Pilgermann\n"
                               "Email: mpilgerm@glam.ac.uk\n\n"
@@ -604,7 +603,7 @@ class FileExtractorSimpleApp(wxApp):
         @return: Indicates, whether the application was invoked successfully.
         @rtype: Bool
         """
-        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 0.2.1")
+        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 1.0")
         frame.initHelp()
         frame.Show(true)
         self.SetTopWindow(frame)
