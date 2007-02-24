@@ -1,7 +1,7 @@
-README for FileExtractor Version 0.1
+README for FileExtractor
 
 Michael Pilgermann
-Email to: mpilgerm@glam.ac.uk
+Email to: michael.pilgermann@gmx.de
 Licensed under the Genreal Public License (GPL) 
 
 Content
@@ -11,7 +11,6 @@ Content
 4. Version Tracker
 5. ToDo
 6. Known Bugs
-7. Possible test cases
 
 1. Introduction
 ---------------
@@ -57,11 +56,7 @@ might cause false positives for finding files. The end of a file may be determin
 
 5. ToDo
 -------
-* guide / instructions / tool for creating an image of the partition, ...
 * user guide
-* finsih Help Dialog Content
-* setup.py
-* HelpBook for UserGuide
 * performance enhancements - consider:
     - replacing compareLists with lib string functions or lib binary functions
     - buffering of reading / writing
@@ -69,39 +64,17 @@ might cause false positives for finding files. The end of a file may be determin
 * Closing Threads in case of errors
 * Error Handling
 * new signature type for saving a predefined file size???
-* Options Dialog
 * Cancel Processing Button?
 * More Signatures:
     - MP3
     - Movie Formats
 * Possible Tools
     - Signature Creator
-    - Image creator (gaining an image file from a source partition / fs)
     
 6. Known Bugs
 -------------
 * Windows does not recognize the help zip file when assembled in Linux
 * if started and no source file given - exception raised
-* Program crashed when Access Denied for Source File
 * No check for the address gained from files with signature type 2
-* when image generator used, the program does not shut down properly ... some remaining threads
 
-7. Possible test cases
-----------------------
-* ZipFile plain (no protection)
-* ZipFile unencrypted but password
-* ZipFile encrypted
-* Other Archives (tar, ...)
-* Outlook Archive File (pst) - plain
-* Outlook Archive File (pst) - password protected
-* Outlook Archive File (pst) - encrypted
-* Other Mail Archives (Thunderbird, ...)
-* Self Assembled Binary Files
-* Image Files from Partitions with Data (dd command)
-    * FAT
-    * FAT32
-    * NTFS
-    * Linux EXT
-    * Linux Reiser
-* Encrypted Partitions
-* Image File from a Memory Stick / Camera
+
