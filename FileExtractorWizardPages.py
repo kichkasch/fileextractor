@@ -90,7 +90,8 @@ class WizardPageSetup(AbstractFileExtractorWizardPage):
         lOutputDir.SetFont(font_headings)
         panel_dir = wx.Panel(contentPane, -1)
         if getSettings().getValue('output_dir'):
-            self.if_dir = wx.TextCtrl(panel_dir, -1, getSettings().getValue('output_dir'))
+            import tools
+            self.if_dir = wx.TextCtrl(panel_dir, -1, tools.determineAbsPath(getSettings().getValue('output_dir')))
         else:
             self.if_dir = wx.TextCtrl(panel_dir, -1, 'Working Directory')
         self.if_dir.SetEditable(False)        

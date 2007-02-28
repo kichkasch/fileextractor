@@ -18,13 +18,17 @@ will in case of start the simple Application.
 import wx
 from wx.wizard import *
 from FileExtractorWizardPages import *
+import sys
 import os
+import os.path
 import thread
 from imagegenerator import Tools
 from ExecutionSettings import *
 import signatures
 import FileExtractorCore
 import tools
+import FESettings
+
 
 _ID_WIZARD = 101
 _ID_INFO_SOURCES = 201
@@ -82,8 +86,12 @@ class FileExtractorWizard(Wizard):
                 self._displayResults()
 
     def _processSourcesList(self):
+        corename = tools.determineCoreName( FESettings.getSettings().getValue("ig_default_core"))
+        locationDD = tools.determineAbsPath( FESettings.getSettings().getValue("ig_location_dd"))
+        #print corename
+
         self._devicesDict = {}
-        self._core  = self._initCore("Win32", ddloc = os.path.join(self._baseDir, "dd/dd.exe"))
+        self._core  = self._initCore(corename, ddloc = os.path.join(self._baseDir, locationDD))
         suggestions, devices = self._core.getPossibleSources()
         self._page1._cbSources.Clear()
         i = 0
@@ -124,17 +132,20 @@ class FileExtractorWizard(Wizard):
 
     def _startImageProcessing(self):
         from imagegenerator import Runtime
+
+        corename = tools.determineCoreName( FESettings.getSettings().getValue("ig_default_core"))
+        location_dd = tools.determineAbsPath( FESettings.getSettings().getValue("ig_location_dd"))
+        location_dest = tools.determineAbsPath( FESettings.getSettings().getValue("ig_output_dir"))
         
         self._timeAllTogether = 0
         
-        location_dd = os.path.join(self._baseDir, "dd/dd.exe")
         sourceTmp = self._page1._cbSources.GetValue()
 ##            sourceTmp = self._cbSources.GetStringSelection()
         if self._devicesDict.has_key(sourceTmp):
             source = self._devicesDict[sourceTmp]
         else:
             source = sourceTmp
-        location_dest = "d:\\temp\\dd.img"
+        #location_dest = "d:\\temp\\dd.img"
         if os.path.exists(location_dest):
             print "Image file existing - I am overwriting."
             os.remove(location_dest)
@@ -143,7 +154,8 @@ class FileExtractorWizard(Wizard):
         redirectBuffer = DEBUG_FILENAME
         settings = Runtime.Settings(path_dd = location_dd, source = source, 
                 destination = location_dest, redirectOutput = redirectBuffer)
-        corename = "Win32"
+        #corename = tools.determineCoreName( getSettings("ig_default_core"))
+        #print corename
         os.chdir(self._baseDir)
         core = self._initCore(corename, settings)
 
@@ -205,10 +217,16 @@ class FileExtractorWizard(Wizard):
         return "%d.%d MB" %(size / (1024  * 1024),  (size % (1024  * 1024))/ (103 * 1024))
         
     def _startFileRecovery(self):
+        location_img = tools.determineAbsPath( FESettings.getSettings().getValue("ig_output_dir"))
+        if self._page1.if_dir.GetValue() == "Working Directory":
+            location_dest = tools.determineAbsPath("./")
+        else:
+            location_dest = tools.determineAbsPath(self._page1.if_dir.GetValue())
         
-        self.settings = ExecutionSettings(sourceFiles = ["d:\\temp\\dd.img"], 
+        self.settings = ExecutionSettings(sourceFiles = [location_img], 
                                           signatures = signatures.getCopyOfAllSignauteres(),
-                                          output_frequency = 2300)
+                                          output_frequency = 2300, output_level = 0,
+                                          dest_folder = location_dest)
         self.status = ExecutionStatus(self.settings)
         self.startTime = time.time()
 
@@ -232,6 +250,8 @@ class FileExtractorWizard(Wizard):
         self.FindWindowById(wx.ID_BACKWARD).Enable()
         
     def _updateValuesRecovery(self, event):
+        if not self.status.hasMoreSourceFiles():
+            return
         elapsed = self.status.getCurrentElapsedTime()
         time1 = tools.processTime(elapsed)
         self.label_current_time_value = "Time elapsed: "+time1[0]+":"+time1[1]+":"+time1[2]
@@ -259,9 +279,26 @@ class FileExtractorWizard(Wizard):
         elapsed = tools.processTime(self._timeAllTogether)
         self._page4._timeOverall.SetLabel("Overall time: " + elapsed[0] + ":" + elapsed[1] + ":" + elapsed[2])
         self._page4._lFilesRecovered.SetLabel("Files recovered: " + str(self.status.getOverallFound()))
+        if self._page1.if_dir.GetValue() == "Working Directory":
+            location_dest = tools.determineAbsPath("./")
+        else:
+            location_dest = tools.determineAbsPath(self._page1.if_dir.GetValue())
+        self._page4._outputLocation.SetLabel("Look for your recovered files in:\n " +
+                                             location_dest)
+
+        if FESettings.getSettings().getValue("ig_delete_imagefile") == "yes":
+            location_dest = tools.determineAbsPath( FESettings.getSettings().getValue("ig_output_dir"))
+            if os.path.exists(location_dest):
+                os.remove(location_dest)
+                print "Image file removed."
+
 
 if __name__ == "__main__":    
+    baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))                #os.getcwd() 
     app = wx.PySimpleApp()
+    # load settings
+    FESettings.getSettings().load(location = baseDir)
+
     app._wizard = FileExtractorWizard()
     app._wizard.Destroy()
     app.MainLoop()

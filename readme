@@ -56,6 +56,9 @@ might cause false positives for finding files. The end of a file may be determin
 
 5. ToDo
 -------
+- new Version of DD available (rework windows Core for image generator)
+- Integration of Open-Source-Icon Library Tango (http://digg.com/design/Open_Source_Icons)
+- document that Win2000 users have to download gdiplus.dll into system32 folder.
 * user guide
 * performance enhancements - consider:
     - replacing compareLists with lib string functions or lib binary functions

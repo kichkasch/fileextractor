@@ -152,7 +152,9 @@ def startSearch(status_passed):
         if file_pos-status.file_start >= x:
             status.updateFineshedForCurrent(file_pos-status.file_start)
             
-            if status.settings.output_level == 3 and size!=0:
+            if status.settings.output_level == 0:
+                pass  
+            elif status.settings.output_level == 3 and size!=0:
                 print "Pos: 0x%x - %d / %d KB (%d %%)" %(file_pos, (file_pos-status.file_start)  / 1024 , size / 1024, (file_pos-status.file_start)*100/size)
             elif status.settings.output_level == 2:
                 print "%d %%" %((file_pos-status.file_start)*100/size)
@@ -229,5 +231,6 @@ def startSearch(status_passed):
         st = st[1:]
     
     status.finishedOneSourceFile()
+    binfile.close()
     return status.settings.signatures, status.counterr
     

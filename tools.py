@@ -13,6 +13,7 @@ Provides certain, reuseable functions (tools) for FileExtractor.
 @type TRUE: C{int}
 """
 import os.path
+import sys
 
 # constants
 FALSE = 0
@@ -154,3 +155,24 @@ def processTime(ttime, filldigits = 0):
                 time[i] = "0" + time[i]
     time[3] = "0" * (4 - len(time[3])) + time[3]
     return time
+
+def determineCoreName(coreNameSetting):
+    if coreNameSetting == None or coreNameSetting == "" or coreNameSetting == "auto":
+        import os
+        osName = os.name
+        if osName == "posix":
+            return "Linux"
+        elif osName == "nt":
+            return "Win32"
+        return None
+    from imagegenerator import CoreManager
+    if coreNameSetting in CoreManager.getInstance().getListOfCoreNames():
+        return coreNameSetting
+    else:
+        return None
+
+def determineAbsPath(locationDD):
+    if locationDD[0] == ".":
+        return os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), locationDD)
+    else:
+        return locationDD
