@@ -120,7 +120,6 @@ class GeneratorWizardPage(WizardPageSimple):
         boxo.Add(panel_outer, 20, wx.EXPAND)
         boxo.Add(pFill2, 1, wx.EXPAND)
 
-
         self.SetAutoLayout(True)
         self.SetSizer(boxo)
         self.Layout()

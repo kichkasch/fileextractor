@@ -205,9 +205,11 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
                 ret_dev.append(ret_line)
                 ret.append(line)
             file.close()
+            self._cleanUpDevicesOutput()
             return ret, ret_dev
         else:
             l = []
+            self._cleanUpDevicesOutput()
             return l, l
         
         
@@ -266,8 +268,16 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
                     
                     sizeList = win32api.GetDiskFreeSpace(mount)
                     size = sizeList[0] * sizeList[1] * sizeList[3]
+                    self._cleanUpDevicesOutput()
                     return size
                     
+        self._cleanUpDevicesOutput()
         return None
+    
+    def _cleanUpDevicesOutput(self):
+        if os.path.exists(TMP_FILE_NAME):
+            os.remove(TMP_FILE_NAME)
+            print "Temporary device file removed."
+
     
 CoreManager.getInstance().registerCore(NAME_IMPL, GeneratorCore)
