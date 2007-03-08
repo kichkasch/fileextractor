@@ -1,7 +1,7 @@
 Changelog for FileExtractor
 
 Content:
-- version 1.0 (??)
+- version 1.0 (10/03/2007)
 - version 0.2.1 (31/01/2006)
 - version 0.2 (25/01/2006)
 - version 0.1 (12/05/2005)
@@ -13,8 +13,7 @@ version 1.0
 - Wizard based GUI
 - Windows XP Look&Feel also for Executable version
 - Integration of new version of wxPython
-- FIXED: clean up prozesses (there are threads remaining after closing the app)
-- Cleaning up Threads
+- FIXED: clean up prozesses (there were threads remaining after closing the app)
 - Cleaning up temporary files (image file, output for device list)
 
 

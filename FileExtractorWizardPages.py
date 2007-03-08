@@ -1,14 +1,17 @@
 import wx
 from wx.wizard import *
 import os
+import os.path
+import sys
 from FESettings import getSettings
 from FileExtractorWizard import _ID_INFO_SOURCES, _ID_B_DIR
 
 class AbstractFileExtractorWizardPage(WizardPageSimple):
-    def __init__(self, parent, prev=None, next=None, image = None):
+    def __init__(self, parent, prev=None, next=None, imagePath = None):
         WizardPageSimple.__init__(self, parent, prev, next)
         
-        self._baseDir = "."
+        self._baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))
+        image = wx.Bitmap(os.path.join(self._baseDir, imagePath), wx.BITMAP_TYPE_PNG)
        
         panel_outer = wx.Panel(self, -1)
 
@@ -34,8 +37,7 @@ class AbstractFileExtractorWizardPage(WizardPageSimple):
 
 class WizardPageSplash(AbstractFileExtractorWizardPage):
     def __init__(self, parent):
-        AbstractFileExtractorWizardPage.__init__(self, parent, None, None, 
-                                                 wx.Bitmap("newicons/wizard_heading.png", wx.BITMAP_TYPE_PNG))
+        AbstractFileExtractorWizardPage.__init__(self, parent, None, None, "newicons/wizard_heading.png")
 
         contentPane = self.getContentPane()
         font_headings = wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD)
@@ -59,8 +61,7 @@ class WizardPageSplash(AbstractFileExtractorWizardPage):
         
 class WizardPageSetup(AbstractFileExtractorWizardPage):
     def __init__(self, parent):
-        AbstractFileExtractorWizardPage.__init__(self, parent, None, None, 
-                                                 wx.Bitmap("newicons/wizard_heading_1.png", wx.BITMAP_TYPE_PNG))
+        AbstractFileExtractorWizardPage.__init__(self, parent, None, None,"newicons/wizard_heading_1.png")
 
         contentPane = self.getContentPane()
         font_headings = wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD)
@@ -126,8 +127,7 @@ class WizardPageSetup(AbstractFileExtractorWizardPage):
         
 class WizardPageImage(AbstractFileExtractorWizardPage):
     def __init__(self, parent):
-        AbstractFileExtractorWizardPage.__init__(self, parent, None, None, 
-                                                 wx.Bitmap("newicons/wizard_heading_2.png", wx.BITMAP_TYPE_PNG))
+        AbstractFileExtractorWizardPage.__init__(self, parent, None, None,"newicons/wizard_heading_2.png")
 
         contentPane = self.getContentPane()
         font_headings = wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD)
@@ -165,8 +165,7 @@ class WizardPageImage(AbstractFileExtractorWizardPage):
 
 class WizardPageRecover(AbstractFileExtractorWizardPage):
     def __init__(self, parent):
-        AbstractFileExtractorWizardPage.__init__(self, parent, None, None, 
-                                                 wx.Bitmap("newicons/wizard_heading_3.png", wx.BITMAP_TYPE_PNG))
+        AbstractFileExtractorWizardPage.__init__(self, parent, None, None,  "newicons/wizard_heading_3.png")
 
         contentPane = self.getContentPane()
         font_headings = wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD)
@@ -205,8 +204,7 @@ class WizardPageRecover(AbstractFileExtractorWizardPage):
 
 class WizardPageResults(AbstractFileExtractorWizardPage):
     def __init__(self, parent):
-        AbstractFileExtractorWizardPage.__init__(self, parent, None, None, 
-                                                 wx.Bitmap("newicons/wizard_heading_4.png", wx.BITMAP_TYPE_PNG))
+        AbstractFileExtractorWizardPage.__init__(self, parent, None, None,"newicons/wizard_heading_4.png")
 
         contentPane = self.getContentPane()
         font_headings = wx.Font(9, wx.DEFAULT, wx.NORMAL, wx.BOLD)

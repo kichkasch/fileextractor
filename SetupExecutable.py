@@ -1,22 +1,12 @@
-if __name__ == "__main__":
-    #setup (console = ["FileExtractorWizard.py"])
-    #setup (name = "FileExtractor", 
-           #windows = [{"script":"FileExtractorWizard.py"}])
-    
+def assemble(filename, distribution):
     from distutils.core import setup
     import py2exe
     import sys
     
     
     # enter the filename of your wxPython code file to compile ...
-    filename = "FileExtractorWizard.py"
-    
-    # ... this creates the filename of your .exe file in the dist folder
-    if filename.endswith(".py"):
-        distribution = filename[:-3]
-    elif filename.endswith(".pyw"):
-        distribution = filename[:-4]
-    
+#    filename = "FileExtractorWizard.py"
+#    distribution = "FileExtractorWizard"    
     
     # if run without args, build executables in quiet mode
     if len(sys.argv) == 1:
@@ -30,7 +20,7 @@ if __name__ == "__main__":
             self.version = "1.0"
             self.company_name = "No Company"
             self.copyright = "2007 Michael Pilgermann"
-            self.name = "FileExtractor"
+            self.name = distribution
     
     ################################################################
     # The manifest will be inserted as resource into your .exe.  This
@@ -91,3 +81,11 @@ if __name__ == "__main__":
         zipfile = None,
         windows = [test_wx],
         )    
+    
+if __name__ == "__main__":
+    #setup (console = ["FileExtractorWizard.py"])
+    #setup (name = "FileExtractor", 
+           #windows = [{"script":"FileExtractorWizard.py"}])
+
+    assemble ("FileExtractorWizard.py", "FileExtractorWizard")
+    assemble ("FileExtractor.py", "FileExtractor")    
