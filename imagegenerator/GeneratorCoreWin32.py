@@ -276,8 +276,11 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
     
     def _cleanUpDevicesOutput(self):
         if os.path.exists(TMP_FILE_NAME):
-            os.remove(TMP_FILE_NAME)
-            print "Temporary device file removed."
+            try:
+                os.remove(TMP_FILE_NAME)
+                print "Temporary device file removed."
+            except :
+                print "Removing device file failed."
 
     
 CoreManager.getInstance().registerCore(NAME_IMPL, GeneratorCore)
