@@ -1,4 +1,3 @@
-#!/usr/bin/python
 """
 The core of the FileExtractor. 
 

@@ -1,6 +1,7 @@
 Changelog for FileExtractor
 
 Content:
+- version 1.1
 - version 1.0 (10/03/2007)
 - version 0.2.1 (31/01/2006)
 - version 0.2 (25/01/2006)
@@ -8,7 +9,11 @@ Content:
 - old entries for early development with name FindFiles
 
 
-version 1.0
+version 1.1
+==========================
+
+
+version 1.0 (10/03/2007)
 ==========================
 - Wizard based GUI
 - Windows XP Look&Feel also for Executable version
