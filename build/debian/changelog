@@ -1,0 +1,5 @@
+fileextractor (1.0-0ubuntu2) karmic; urgency=low
+
+  * Initial release of FileExtractor
+
+ -- Michael Pilgermann <kichkasch@gmx.de>  Fri, 05 Feb 2010 19:57:57 +0100

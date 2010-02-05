@@ -1,0 +1,40 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Fri, 05 Feb 2010 19:57:57 +0100
+Source: fileextractor
+Binary: fileextractor
+Architecture: source
+Version: 1.0-0ubuntu2
+Distribution: karmic
+Urgency: low
+Maintainer: Michael Pilgermann <kichkasch@gmx.de>
+Changed-By: Michael Pilgermann <kichkasch@gmx.de>
+Description: 
+ fileextractor - File Recovery Tool written in Python
+Changes: 
+ fileextractor (1.0-0ubuntu2) karmic; urgency=low
+ .
+   * Initial release of FileExtractor
+Checksums-Sha1: 
+ 91c4bf535b813951bda0a3a53b81e51af9be2c71 1173 fileextractor_1.0-0ubuntu2.dsc
+ 64584bc85c80250e68a68cf23c5c9a39c0c24fa7 356027 fileextractor_1.0-0ubuntu2.tar.gz
+Checksums-Sha256: 
+ 6f258004ef9a8ad32c9f5e2e3ed29a5eb8cb6275c9bc4f0a757af73f386be0d5 1173 fileextractor_1.0-0ubuntu2.dsc
+ 495d483121a5ccd797f39bafb573dc61aecee196ef301d9a20a4980ef303a5d7 356027 fileextractor_1.0-0ubuntu2.tar.gz
+Files: 
+ 864b02174438723641a8841668e658d0 1173 misc optional fileextractor_1.0-0ubuntu2.dsc
+ 9599c517783aced80dff72bfebaa1b64 356027 misc optional fileextractor_1.0-0ubuntu2.tar.gz
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iQEcBAEBAgAGBQJLbGo6AAoJECyCaNMbCftRi7cH/jYHayxom4SFz72/MvoOD0Yb
+ibtYqozdxzjXe9cMKuMKnpe2MuNCrS6Tbxo2OvcHb3tIVel2dNOAQB3N4s4b85Dm
+kJwFSvzzDTZymynmXoLgBMCeysgmA33eFQSMyNBcgPOr7s6PYZQY7PvNbHxcYEBK
+VAocrileJe5Sbve7n8ZJWOYwRjWZQGByd30bNWbCDdbPlau9Nh0EmDb7fG4N4Brq
+uXuM2O7LfROT0iK50slajhpLAl3gjSw502Kzlyj2S2YslOBsOPD13085p4jMh3Xo
+0lyx+ekV7EDlQU60T0DgnRtlf+cXueXRRuYvdW1jbtSW5e2cyWbxe566J4SAmwI=
+=0nGO
+-----END PGP SIGNATURE-----

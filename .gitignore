@@ -2,3 +2,4 @@ FileExtractor.e4p
 .eric4project
 *.pyc
 apidoc*
+dist
