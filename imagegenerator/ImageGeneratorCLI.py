@@ -10,9 +10,8 @@ This module can start the application. It is checking for the call of the __main
 will in case initalise and start the ImageGenerator CLI version.
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 
 @var OUTPUT_DELAY: Delay between two outputs for the filesize during the imaging process in seconds

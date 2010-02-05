@@ -8,8 +8,7 @@ It provides exactly the same interface as the original FileExtractorCore.
 
 @author: Michael Pilgermann
 @contact: mailto:kichkasch@gmx.de
-@organization: Pilgermann Productions
-@contact: http://kkfileextractor.sourceforge.net/
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """
 

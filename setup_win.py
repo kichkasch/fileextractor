@@ -8,9 +8,8 @@ Don't forget to put the icons, the help zip and the dd  clone afterwards.
 http://www.py2exe.org/
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """
 

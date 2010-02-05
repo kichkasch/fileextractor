@@ -10,7 +10,7 @@ This module can start the application. It is checking for the call of the __main
 will in case of start the simple Application.
 
 @author: Michael Pilgermann
-@contact: mailto:michael.pilgermann@gmx.de
+@contact: mailto:kichkasch@gmx.de
 @contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """
@@ -415,8 +415,8 @@ class FileExtractorFrame(wxFrame):
         dlg = wxMessageDialog(self, "FileExtractor - Version 1.0\n"
                               "Searching for Files within binary sources\n"
                               "\nAuthor: Michael Pilgermann\n"
-                              "Email: mpilgerm@glam.ac.uk\n\n"
-                              "http://kkfileextractor.sourceforge.net"
+                              "Email: kichkasch@gmx.de\n\n"
+                              "http://freshmeat.net/projects/fileextractor"
                               "\n\nPublished under the General Public License (GPL)   ",
                               "About Me", wxOK | wxICON_INFORMATION)
         dlg.ShowModal()

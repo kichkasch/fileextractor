@@ -5,9 +5,8 @@ The GUI is wxDigit / wxPython based.
 @see: http://wxpython.org for details on wxPython
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """
 from wxPython.wx import *

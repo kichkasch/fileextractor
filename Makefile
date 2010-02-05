@@ -2,13 +2,13 @@
 #
 # FileExtractor
 # Michael Pilgermann
-# mpilgerm@glam.ac.uk
+# kichkasch@gmx.de
 #
-# last change Makefile: 2005-05-14
+# last change Makefile: 2010-02-05
 #
 # global parameters
 TITLE=		"File Extractor"
-URL=		"kkfileextractor.sourceforge.net"
+URL=		"http://freshmeat.net/projects/fileextractor"
 HELP_DIR=	help
 HELP_ZIPNAME=	fileextractorhelp.zip
 HELP_HTMLS=	\
@@ -27,6 +27,13 @@ HELP_CONFIGS=	\
 		$(HELP_DIR)/general.hhp  
 
 API_DOC_DIR=	api/
+
+PACKAGE_NAME =fileextractor
+VERSION=	"1.0"
+
+# for UBUNTU Launchpad upload of deb package
+PGP_KEYID ="1B09FB51"
+BUILD_VERSION = "0ubuntu2"
 
 # program names
 EPYDOC=		/usr/bin/epydoc 
@@ -52,9 +59,31 @@ $(HELP_ZIPNAME):	$(HELP_CONFIGS) $(HELP_HTMLS)
 help: $(HELP_ZIPNAME)
 
 clean:
-	$(RM) *.pyc imagegenerator/*.pyc
+	$(RM) -f *.pyc imagegenerator/*.pyc
+	$(RM) -rf build/template
+	$(RM) -f apidoc.tar.gz
+	$(RM) -f build/$(PACKAGE_NAME)-$(VERSION).orig.tar.gz
+	$(RM) -rf build/$(PACKAGE_NAME)-$(VERSION)
+	$(RM) -f build/*ppa.upload	
 
-distribution:
+sdist:
 	$(PYTHON) setup.py sdist --formats=gztar,zip
 	
 	
+# here go instructions for building Desktop packages
+# 1. Ubuntu deb
+ 
+# All up-to-date information must be applied to sub dir build/debian in advance
+sdist_ubuntu: sdist
+	export DEBFULLNAME="Michael Pilgermann"
+	export DEBEMAIL="kichkasch@gmx.de"
+	cp dist/$(PACKAGE_NAME)-$(VERSION).tar.gz build/$(PACKAGE_NAME)-$(VERSION).orig.tar.gz
+	(cd build && tar -xzf $(PACKAGE_NAME)-$(VERSION).orig.tar.gz)
+	cp -r build/debian build/$(PACKAGE_NAME)-$(VERSION)/
+	cp README build/$(PACKAGE_NAME)-$(VERSION)/debian/README.Debian
+	dch -m -c build/$(PACKAGE_NAME)-$(VERSION)/debian/changelog
+	cp build/$(PACKAGE_NAME)-$(VERSION)/debian/changelog build/debian
+	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -S -k$(PGP_KEYID))
+ 
+ppa_upload: sdist_ubuntu
+	(cd build/ && dput --config dput.config kichkasch-ppa $(PACKAGE_NAME)_$(VERSION)-$(BUILD_VERSION)_source.changes)

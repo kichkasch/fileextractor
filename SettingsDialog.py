@@ -8,9 +8,8 @@ Changes here are written through to the L{FESettings} module. After hitting the 
 the save function in there will be invoked as well to make the settings persistent.
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """
 

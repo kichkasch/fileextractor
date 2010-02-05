@@ -8,9 +8,8 @@ from a partition for a speciifc camera. (It asumes 3 entries in  the "main dir" 
 and the first entry must be of type 0x0520) - check CRW docs for more details.
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 
 @var sequ: Sequence for starting the directory at the end of a CRW file

@@ -10,7 +10,7 @@ This module can start the application. It is checking for the call of the __main
 will in case of start the simple Application.
 
 @author: Michael Pilgermann
-@contact: mailto:michael.pilgermann@gmx.de
+@contact: mailto:kichkasch@gmx.de
 @contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 """

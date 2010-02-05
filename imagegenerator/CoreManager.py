@@ -6,9 +6,8 @@ only be one instance of the class L{CoreManager}, which may be accessed using th
 L{getInstance} method.
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 
 @var _instance: Singelton Pattern - holds an instance of the type CoreManager. Should be the only 

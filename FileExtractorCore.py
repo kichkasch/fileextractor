@@ -19,9 +19,8 @@ be performed by the calling frontend. However, the status object is handled in a
 that overall information for all source files are contained.
 
 @author: Michael Pilgermann
-@contact: mailto:mpilgerm@glam.ac.uk
-@organization: Information Security Group / University of Glamorgan 
-@contact: http://www.glam.ac.uk/soc/research/isrg.php
+@contact: mailto:kichkasch@gmx.de
+@contact: http://www.kichkasch.de
 @license: GPL (General Public License)
 
 @var maxlength: For internal processing - Indicates the maximum length for sequences in signatures (both
