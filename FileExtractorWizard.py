@@ -9,10 +9,18 @@ The GUI is wxDigit / wxPython based.
 This module can start the application. It is checking for the call of the __main__ function and
 will in case of start the simple Application.
 
-@author: Michael Pilgermann
-@contact: mailto:kichkasch@gmx.de
-@contact: http://www.kichkasch.de
-@license: GPL (General Public License)
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import wx
@@ -39,7 +47,7 @@ DEBUG_FILENAME = "./fileextractordebug.txt"
 
 
 class FileExtractorWizard(Wizard):
-    def __init__(self, parent = None, title = "FileExtractor 1.0"):
+    def __init__(self, parent = None, title = "%s %s" %(FESettings.PROGRAM_NAME, FESettings.VERSION)):
         Wizard.__init__(self, parent, _ID_WIZARD, title)
 
         self._baseDir = "."

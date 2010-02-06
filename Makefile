@@ -1,10 +1,4 @@
-# Makefile
-#
-# FileExtractor
-# Michael Pilgermann
-# kichkasch@gmx.de
-#
-# last change Makefile: 2010-02-05
+# Makefile for FileExtractor
 #
 # global parameters
 TITLE=		"File Extractor"
@@ -29,11 +23,11 @@ HELP_CONFIGS=	\
 API_DOC_DIR=	api/
 
 PACKAGE_NAME =fileextractor
-VERSION=	"1.0"
+VERSION=	"1.0.2"
 
 # for UBUNTU Launchpad upload of deb package
 PGP_KEYID ="1B09FB51"
-BUILD_VERSION = "0ubuntu2"
+BUILD_VERSION = "0ubuntu1"
 
 # program names
 EPYDOC=		/usr/bin/epydoc 

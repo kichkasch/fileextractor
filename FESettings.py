@@ -1,12 +1,40 @@
+"""
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
+"""
+
 #
 # Settings for FileExtractor
 #
 
+# 1st part: Application specific settings
+PROGRAM_NAME = "FileExtractor"
+VERSION = "1.0.2"
+AUTHOR = "Michael Pilgermann"
+EMAIL = "kichkasch@gmx.de"
+URL = "http://freshmeat.net/projects/fileextractor"
+COPYRIGHT = "(C) 2010 " + AUTHOR
+
+
+# 2nd part: user specific settings
 DEFAULT_FILE = 'fileextractor_settings.dat'
 DEFAULT_LOCATION  ='.'
 
 settings = None
 def getSettings():
+    """
+    'Singleton'
+    """
     global settings
     if not settings:
         settings = Settings()

@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=FileExtractor
-AppVerName=FileExtractor 1.0
+AppVerName=FileExtractor 1.0.1
 AppPublisher=Michael Pilgermann
 AppPublisherURL=http://kkfileextractor.sourceforge.net
 AppSupportURL=http://kkfileextractor.sourceforge.net
@@ -12,7 +12,7 @@ DefaultDirName={pf}\FileExtractor
 DefaultGroupName=FileExtractor
 AllowNoIcons=yes
 OutputDir=D:\Privat\programming\FileExtractor\sources\dist\DistForInstallation
-OutputBaseFilename=FileExtractorSetup-1.0
+OutputBaseFilename=FileExtractorSetup-1.0.1
 SetupIconFile=D:\Privat\programming\FileExtractor\sources\icons\lupe.ico
 Compression=lzma
 SolidCompression=yes

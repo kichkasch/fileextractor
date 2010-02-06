@@ -20,7 +20,7 @@ set -e
 
 case "$1" in
     configure)
-        rm -r /opt/fileextraactor/build/
+        rm -rf /opt/fileextractor/build/
         chmod 755 /opt/fileextractor/FileExtractor.py
         chmod 755 /opt/fileextractor/FileExtractorCLI.py
     ;;

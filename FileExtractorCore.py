@@ -18,10 +18,19 @@ The core handles exactly one source file. The iteration over a list of source fi
 be performed by the calling frontend. However, the status object is handled in a way,
 that overall information for all source files are contained.
 
-@author: Michael Pilgermann
-@contact: mailto:kichkasch@gmx.de
-@contact: http://www.kichkasch.de
-@license: GPL (General Public License)
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
+
 
 @var maxlength: For internal processing - Indicates the maximum length for sequences in signatures (both
 start and end sequences) - important for prefetching characters from the source files.)

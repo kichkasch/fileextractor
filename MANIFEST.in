@@ -1,8 +1,7 @@
 recursive-include icons *.png
-recursive-include build *.desktop
-include readme
+include README
 include install
-include changelog
+include changelog.old
 include types.dat
 include fileextractorhelp.zip
-
+include fileextractor.desktop

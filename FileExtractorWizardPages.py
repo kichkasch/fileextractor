@@ -1,8 +1,23 @@
+"""
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
+"""
 import wx
 from wx.wizard import *
 import os
 import os.path
 import sys
+import FESettings
 from FESettings import getSettings
 from FileExtractorWizard import _ID_INFO_SOURCES, _ID_B_DIR
 
@@ -49,7 +64,7 @@ class WizardPageSplash(AbstractFileExtractorWizardPage):
                               "\n\nClick 'Next' to start recovery.")
         label.SetFont(font_headings)
         
-        label2 = wx.StaticText(contentPane, -1, "\n\nFileExtractor 1.0\nby Michael Pilgermann\nemail: michael.pilgermann@gmx.de")
+        label2 = wx.StaticText(contentPane, -1, "\n\%s %s\nby %s\nemail: %s" %(FESettings.PROGRAM_NAME, FESettings.VERSION, FESettings.AUTHOR, FESettings.EMAIL))
         
         box = wx.BoxSizer(wx.VERTICAL)
         box.Add(label, 2, wx.EXPAND)

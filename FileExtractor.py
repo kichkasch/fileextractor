@@ -9,10 +9,19 @@ The GUI is wxDigit / wxPython based.
 This module can start the application. It is checking for the call of the __main__ function and
 will in case of start the simple Application.
 
-@author: Michael Pilgermann
-@contact: mailto:kichkasch@gmx.de
-@contact: http://www.kichkasch.de
-@license: GPL (General Public License)
+
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import sys
@@ -34,6 +43,7 @@ except ImportError:
     raw_input("\nPress enter to abort")
     sys.exit(-1)
     
+import FESettings
 import FileExtractorCore
 import signatures
 import ProgressDialog
@@ -412,12 +422,12 @@ class FileExtractorFrame(wxFrame):
         dia.Destroy()        
 
     def _OnAbout(self, event):
-        dlg = wxMessageDialog(self, "FileExtractor - Version 1.0\n"
+        dlg = wxMessageDialog(self, "%s - Version %s\n"
                               "Searching for Files within binary sources\n"
-                              "\nAuthor: Michael Pilgermann\n"
-                              "Email: kichkasch@gmx.de\n\n"
-                              "http://freshmeat.net/projects/fileextractor"
-                              "\n\nPublished under the General Public License (GPL)   ",
+                              "\nAuthor: %s\n"
+                              "Email: %s\n\n"
+                              "%s"
+                              "\n\nPublished under the General Public License (GPL)   " %(FESettings.PROGRAM_NAME, FESettings.VERSION, FESettings.AUTHOR, FESettings.EMAIL, FESettings.URL),
                               "About Me", wxOK | wxICON_INFORMATION)
         dlg.ShowModal()
         dlg.Destroy()
@@ -603,7 +613,7 @@ class FileExtractorSimpleApp(wxApp):
         @return: Indicates, whether the application was invoked successfully.
         @rtype: Bool
         """
-        frame = FileExtractorFrame(NULL, -1, "FileExtractor - Version 1.0")
+        frame = FileExtractorFrame(NULL, -1, "%s - Version %s" %(FESettings.PROGRAM_NAME, FESettings.VERSION))
         frame.initHelp()
         frame.Show(true)
         self.SetTopWindow(frame)

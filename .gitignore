@@ -3,3 +3,10 @@ FileExtractor.e4p
 *.pyc
 apidoc*
 dist
+MANIFEST
+build/template
+build/*.dsc
+build/*source.changes
+build/*amd64.changes
+*tar.gz
+*deb

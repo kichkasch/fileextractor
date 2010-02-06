@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=fileextractor
 Comment=File Recovery Tool written in Python
-Version=1.0
+Version=1.0.2
 GenericName=FileExtractor
 Terminal=false
 Icon=fileextractor.png

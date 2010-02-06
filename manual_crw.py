@@ -7,10 +7,19 @@ In fact, this is a very dirty implementation - but seems to work for the pics we
 from a partition for a speciifc camera. (It asumes 3 entries in  the "main dir" within the file
 and the first entry must be of type 0x0520) - check CRW docs for more details.
 
-@author: Michael Pilgermann
-@contact: mailto:kichkasch@gmx.de
-@contact: http://www.kichkasch.de
-@license: GPL (General Public License)
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
+
 
 @var sequ: Sequence for starting the directory at the end of a CRW file
 @type sequ: C{List} of C{int}

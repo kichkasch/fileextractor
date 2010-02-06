@@ -8,10 +8,19 @@ This class does not provide any notification whenever something has changed
 within the class. Insteed, the observing class is supposed to implement a
 timer and should check for up-to-date information frequently.
 
-@author: Michael Pilgermann
-@contact: mailto:kichkasch@gmx.de
-@contact: http://www.kichkasch.de
-@license: GPL (General Public License)
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
+
 
 @var def_digits: Default value for digits for the numerical part in output file names
 @var def_counterstart: Default value for the initial number for the output file names

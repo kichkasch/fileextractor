@@ -9,10 +9,19 @@ the execution of the command itself would block the thread otherwise.
 This module can start the application. It is checking for the call of the __main__ function and
 will in case initalise and start the ImageGenerator CLI version.
 
-@author: Michael Pilgermann
-@contact: mailto:kichkasch@gmx.de
-@contact: http://www.kichkasch.de
-@license: GPL (General Public License)
+FileExtractor is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+ 
+FileExtractor is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
+
 
 @var OUTPUT_DELAY: Delay between two outputs for the filesize during the imaging process in seconds
 @type OUTPUT_DELAY: C{Int}
