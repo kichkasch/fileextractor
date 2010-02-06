@@ -24,6 +24,7 @@ AUTHOR = "Michael Pilgermann"
 EMAIL = "kichkasch@gmx.de"
 URL = "http://freshmeat.net/projects/fileextractor"
 COPYRIGHT = "(C) 2010 " + AUTHOR
+BASEDIR = "/opt/fileextractor"  # FIX ME
 
 
 # 2nd part: user specific settings
