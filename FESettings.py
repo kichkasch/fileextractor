@@ -13,6 +13,9 @@ You should have received a copy of the GNU General Public License
 along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import os.path
+import os
+
 #
 # Settings for FileExtractor
 #
@@ -29,7 +32,7 @@ BASEDIR = "/opt/fileextractor"  # FIX ME
 
 # 2nd part: user specific settings
 DEFAULT_FILE = 'fileextractor_settings.dat'
-DEFAULT_LOCATION  ='.'
+DEFAULT_LOCATION = os.path.join(os.environ.get('HOME'), '.fileextractor') 
 
 settings = None
 def getSettings():
@@ -53,6 +56,7 @@ class Settings:
             file = open(os.path.join(location, filename), 'r')
         except IOError, msg:
             # fair enough; there is not yet any settings on this machine
+            print "No configuration found - using defaults"
             return
         line1 = ' '
         line2 = ' '
@@ -72,7 +76,8 @@ class Settings:
                     #print ("%s: %s (%s)" %(line1, line2, comment))
         
     def save(self, filename = DEFAULT_FILE, location = DEFAULT_LOCATION):
-        import os.path
+        if not os.path.exists(location):
+            os.makedirs(location)
         file = open(os.path.join(location, filename), 'w')
         for key in self._values.keys():
             if self._comments.has_key(key):

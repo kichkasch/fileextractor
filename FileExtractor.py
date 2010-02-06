@@ -112,7 +112,7 @@ class FileExtractorFrame(wxFrame):
         
         # load settings
         from FESettings import getSettings
-        getSettings().load(location = self._baseDir)
+        getSettings().load()
 
         wxFrame.__init__(self, parent, ID, title,
                          wxDefaultPosition, wxSize(600, 500))

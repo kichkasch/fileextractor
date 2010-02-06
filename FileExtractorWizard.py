@@ -305,7 +305,7 @@ if __name__ == "__main__":
     baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))                #os.getcwd() 
     app = wx.PySimpleApp()
     # load settings
-    FESettings.getSettings().load(location = baseDir)
+    FESettings.getSettings().load()
 
     app._wizard = FileExtractorWizard()
     app._wizard.Destroy()
