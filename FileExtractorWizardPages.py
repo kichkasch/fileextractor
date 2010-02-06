@@ -25,7 +25,8 @@ class AbstractFileExtractorWizardPage(WizardPageSimple):
     def __init__(self, parent, prev=None, next=None, imagePath = None):
         WizardPageSimple.__init__(self, parent, prev, next)
         
-        self._baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))
+#        self._baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))
+        self._baseDir = FESettings.BASEDIR
         image = wx.Bitmap(os.path.join(self._baseDir, imagePath), wx.BITMAP_TYPE_PNG)
        
         panel_outer = wx.Panel(self, -1)
@@ -64,7 +65,7 @@ class WizardPageSplash(AbstractFileExtractorWizardPage):
                               "\n\nClick 'Next' to start recovery.")
         label.SetFont(font_headings)
         
-        label2 = wx.StaticText(contentPane, -1, "\n\%s %s\nby %s\nemail: %s" %(FESettings.PROGRAM_NAME, FESettings.VERSION, FESettings.AUTHOR, FESettings.EMAIL))
+        label2 = wx.StaticText(contentPane, -1, "\n%s %s\nby %s\nemail: %s" %(FESettings.PROGRAM_NAME, FESettings.VERSION, FESettings.AUTHOR, FESettings.EMAIL))
         
         box = wx.BoxSizer(wx.VERTICAL)
         box.Add(label, 2, wx.EXPAND)

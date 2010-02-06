@@ -22,7 +22,7 @@ import os
 
 # 1st part: Application specific settings
 PROGRAM_NAME = "FileExtractor"
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 AUTHOR = "Michael Pilgermann"
 EMAIL = "kichkasch@gmx.de"
 URL = "http://freshmeat.net/projects/fileextractor"

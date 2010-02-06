@@ -23,6 +23,7 @@ along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 
 from wxPython.wx import *
 import wx
+import tools
 
 DIR_CURRENT_ST = 'Working directory'
 
@@ -196,6 +197,7 @@ class SettingsDialog(wxDialog):
         try:
             val = self._chCore.GetStringSelection()
             getSettings().setValue('ig_default_core', val)
+            getSettings().setValue('ig_location_dd', tools.determineDDPathFromCoreName(val))
         except AttributeError, msg:
             pass
             

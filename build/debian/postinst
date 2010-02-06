@@ -23,6 +23,7 @@ case "$1" in
         rm -rf /opt/fileextractor/build/
         chmod 755 /opt/fileextractor/FileExtractor.py
         chmod 755 /opt/fileextractor/FileExtractorCLI.py
+        chmod 755 /opt/fileextractor/FileExtractorWizard.py
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -23,7 +23,7 @@ HELP_CONFIGS=	\
 API_DOC_DIR=	api/
 
 PACKAGE_NAME =fileextractor
-VERSION=	"1.0.2"
+VERSION=	"1.0.3"
 
 # for UBUNTU Launchpad upload of deb package
 PGP_KEYID ="1B09FB51"

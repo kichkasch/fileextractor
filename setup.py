@@ -32,7 +32,8 @@ filesToMove = [
                ]
 filesToLink = [
                ['../../opt/fileextractor/FileExtractor.py', 'usr/bin','fileextractor'], 
-               ['../../opt/fileextractor/FileExtractorCLI.py', 'usr/bin', 'fileextractorcli']
+               ['../../opt/fileextractor/FileExtractorCLI.py', 'usr/bin', 'fileextractorcli'], 
+               ['../../opt/fileextractor/FileExtractorWizard.py', 'usr/bin', 'fileextractorwizard']
                ]
 
 
@@ -59,7 +60,7 @@ def doInstall(path):
 def doSetup():
     setup (
         name = "fileextractor",
-        version = "1.0.2",
+        version = "1.0.3",
         description = "FileExtractor - recover your data",
         author = "Michael Pilgermann",
         author_email = "kichkasch@gmx.de",

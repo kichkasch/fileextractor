@@ -179,7 +179,15 @@ def determineCoreName(coreNameSetting):
     else:
         return None
 
+def determineDDPathFromCoreName(coreName):
+    if coreName == "Linux":
+        return "/bin/dd"
+    elif coreName == "Win32":
+        return "./dd/dd.exe"
+
 def determineAbsPath(locationDD):
+    if not locationDD or locationDD == "":
+        return locationDD
     if locationDD[0] == ".":
         return os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), locationDD)
     else:
