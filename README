@@ -1,83 +1,10 @@
 README for FileExtractor
 
-Michael Pilgermann
-Email to: kichkasch@gmx.de
-Licensed under the Genreal Public License (GPL) 
+FileExtractor is a free (open source) tool for recovering files from a binary data source. Sources such as 
+digital cameras, partitions, harddrives, memory sticks or floppy disks may be corrupted, deleted or 
+formatted by mistake. Once the file system is destroyed you need a tool such as FileExtractor to recover your files.
 
-Content
-1. Introduction
-2. Mode of operation
-3. Signatures
-4. Version Tracker
-5. ToDo
-6. Known Bugs
+First source of information is its home page:
+http://freshmeat.net/projects/fileextractor
 
-1. Introduction
----------------
-This program was implemented for searching for files inside binary sources. Apparently, the source files are image 
-files containing all the data of a hard disk, a memory stick or a camera. It becomes useful whenever the 
-File System on the device was damaged, maybe problems with the File Allocation Table or whatever. 
-(The creating of the image file is beyond the scope of this program, it might be realised with tools such as 
-EnCase or simply using the dd command in Linux/Unix environments).
-
-2. Mode of operation
----------------------
-FileExtractor may look for very different kinds of files. All it needs for a new file type is a signature telling the program 
-how to find the beginning and the end of a file. (see next paragraph Signatures for more details) The beginning of a 
-file may only be found by a defined sequence of bytes. The length of the sequence may vary; however, too short sequences 
-might cause false positives for finding files. The end of a file may be determined by the following 3 different ways:
-1.) An end sequence: Same as start sequence, the program will store all the data between the start of the 
-    start sequence and the end of the end sequence to a new file.
-2.) A location for the information about the file size: Many file formats store information about the file size of files at a 
-    certain location within the file. As soon as the location is fixed and relative to the beginnning of the file, it may be 
-    specified in the signature. (Offsets in Integers of different lengths are supported; just provide all the significant bytes 
-    ordered starting with the highest byte - see Signature File signatures.py for more details.)
-3.) User defined file end determination. You have a file type which starts with a certain sequence and you now how 
-    to deteremin the end of the file; however, this cannot be performed with either of the first two ways. All you need to provide 
-    is the name of the function to determine the end position (check signatures.py for required parameters and return values). 
-    After importing the implemented python module the program will handover the control to the user-defined function whenever 
-    the start of the file is found.
-
-3. Signatures 
--------------
-(more details in signatures.py):
-* JPEG (type 1)
-* BMP (type 2)
-* GIF (type 1)
-* CRW (type 3)
-* CR2 (type 1)
-* THM (type 1)
-* WAV (type 2)
-* PNG (type 1)
-
-4. Version Tracker
-------------------
-----> moved to its own file changelog - check for it in program root directory
-
-5. ToDo
--------
-- new Version of DD available (rework windows Core for image generator)
-- Integration of Open-Source-Icon Library Tango (http://digg.com/design/Open_Source_Icons)
-- document that Win2000 users have to download gdiplus.dll into system32 folder.
-* user guide
-* performance enhancements - consider:
-    - replacing compareLists with lib string functions or lib binary functions
-    - buffering of reading / writing
-* GUI - Indicator, whenever core is in manual function (may take some time where no progress is visible)
-* Closing Threads in case of errors
-* Error Handling
-* new signature type for saving a predefined file size???
-* Cancel Processing Button?
-* More Signatures:
-    - MP3
-    - Movie Formats
-* Possible Tools
-    - Signature Creator
-    
-6. Known Bugs
--------------
-* Windows does not recognize the help zip file when assembled in Linux
-* if started and no source file given - exception raised
-* No check for the address gained from files with signature type 2
-
-
+Please browse the wiki there to find more information about the usage and the development of FileExtractor.
