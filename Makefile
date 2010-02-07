@@ -58,7 +58,7 @@ clean:
 	$(RM) -f apidoc.tar.gz
 	$(RM) -f build/$(PACKAGE_NAME)-$(VERSION).orig.tar.gz
 	$(RM) -rf build/$(PACKAGE_NAME)-$(VERSION)
-	$(RM) -f build/*ppa.upload	
+	$(RM) -f build/*ppa.upload
 
 sdist:
 	$(PYTHON) setup.py sdist --formats=gztar,zip

@@ -7,6 +7,9 @@ auto
 # Location of dd-command (use leading dot for relative path)
 ig_location_dd
 ./dd/dd.exe
+# Command to use for getting root privileges - leave blank if you run as root anyway
+command_sudo
+gksudo --message 'Imaging requires root priveliges - please provide password.'
 # Delete image file after processing? (yes / no)
 ig_delete_imagefile
 yes

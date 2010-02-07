@@ -42,6 +42,7 @@ import GeneratorCoreAbstract
 import Runtime
 import os
 import CoreManager
+import FESettings
 
 NAME_IMPL = "Linux"
 PARAM_INPUTFILE = "if"
@@ -129,6 +130,10 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
             
         if self._settings.getRedirectOutputBuffer() != None:
             st = st + " > " + self._settings.getRedirectOutputBuffer() + " 2> " + self._settings.getRedirectOutputBuffer()
+        
+        # we need to be root
+        sudo = FESettings.getSettings().getValue('command_sudo')
+        st = sudo + " " + st
         return st
 
     def getPossibleSources(self):
