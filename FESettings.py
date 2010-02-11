@@ -1,4 +1,7 @@
 """
+Loading and saving configurations - based on ConfigObj 
+(see http://www.voidspace.org.uk/python/articles/configobj.shtml)
+
 FileExtractor is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -13,8 +16,8 @@ You should have received a copy of the GNU General Public License
 along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 """
 
+from configobj  import ConfigObj  #requires python-configobj
 import os.path
-import os
 
 #
 # Settings for FileExtractor
@@ -31,7 +34,7 @@ BASEDIR = "/opt/fileextractor"  # FIX ME
 
 
 # 2nd part: user specific settings
-DEFAULT_FILE = 'fileextractor_settings.dat'
+DEFAULT_FILE = 'fileextractor_settings.ini'
 DEFAULT_LOCATION = os.path.join(os.environ.get('HOME'), '.fileextractor') 
 
 settings = None
@@ -47,52 +50,40 @@ def getSettings():
 class Settings:
 
     def __init__(self):
-        self._values = {}
-        self._comments = {}
+        self._config = {}
         
     def load(self, filename = DEFAULT_FILE, location = DEFAULT_LOCATION):
-        import os.path
-        try:
-            file = open(os.path.join(location, filename), 'r')
-        except IOError, msg:
-            # fair enough; there is not yet any settings on this machine
-            print "No configuration found - using defaults"
-            return
-        line1 = ' '
-        line2 = ' '
-        while line1 and line2:
-            comment = file.readline()
-            if comment and not comment[0] == "#":
-                line1 = comment
-                comment = None
-            else:
-                line1 = file.readline()
-            if line1:
-                line2 = file.readline()
-                if line2:
-                    self._values[line1.strip()] = line2.strip()
-                    if comment:
-                        self._comments[line1.strip()] = comment.strip()
-                    #print ("%s: %s (%s)" %(line1, line2, comment))
+        if os.path.exists(os.path.join(location, filename)):
+            self._config = ConfigObj(os.path.join(location, filename))
+        else:
+            self._config = ConfigObj()
+            self._config.filename = os.path.join(location, filename)
+            for key, value in DEFAULTS.iteritems():
+                self.setValue(key, value)
         
-    def save(self, filename = DEFAULT_FILE, location = DEFAULT_LOCATION):
-        if not os.path.exists(location):
-            os.makedirs(location)
-        file = open(os.path.join(location, filename), 'w')
-        for key in self._values.keys():
-            if self._comments.has_key(key):
-                file.write("%s\n" %self._comments[key])
-            file.write("%s\n" %(key))
-            file.write("%s\n" %(self._values[key]))
-        file.close()
+    def save(self, filename = None, location = None):
+        if filename and location:
+            self._config.filename = os.path.join(location, filename)
+        self._config.write()
         
     def getValue(self, key):
         try:
-            return self._values[key]
+            return self._config[key]
         except KeyError, msg:
             return None
         
     def setValue(self, key, value):
-        self._values[key] = value
+        self._config[key] = value
         
-    
+
+DEFAULTS = {
+            "ig_location_dd": "/bin/dd", 
+            "signatues_off" : "", 
+            "naming_start" : "1", 
+            "ig_output_dir" : "/tmp", 
+            "ig_output_filename" : "fileextractor.img", 
+            "output_dir" : "/tmp", 
+            "ig_default_core" : "Linux", 
+            "naming_digits" : "5", 
+            "command_sudo" : "gksudo --message 'Imaging needs root priveliges - Please provide password!'"
+}

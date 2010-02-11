@@ -1,3 +1,9 @@
+fileextractor (1.0.4-0ubuntu1) karmic; urgency=low
+
+  * Proper config file management
+
+ -- Michael Pilgermann <kichkasch@gmx.de>  Sat, 06 Feb 2010 16:17:45 +0100
+ 
 fileextractor (1.0.3-0ubuntu1) karmic; urgency=low
 
   * Some fixes due to larger focus on Linux release

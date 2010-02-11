@@ -10,7 +10,7 @@ Homepage: http://freshmeat.net/projects/fileextractor
 Package: fileextractor
 Architecture: all
 XB-Python-Version: ${python:Versions}
-Depends: ${python:Depends}, ${misc:Depends}, python-wxgtk2.8
+Depends: ${python:Depends}, ${misc:Depends}, python-wxgtk2.8, python-configobj
 Description: File Recovery Tool written in Python
  FileExtractor is a free (open source) tool for recovering files from a binary data source. Sources such as digital cameras, 
  partitions, harddrives, memory sticks or floppy disks may be corrupted, deleted or formatted by mistake. 

@@ -25,6 +25,8 @@ along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 """
 
 import sys
+import os
+import os.path
 
 
 try:
@@ -102,8 +104,6 @@ class FileExtractorFrame(wxFrame):
         @param title: The title of the frame (passed to super class constructor L{wxPython.wx.wxFrame.__init__})
         @type title: C{String}
         """
-        import os
-        import os.path
 #        self._baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))                #os.getcwd() 
         self._baseDir = FESettings.BASEDIR
         
@@ -538,8 +538,8 @@ class FileExtractorFrame(wxFrame):
         from FESettings import getSettings
         if getSettings().getValue('ig_default_core'):
             parameters['default_core'] = getSettings().getValue('ig_default_core')
-        if getSettings().getValue('ig_output_dir'):
-            parameters['output_dir'] = getSettings().getValue('ig_output_dir')
+        if getSettings().getValue('ig_output_dir') and getSettings().getValue('ig_output_filename'):
+            parameters['output_dir'] = os.path.join(getSettings().getValue('ig_output_dir'), getSettings().getValue('ig_output_filename'))
         imageGenerator = ImageGenerator.ImageGenerator(callback = self, parentControl = self, baseDir = self._baseDir)
         imageGenerator.start(parameters = parameters)
         
@@ -563,7 +563,6 @@ class FileExtractorFrame(wxFrame):
         self.helpctrl = wxHtmlHelpController(wxHF_TOOLBAR | wxHF_CONTENTS | wxHF_INDEX | wxHF_PRINT | wxHF_BOOKMARKS)
         # and add the books
         global _helpFile_arch
-        import os.path
         self.helpctrl.AddBook(os.path.join(self._baseDir,_helpFile_arch), 1)
     
     def _showIt(self):

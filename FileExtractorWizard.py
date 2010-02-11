@@ -143,7 +143,7 @@ class FileExtractorWizard(Wizard):
 
         corename = tools.determineCoreName( FESettings.getSettings().getValue("ig_default_core"))
         location_dd = tools.determineAbsPath( FESettings.getSettings().getValue("ig_location_dd"))
-        location_dest = tools.determineAbsPath( FESettings.getSettings().getValue("ig_output_dir"))
+        location_dest = tools.determineAbsPath( os.path.join(FESettings.getSettings().getValue("ig_output_dir"), FESettings.getSettings().getValue("ig_output_filename")))
         
         self._timeAllTogether = 0
         
