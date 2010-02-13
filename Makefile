@@ -23,7 +23,7 @@ HELP_CONFIGS=	\
 API_DOC_DIR=	api/
 
 PACKAGE_NAME =fileextractor
-VERSION=	"1.0.3"
+VERSION=	"1.0.4"
 
 # for UBUNTU Launchpad upload of deb package
 PGP_KEYID ="1B09FB51"
@@ -77,7 +77,8 @@ sdist_ubuntu: sdist
 	cp README build/$(PACKAGE_NAME)-$(VERSION)/debian/README.Debian
 	dch -m -c build/$(PACKAGE_NAME)-$(VERSION)/debian/changelog
 	cp build/$(PACKAGE_NAME)-$(VERSION)/debian/changelog build/debian
-	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -S -k$(PGP_KEYID))
+	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -k$(PGP_KEYID))
+#	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -S -k$(PGP_KEYID))
  
 ppa_upload: sdist_ubuntu
 	(cd build/ && dput --config dput.config kichkasch-ppa $(PACKAGE_NAME)_$(VERSION)-$(BUILD_VERSION)_source.changes)

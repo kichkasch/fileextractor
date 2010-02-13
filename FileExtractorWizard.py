@@ -50,8 +50,6 @@ class FileExtractorWizard(Wizard):
     def __init__(self, parent = None, title = "%s %s" %(FESettings.PROGRAM_NAME, FESettings.VERSION)):
         Wizard.__init__(self, parent, _ID_WIZARD, title)
 
-        self._baseDir = "."
-
         #wx.InitAllImageHandlers()
         #wx.Image_AddHandler(wx.PNGHandler())
         self._page0 = WizardPageSplash(self)
@@ -99,7 +97,7 @@ class FileExtractorWizard(Wizard):
         #print corename
 
         self._devicesDict = {}
-        self._core  = self._initCore(corename, ddloc = os.path.join(self._baseDir, locationDD))
+        self._core  = self._initCore(corename, ddloc = locationDD)
         suggestions, devices = self._core.getPossibleSources()
         self._page1._cbSources.Clear()
         i = 0
@@ -164,7 +162,6 @@ class FileExtractorWizard(Wizard):
                 destination = location_dest, redirectOutput = redirectBuffer)
         #corename = tools.determineCoreName( getSettings("ig_default_core"))
         #print corename
-        os.chdir(self._baseDir)
         core = self._initCore(corename, settings)
 
         status = Runtime.Status()
@@ -225,7 +222,7 @@ class FileExtractorWizard(Wizard):
         return "%d.%d MB" %(size / (1024  * 1024),  (size % (1024  * 1024))/ (103 * 1024))
         
     def _startFileRecovery(self):
-        location_img = tools.determineAbsPath( FESettings.getSettings().getValue("ig_output_dir"))
+        location_img = tools.determineAbsPath( os.path.join(FESettings.getSettings().getValue("ig_output_dir"), FESettings.getSettings().getValue("ig_output_filename")))
         if self._page1.if_dir.GetValue() == "Working Directory":
             location_dest = tools.determineAbsPath("./")
         else:
@@ -302,7 +299,6 @@ class FileExtractorWizard(Wizard):
 
 
 if __name__ == "__main__":    
-    baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))                #os.getcwd() 
     app = wx.PySimpleApp()
     # load settings
     FESettings.getSettings().load()

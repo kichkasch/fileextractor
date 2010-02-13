@@ -1,5 +1,6 @@
 recursive-include icons *.png
 recursive-include newicons *.png
+recursive-include imagegenerator/icons *.png
 include README
 include install
 include changelog.old

@@ -46,6 +46,7 @@ import Runtime
 import wx
 from wx.wizard import *
 import os
+import ImageSettings
 
 DEF_TITLE = "ImageGenerator"
 DEBUG_FILENAME = "./fileextractordebug.txt"
@@ -162,7 +163,7 @@ class ImageGeneratorWizard(Wizard):
     @ivar _page2: Second wizard page
     @type _page2: L{GeneratorWizardPage}
     """
-    def __init__(self, callback = None, parent = None, title = DEF_TITLE, parameters = {}, baseDir = "."):
+    def __init__(self, callback = None, parent = None, title = DEF_TITLE, parameters = {}):
         """
         Initialises the wizard instance.
         
@@ -185,8 +186,6 @@ class ImageGeneratorWizard(Wizard):
         @type parameters: C{Dict}
         """
         Wizard.__init__(self, parent, _ID_WIZARD, title)
-        
-        self._baseDir = baseDir
         
         self._core = None
         self._callback = callback
@@ -247,7 +246,7 @@ class ImageGeneratorWizard(Wizard):
 ##        bBrowse = wx.Button(panel_outer, _ID_BROWSE_DD, "Browse")
         panel_dir = wx.Panel(panel_outer, -1)
         self._tcLocDD = wx.TextCtrl(panel_dir , -1)        
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(ImageSettings.PATH_ICONS, "browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bBrowse = wx.BitmapButton(panel_dir, _ID_BROWSE_DD, bmDir, size=(25,25))        
@@ -302,7 +301,7 @@ class ImageGeneratorWizard(Wizard):
         choicesSources = []
         self._cbSources = wx.ComboBox(panel_info, -1, choices = choicesSources)
 
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/info.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(ImageSettings.PATH_ICONS, "info.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_info, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bInfoSources = wx.BitmapButton(panel_info, _ID_INFO_SOURCES, bmDir, size=(25,25))        
@@ -323,7 +322,7 @@ class ImageGeneratorWizard(Wizard):
         if parameters.has_key('output_dir'):
             self._tcLocDest.SetValue(parameters['output_dir'])
 
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(ImageSettings.PATH_ICONS, "browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bBrowseDest = wx.BitmapButton(panel_dir, _ID_BROWSE_DEST, bmDir, size=(25,25))        
@@ -479,7 +478,7 @@ class ImageGeneratorWizard(Wizard):
             settings = Runtime.Settings(path_dd = location_dd, source = source, 
                 destination = location_dest, redirectOutput = redirectBuffer)
             corename = self._chCore.GetStringSelection()
-            os.chdir(self._baseDir)
+#            os.chdir(self._baseDir)
             core = self._initCore(corename, settings)
             self._callback.finished(core, settings)
             

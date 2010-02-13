@@ -1,8 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=fileextractor
+Name=FileExtractor
 Comment=File Recovery Tool written in Python
-Version=1.0.3
+Version=1.0.4
 GenericName=FileExtractor
 Terminal=false
 Icon=fileextractor.png

@@ -23,7 +23,16 @@ along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 
 from wxPython.wx import *
 import wx
+import os
+import os.path
+
 import tools
+import FileExtractor
+import FESettings
+from FESettings import getSettings
+import imagegenerator
+import FileExtractorCore
+import signatures
 
 DIR_CURRENT_ST = 'Working directory'
 
@@ -32,15 +41,11 @@ class SettingsDialog(wxDialog):
     Holding all the information about the dialog.
     """
     
-    def __init__(self, parent, ID, title, baseDir):
+    def __init__(self, parent, ID, title):
         """
         Initialises all controls and registers the event listeners.
         """
         wxDialog.__init__(self, parent, ID, title, size=(600,400))
-        
-        self._baseDir = baseDir
-        import os
-        import os.path
 
         outerBox = wx.BoxSizer(wx.VERTICAL)
         panel = wx.Panel(self, -1)
@@ -96,9 +101,9 @@ class SettingsDialog(wxDialog):
         panel_buttons = wx.Panel(self, -1)
         panel_fill = wx.Panel(panel_buttons, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
-        bmApply = wx.Bitmap(os.path.join(self._baseDir, "icons/apply.png"), wx.BITMAP_TYPE_PNG);
+        bmApply = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, "apply.png"), wx.BITMAP_TYPE_PNG);
         b1 = wx.BitmapButton(panel_buttons, 601, bmApply, size=(30,25))
-        bmCancel = wx.Bitmap(os.path.join(self._baseDir, "icons/cancel.png"), wx.BITMAP_TYPE_PNG);
+        bmCancel = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, "cancel.png"), wx.BITMAP_TYPE_PNG);
         b2 = wx.BitmapButton(panel_buttons, 602, bmCancel, size=(30,25))
         panel_fill1 = wx.Panel(panel_buttons, -1)
 ##        panel_fill1.SetBackgroundColour(wx.RED)
@@ -169,7 +174,6 @@ class SettingsDialog(wxDialog):
         wx.EVT_TREE_SEL_CHANGED(self.tree, 1, self._OnSelChanged)
 
     def _OnApply(self, event):
-        from FESettings import getSettings
         try:
             val = self.if_dir.GetValue()
             if val != DIR_CURRENT_ST:
@@ -231,7 +235,6 @@ class SettingsDialog(wxDialog):
             self._lastChild.Show(0)
         
         if self.tree.GetItemText(item) == "ImageGenerator":
-            import FileExtractor
             if FileExtractor._MODULE_IMAGE_GENERATOR:
                 self.contentHeading.SetValue("Apply the settings for the module 'ImageGenerator' here.")
                 self._putImageGeneratorOptionsContent()
@@ -273,21 +276,19 @@ class SettingsDialog(wxDialog):
 ##        self._topName = None
             
     def _putGeneralOptionsContent(self):
-        import os.path
         panel_top = wx.Panel(self.panel_swap, -1)
         label_outputdir = wxStaticText (panel_top, -1, "Output Directory")
         panel_dir = wxPanel(panel_top, -1)
         try:
             self.if_dir.Reparent(panel_dir)
         except AttributeError, msg:
-            from FESettings import getSettings
             if getSettings().getValue('output_dir'):
                 self.if_dir = wxTextCtrl(panel_dir, -1, getSettings().getValue('output_dir'))
             else:
                 self.if_dir = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
             self.if_dir.SetEditable(false)
         
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, "browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bChooseDir = wxBitmapButton(panel_dir, 701, bmDir, size=(25,25))        
@@ -323,15 +324,12 @@ class SettingsDialog(wxDialog):
         dirDialog.Destroy()
 
     def _putImageGeneratorOptionsContent(self):
-        import os.path
         panel_top = wx.Panel(self.panel_swap, -1)
 
         lCore = wx.StaticText(panel_top, -1, "Choose default core")
 ##        choicesCore = CoreManager.getInstance().getListOfCoreNames()
-        import imagegenerator
         choicesCore = imagegenerator.CoreManager.getInstance().getListOfCoreNames()
 ##        choicesCore = ['Win32 dd clone', 'Linux / Unix']
-        from FESettings import getSettings
         try:
             self._chCore.Reparent(panel_top)
         except AttributeError, msg:
@@ -353,7 +351,7 @@ class SettingsDialog(wxDialog):
                 self.if_dir_img = wxTextCtrl(panel_dir, -1, DIR_CURRENT_ST)
             self.if_dir_img.SetEditable(false)
         
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, "browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wxPanel(panel_dir, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bChooseDir = wxBitmapButton(panel_dir, 722, bmDir, size=(25,25))        
@@ -394,9 +392,6 @@ class SettingsDialog(wxDialog):
         dirDialog.Destroy()        
         
     def _putFiletypeOptionsContent(self):
-        from FESettings import getSettings
-        import FileExtractorCore
-        import signatures
         panel_top = wx.Panel(self.panel_swap, -1)
 
         label_signatures = wxStaticText (panel_top, -1 , "Select file types enabled by default")
@@ -441,7 +436,6 @@ class SettingsDialog(wxDialog):
         self._lastChild = panel_top
         
     def _putFilenameOptionsContent(self):
-        from FESettings import getSettings
         panel_top = wx.Panel(self.panel_swap, -1)
         lDigits = wxStaticText (panel_top, -1 , "Number of numeric digits in the filename")
         if getSettings().getValue('naming_digits'):

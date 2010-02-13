@@ -25,12 +25,16 @@ import os.path
 
 # 1st part: Application specific settings
 PROGRAM_NAME = "FileExtractor"
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 AUTHOR = "Michael Pilgermann"
 EMAIL = "kichkasch@gmx.de"
 URL = "http://freshmeat.net/projects/fileextractor"
 COPYRIGHT = "(C) 2010 " + AUTHOR
-BASEDIR = "/opt/fileextractor"  # FIX ME
+#BASEDIR = "/opt/fileextractor"  # FIX ME
+
+PATH_ICONS = '/usr/share/icons/fileextractor'
+PATH_NEWICONS = os.path.join(PATH_ICONS, 'newicons')
+PATH_HELPFILE = '/usr/share/doc/fileextractor/fileextractorhelp.zip'
 
 
 # 2nd part: user specific settings

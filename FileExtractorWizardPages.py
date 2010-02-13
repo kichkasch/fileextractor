@@ -25,9 +25,7 @@ class AbstractFileExtractorWizardPage(WizardPageSimple):
     def __init__(self, parent, prev=None, next=None, imagePath = None):
         WizardPageSimple.__init__(self, parent, prev, next)
         
-#        self._baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))
-        self._baseDir = FESettings.BASEDIR
-        image = wx.Bitmap(os.path.join(self._baseDir, imagePath), wx.BITMAP_TYPE_PNG)
+        image = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, imagePath), wx.BITMAP_TYPE_PNG)
        
         panel_outer = wx.Panel(self, -1)
 
@@ -89,7 +87,7 @@ class WizardPageSetup(AbstractFileExtractorWizardPage):
         choicesSources = []
         self._cbSources = wx.ComboBox(panel_info, -1, choices = choicesSources)
 
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/info.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, "info.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_info, -1)
 ##        panel_fill.SetBackgroundColour(wx.RED)
         bInfoSources = wx.BitmapButton(panel_info, _ID_INFO_SOURCES, bmDir, size=(28,28))        
@@ -112,7 +110,7 @@ class WizardPageSetup(AbstractFileExtractorWizardPage):
         else:
             self.if_dir = wx.TextCtrl(panel_dir, -1, 'Working Directory')
         self.if_dir.SetEditable(False)        
-        bmDir = wx.Bitmap(os.path.join(self._baseDir, "icons/browse.png"), wx.BITMAP_TYPE_PNG);
+        bmDir = wx.Bitmap(os.path.join(FESettings.PATH_ICONS, "browse.png"), wx.BITMAP_TYPE_PNG);
         panel_fill = wx.Panel(panel_dir, -1)
         bChooseDir = wx.BitmapButton(panel_dir, _ID_B_DIR, bmDir, size=(28,28))        
 

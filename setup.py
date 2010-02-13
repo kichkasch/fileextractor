@@ -28,7 +28,12 @@ from distutils.core import setup
 
 filesToMove = [
                ['fileextractor.desktop', 'usr/share/applications', 'fileextractor.desktop'], 
-               ['icons/fileextractor.png', 'usr/share/pixmaps', 'fileextractor.png']
+               ['icons/fileextractor.png', 'usr/share/pixmaps', 'fileextractor.png'], 
+               ['icons', 'usr/share/icons', 'fileextractor'], 
+               ['newicons', 'usr/share/icons/fileextractor', 'newicons'], 
+               ['imagegenerator/icons', 'usr/share/icons', 'imagegenerator'], 
+               ['fileextractorhelp.zip', 'usr/share/doc/fileextractor', 'fileextractorhelp.zip'], 
+               ['types.dat', 'usr/share/apps/imagegenerator', 'types.dat']
                ]
 filesToLink = [
                ['../../opt/fileextractor/FileExtractor.py', 'usr/bin','fileextractor'], 
@@ -60,7 +65,7 @@ def doInstall(path):
 def doSetup():
     setup (
         name = "fileextractor",
-        version = "1.0.3",
+        version = "1.0.4",
         description = "FileExtractor - recover your data",
         author = "Michael Pilgermann",
         author_email = "kichkasch@gmx.de",

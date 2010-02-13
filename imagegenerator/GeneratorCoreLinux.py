@@ -43,6 +43,7 @@ import Runtime
 import os
 import CoreManager
 import FESettings
+import ImageSettings
 
 NAME_IMPL = "Linux"
 PARAM_INPUTFILE = "if"
@@ -55,7 +56,7 @@ FDISK_LOCATION = "/sbin/fdisk"
 DEV_PREFIX = "/dev/"
 DEFAULT_PATH_DD = "/bin/dd"
 TMP_FDISK_FILE = "fdisk.tmp"
-FILE_TYPES = "types.dat"
+FILE_TYPES = ImageSettings.PATH_FILETYPES
 
 class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
     """
@@ -259,8 +260,7 @@ class GeneratorCore(GeneratorCoreAbstract.CoreInterface):
         import os
         import os.path
         import sys
-        baseDir = os.path.abspath(os.path.dirname(sys.argv[0]))       
-        f = open(os.path.join(baseDir, FILE_TYPES), 'r')
+        f = open(FILE_TYPES, 'r')
         while 1:
             line = f.readline()
             if not line:
