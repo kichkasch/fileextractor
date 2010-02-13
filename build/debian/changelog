@@ -3,8 +3,9 @@ fileextractor (1.0.4-0ubuntu1) karmic; urgency=low
   * Proper config file management
   * Distributed all resources (icons, help files, etc) in corresponding locations in Linux file system
   * Got rid of this stupid base dir thing, where execution depends on directory of installation 
+  * temp files (fdisk, debug) moved to /tmp
 
- -- Michael Pilgermann <kichkasch@gmx.de>  Sat, 13 Feb 2010 12:17:39 +0100
+ -- Michael Pilgermann <kichkasch@gmx.de>  Sat, 13 Feb 2010 13:21:12 +0100
 
 fileextractor (1.0.3-0ubuntu1) karmic; urgency=low
 

@@ -43,7 +43,7 @@ _ID_INFO_SOURCES = 201
 _ID_B_DIR = 202
 _TIMER_ID = 301
 _TIMER_ID1 = 302
-DEBUG_FILENAME = "./fileextractordebug.txt"
+DEBUG_FILENAME = FESettings.PATH_DEBUGFILE
 
 
 class FileExtractorWizard(Wizard):
@@ -154,9 +154,15 @@ class FileExtractorWizard(Wizard):
         #location_dest = "d:\\temp\\dd.img"
         if os.path.exists(location_dest):
             print "Image file existing - I am overwriting."
-            os.remove(location_dest)
-#        if not self._checkOverwrite(location_dest):
-#            return
+            try:
+                os.remove(location_dest)
+            except OSError:
+                # let's try again with root priv
+                print "Seems to be root; try again with root priv"
+                sudo = FESettings.getSettings().getValue('command_sudo')
+                command = sudo + " rm " + location_dest
+                ret = os.system(command)
+                # FIX ME: if not working ...
         redirectBuffer = DEBUG_FILENAME
         settings = Runtime.Settings(path_dd = location_dd, source = source, 
                 destination = location_dest, redirectOutput = redirectBuffer)

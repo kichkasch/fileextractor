@@ -55,7 +55,7 @@ PROC_LOCATION = "/proc/partitions"
 FDISK_LOCATION = "/sbin/fdisk"
 DEV_PREFIX = "/dev/"
 DEFAULT_PATH_DD = "/bin/dd"
-TMP_FDISK_FILE = "fdisk.tmp"
+TMP_FDISK_FILE = ImageSettings.PATH_TMP_FDISK
 FILE_TYPES = ImageSettings.PATH_FILETYPES
 
 class GeneratorCore(GeneratorCoreAbstract.CoreInterface):

@@ -47,9 +47,10 @@ import wx
 from wx.wizard import *
 import os
 import ImageSettings
+import FESettings
 
-DEF_TITLE = "ImageGenerator"
-DEBUG_FILENAME = "./fileextractordebug.txt"
+DEF_TITLE = ImageSettings.TITLE
+DEBUG_FILENAME = FESettings.PATH_DEBUGFILE
 _ID_WIZARD = 101
 _ID_BROWSE_DD = 201
 _ID_BROWSE_DEST = 202
@@ -73,7 +74,7 @@ class GeneratorWizardPage(WizardPageSimple):
     should be provided by the user here.
     @type _message: c{String}
     """
-    def __init__(self, parent, prev=None, next=None, title = "Image Generator", message = "Apply your settings"):
+    def __init__(self, parent, prev=None, next=None, title = ImageSettings.TITLE, message = "Apply your settings"):
         """
         Initialises the wizard page.
         
@@ -486,7 +487,7 @@ class ImageGeneratorWizard(Wizard):
 ##        import os, wx
         if os.access(path, os.F_OK):
             # the file is there already - ask for overwriting
-            dlg = wx.MessageDialog(self, "The destination image file exsists already." \
+            dlg = wx.MessageDialog(self, "The destination image file exists already." \
                                     "\n(name: " + path + ")" \
                                     "\n\nOverwrite this file?",
                                   "Overwrite image file", wx.YES_NO | wx.ICON_QUESTION)
@@ -495,15 +496,22 @@ class ImageGeneratorWizard(Wizard):
                 dlg.Destroy()
                 try:
                     os.unlink(path)
-                except OSError, msg:
-                    # ups
-                    dlg1 = wx.MessageDialog(self, "Problem with deleting old file.\n\n" 
-                                            "Low level Error Message:\n%s" 
-                                            "\n\nProcessing aborted!" %(msg) ,
-                                          "Overwrite error", wx.OK | wx.ICON_ERROR)
-                    dlg1.ShowModal()
-                    dlg1.Destroy()
-                    return 0
+                except OSError:
+                    # let's try again with root priv
+                    print "Seems to be root; try again with root priv"
+                    sudo = FESettings.getSettings().getValue('command_sudo')
+                    command = sudo + " rm " + path
+                    try:
+                        ret = os.system(command)
+                    except OSError, msg:
+                        # ups
+                        dlg1 = wx.MessageDialog(self, "Problem with deleting old file.\n\n" 
+                                                "Low level Error Message:\n%s" 
+                                                "\n\nProcessing aborted!" %(msg) ,
+                                              "Overwrite error", wx.OK | wx.ICON_ERROR)
+                        dlg1.ShowModal()
+                        dlg1.Destroy()
+                        return 0
             else:
                 dlg.Destroy()
                 return 0

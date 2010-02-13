@@ -16,5 +16,10 @@ You should have received a copy of the GNU General Public License
 along with FileExtractor. If not, see <http://www.gnu.org/licenses/>.
 """
 
+TITLE = 'ImageGenerator'
+
 PATH_ICONS = '/usr/share/icons/imagegenerator'
 PATH_FILETYPES = '/usr/share/apps/imagegenerator/types.dat'
+PATH_DEBUGFILE = '/tmp/fileextractordebug.txt'
+
+PATH_TMP_FDISK = '/tmp/fdisk.txt'

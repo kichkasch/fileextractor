@@ -32,9 +32,10 @@ import Runtime
 import CoreManager
 import sys
 import threading, time
+import ImageSettings
 
 OUTPUT_DELAY = 1    # in seconds; delay between 2 outputs
-DEBUG_FILENAME = "./fileextractordebug.txt"
+DEBUG_FILENAME = ImageSettings.PATH_DEBUGFILE
 
 class ImageGeneratorCLI:
     """

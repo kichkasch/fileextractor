@@ -36,6 +36,7 @@ PATH_ICONS = '/usr/share/icons/fileextractor'
 PATH_NEWICONS = os.path.join(PATH_ICONS, 'newicons')
 PATH_HELPFILE = '/usr/share/doc/fileextractor/fileextractorhelp.zip'
 
+PATH_DEBUGFILE = '/tmp/fileextractordebug.txt'
 
 # 2nd part: user specific settings
 DEFAULT_FILE = 'fileextractor_settings.ini'
@@ -89,5 +90,5 @@ DEFAULTS = {
             "output_dir" : "/tmp", 
             "ig_default_core" : "Linux", 
             "naming_digits" : "5", 
-            "command_sudo" : "gksudo --message 'Imaging needs root priveliges - Please provide password!'"
+            "command_sudo" : "gksudo --message 'This action requrires root priveliges - Please provide password!'"
 }
