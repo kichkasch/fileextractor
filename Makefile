@@ -77,8 +77,7 @@ sdist_ubuntu: sdist
 	cp README build/$(PACKAGE_NAME)-$(VERSION)/debian/README.Debian
 	dch -m -c build/$(PACKAGE_NAME)-$(VERSION)/debian/changelog
 	cp build/$(PACKAGE_NAME)-$(VERSION)/debian/changelog build/debian
-	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -k$(PGP_KEYID))
-#	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -S -k$(PGP_KEYID))
+	(cd build/$(PACKAGE_NAME)-$(VERSION)/ && dpkg-buildpackage -S -k$(PGP_KEYID))
  
 ppa_upload: sdist_ubuntu
 	(cd build/ && dput --config dput.config kichkasch-ppa $(PACKAGE_NAME)_$(VERSION)-$(BUILD_VERSION)_source.changes)
